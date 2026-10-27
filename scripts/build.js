@@ -17,7 +17,7 @@ const ROOT = path.join(__dirname, '..');
 const SITE = 'https://sikhsinworld.com';
 const NAME = 'Sikhs in World';
 
-const slug = s => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const slug = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 // Links into the Sikhi library on sikhsinindia.com (written once there, never copied here)

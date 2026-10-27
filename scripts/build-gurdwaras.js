@@ -6,7 +6,7 @@
      <region>/<country>/gurdwaras/<province>/            every Gurdwara in a province
      <region>/<country>/gurdwaras/<province>/<gurdwara>/ one page per Gurdwara
    ────────────────────────────────────────────────────────────── */
-const slugify = s => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const slugify = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const cityOf = g => (g.c || '').replace(/\s*\(.*\)$/, '').replace(/ area$/, '').replace(/^near /, '');
 const gurdwaraSlug = g => {
   const name = slugify(g.n), city = slugify(cityOf(g));

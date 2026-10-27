@@ -30,7 +30,7 @@ const COUNTRIES = [
 const args = process.argv.slice(2);
 const replace = args.includes('--replace');
 const dir = args.find(a => !a.startsWith('--')) || path.join(os.homedir(), 'Downloads');
-const slugify = s => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const slugify = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const rclone = (...a) => execFileSync(RCLONE, a, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
 // Forgive spelling variants: Gurudwara/Gurdwara/Gurduara, Sahab/Sahib, a trailing "Inc"
 const norm = s => slugify(s).replace(/\bgur(u|d)?(d)?(w|u)ara\b/g, 'gurdwara').replace(/\bsahab\b/g, 'sahib').replace(/-inc$/, '');
