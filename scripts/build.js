@@ -25,7 +25,6 @@ const LIBRARY = [
   ['Sikh history', INDIA + 'sikh-history.html']
 ];
 
-const GLOBE = `<svg class="globe" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="16" fill="none" stroke="currentColor" stroke-width="3.5"/><ellipse cx="20" cy="20" rx="7" ry="16" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 20h32M7 12.5q13 3 26 0M7 27.5q13-3 26 0" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>`;
 
 function page({ url, title, description, crumbs = [], body }) {
   const canonical = SITE + url;
@@ -37,7 +36,7 @@ function page({ url, title, description, crumbs = [], body }) {
     itemListElement: [['World', '/'], ...crumbs].map(([t, h], i) => ({ '@type': 'ListItem', position: i + 1, name: t, item: SITE + (h || url) }))
   })}</script>` : `\n<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org', '@type': 'Organization', name: NAME, url: SITE + '/',
-    email: 'sikhsinindia@gmail.com', sameAs: [INDIA, UAE]
+    logo: SITE + '/pictures/sikhsinworld-logo.png', email: 'sikhsinindia@gmail.com', sameAs: [INDIA, UAE]
   })}</script>`;
   return `<!DOCTYPE html>
 <html lang="en">
@@ -52,8 +51,14 @@ function page({ url, title, description, crumbs = [], body }) {
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${canonical}">
-<meta name="twitter:card" content="summary">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:image" content="${SITE}/pictures/sikhsinworld-share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="${SITE}/pictures/sikhsinworld-share.jpg">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
@@ -62,7 +67,7 @@ function page({ url, title, description, crumbs = [], body }) {
 <body>
 <header class="top">
   <div class="wrap top-in">
-    <a class="brand" href="/">${GLOBE}<span><b>Sikhs in World</b><small>sikhsinworld.com</small></span></a>
+    <a class="brand" href="/"><img src="/pictures/sikhsinworld-logo.png" width="62" height="77" alt="Sikhs in World – sikhsinworld.com"></a>
     <nav class="family" aria-label="Sikhs in family of sites">
       <a href="/" class="on">World</a>
       <a href="${INDIA}">India</a>
@@ -118,11 +123,14 @@ write('index.html', page({
   title: 'Sikhs in World – Sikh Communities, Gurdwaras and Heritage Worldwide',
   description: 'Sikhs in World brings together Sikh communities across every continent: their history, Gurdwaras, Gurpurab events and sangat, region by region and country by country.',
   body: `<section class="hero">
-  <div class="wrap">
+  <div class="wrap hero-in">
+    <img class="hero-logo" src="/pictures/sikhsinworld-logo.png" width="200" height="248" alt="Sikhs in World logo">
+    <div>
     <p class="ik">ੴ There is only one God</p>
     <h1>Sikhs in World</h1>
     <p class="lead">One Panth, every continent. Discover the history, Gurdwaras and sangat of Sikh communities around the globe, region by region and country by country.</p>
     <p class="hero-links"><a class="btn" href="#regions">Explore the regions</a> <a class="btn ghost" href="${INDIA}">Visit Sikhs in India</a></p>
+    </div>
   </div>
 </section>
 <section class="wrap" id="regions">
