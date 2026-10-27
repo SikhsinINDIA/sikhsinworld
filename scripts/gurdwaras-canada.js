@@ -1,6 +1,7 @@
 /* Gurdwaras in Canada, province by province.
    Each Gurdwara: n name, c city, a street address, pc postal code, ph phone,
    y year founded, w website, p one paragraph (our own words),
+   aka another name its photos may be filed under,
    wg the Gurdwara’s listing on worldgurudwaras.com (where its photos come from).
    Names and addresses from the public listings on worldgurudwaras.com and the
    Gurdwaras' own websites (Oct 2026). Empty fields are simply left out. */
@@ -181,7 +182,7 @@ module.exports = {
       name: 'Quebec', abbr: 'QC',
       intro: 'Most of Quebec’s Gurdwaras are on the island of Montreal and its suburbs, with one more in Quebec City.',
       list: [
-        { n: 'Gurdwara Guru Nanak Darbar, Park Extension', c: 'Montreal (Park Extension)', wg: 'gurdwara-nanak-darbar-community-center-montreal', a: '430 Rue Saint-Roch', pc: 'H3N 1K2', ph: '(514) 270-6600', w: 'https://montrealgurudwara.com/',
+        { n: 'Gurdwara Guru Nanak Darbar, Park Extension', aka: 'Gurdwara Nanak Darbar Park Extention – Montreal', c: 'Montreal (Park Extension)', wg: 'gurdwara-nanak-darbar-community-center-montreal', a: '430 Rue Saint-Roch', pc: 'H3N 1K2', ph: '(514) 270-6600', w: 'https://montrealgurudwara.com/',
           p: 'This Gurdwara on Rue Saint-Roch serves Park Extension, the Montreal neighbourhood where many South Asian families first settled. It is run by the same Guru Nanak Darbar sangat as the LaSalle Gurdwara and a third Gurdwara in Hudson, Quebec.' },
         { n: 'Shri Guru Ravidass Temple Gurbani Sagar', c: 'Montreal', wg: 'gurbani-sagar-montreal', a: '8205 Rue Durocher',
           p: 'Shri Guru Ravidass Temple Gurbani Sagar on Rue Durocher is devoted to the teachings of Bhagat Ravidas Ji, whose bani is part of Sri Guru Granth Sahib. The sangat gathers here for kirtan, paath and langar.' },

@@ -12,16 +12,15 @@
   <meta property="og:title" content="Gurdwara Brahm Bunga Sahib, Brossard, Quebec – Address and Details | Sikhs in World">
   <meta property="og:description" content="Gurdwara Brahm Bunga Sahib on Grande Allée serves Sikhs on Montreal’s South Shore in Brossard. Address: 6255 Grande Allée, Brossard, QC.">
   <meta property="og:url" content="https://sikhsinworld.com/north-america/canada/gurdwaras/quebec/gurdwara-brahm-bunga-sahib-brossard/">
-  <meta property="og:image" content="https://sikhsinworld.com/pictures/sikhsinworld-share.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image" content="https://lh3.googleusercontent.com/d/1iW-0eZBdbQXw2TkyzsO5YB4M4zUXADv1=w1200">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://sikhsinworld.com/pictures/sikhsinworld-share.jpg">
+  <meta name="twitter:image" content="https://lh3.googleusercontent.com/d/1iW-0eZBdbQXw2TkyzsO5YB4M4zUXADv1=w1200">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/gurdwara.css">
+  <link rel="preconnect" href="https://lh3.googleusercontent.com">
   <script type="application/ld+json">[{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"World","item":"https://sikhsinworld.com/"},{"@type":"ListItem","position":2,"name":"North America","item":"https://sikhsinworld.com/north-america/"},{"@type":"ListItem","position":3,"name":"Canada","item":"https://sikhsinworld.com/north-america/canada/"},{"@type":"ListItem","position":4,"name":"Gurudwaras in Canada","item":"https://sikhsinworld.com/north-america/canada/gurdwaras/"},{"@type":"ListItem","position":5,"name":"Quebec","item":"https://sikhsinworld.com/north-america/canada/gurdwaras/quebec/"},{"@type":"ListItem","position":6,"name":"Gurdwara Brahm Bunga Sahib","item":"https://sikhsinworld.com/north-america/canada/gurdwaras/quebec/gurdwara-brahm-bunga-sahib-brossard/"}]},{"@context":"https://schema.org","@type":"PlaceOfWorship","name":"Gurdwara Brahm Bunga Sahib","url":"https://sikhsinworld.com/north-america/canada/gurdwaras/quebec/gurdwara-brahm-bunga-sahib-brossard/","description":"Gurdwara Brahm Bunga Sahib on Grande Allée serves Sikhs on Montreal’s South Shore in Brossard. The sangat gathers here for kirtan, paath and langar.","address":{"@type":"PostalAddress","streetAddress":"6255 Grande Allée","addressLocality":"Brossard","addressRegion":"QC","addressCountry":"CA"}}]</script>
 </head>
 <body>
@@ -43,6 +42,15 @@
   <!-- ── INTRO BANNER ── -->
   <div class="intro-banner">
     <p>Gurdwara Brahm Bunga Sahib on Grande Allée serves Sikhs on Montreal’s South Shore in Brossard.</p>
+  </div>
+  <!-- ── GALLERY ── -->
+  <div class="gallery-wrapper">
+    <img id="galleryMain" class="gallery-main" src="https://lh3.googleusercontent.com/d/1iW-0eZBdbQXw2TkyzsO5YB4M4zUXADv1=w1200" alt="Gurdwara Brahm Bunga Sahib, Brossard" onclick="openLightbox(this.src, 'Gurdwara Brahm Bunga Sahib, Brossard')">
+    <div class="gallery-thumbs">
+      <img loading="lazy" class="gallery-thumb active" src="https://lh3.googleusercontent.com/d/1iW-0eZBdbQXw2TkyzsO5YB4M4zUXADv1=w1200" alt="Gurdwara Brahm Bunga Sahib, Brossard — view 1" onclick="selectSlide(0)">
+      <img loading="lazy" class="gallery-thumb" src="https://lh3.googleusercontent.com/d/1kcw2zQ8PRZeCh53f_yMPRFHlLhVZHaXR=w1200" alt="Gurdwara Brahm Bunga Sahib, Brossard — view 2" onclick="selectSlide(1)">
+    </div>
+    <div class="gallery-hint">Tap any photo to enlarge</div>
   </div>
   <!-- ── DETAIL ── -->
   <div class="detail-wrapper">
@@ -127,5 +135,15 @@
     </div>
   </div>
 </div>
+<!-- ── LIGHTBOX ── -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕ &nbsp;Close</button>
+  <img id="lightbox-img" src="" alt="Enlarged view of the selected picture">
+  <button class="lb-download" onclick="downloadCurrentImage()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 5v10M7 15l5 5 5-5"/><rect x="3" y="19" width="18" height="2" rx="1"/></svg>
+    Download Image
+  </button>
+</div>
+<script src="/js/gurdwara-gallery.js"></script>
 </body>
 </html>

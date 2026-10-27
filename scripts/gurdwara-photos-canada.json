@@ -1,5 +1,14 @@
 {
- "darbar-sri-guru-granth-sahib-ji-brampton": [],
+ "darbar-sri-guru-granth-sahib-ji-brampton": [
+  {
+   "file": "darbar-sri-guru-granth-sahib-ji-brampton-01.jpg",
+   "drive": "1TqfzmiblxZjPGPCjlWLKDtEEQAc_owO2"
+  },
+  {
+   "file": "darbar-sri-guru-granth-sahib-ji-brampton-02.jpg",
+   "drive": "1v03KuY_T9f_E06KFh47yX-JQs5pVIVK9"
+  }
+ ],
  "gurdwara-dasmesh-darbar-brampton": [],
  "gurdwara-tapoban-sahib-brampton": [],
  "nanaksar-thath-isher-darbar-brampton": [],
@@ -9,7 +18,24 @@
  "gurudwara-nanaksar-brampton-2": [],
  "sri-guru-nanak-sikh-center-brampton": [],
  "sikh-sangat-brampton": [],
- "sri-gurduara-jot-parkash-sahib-toronto": [],
+ "sri-gurduara-jot-parkash-sahib-toronto": [
+  {
+   "file": "sri-gurduara-jot-parkash-sahib-brampton-01.jpg",
+   "drive": "1aQ5A-5WNvFceUzkZTOznWkka9Ks54Ql8"
+  },
+  {
+   "file": "sri-gurduara-jot-parkash-sahib-brampton-02.jpg",
+   "drive": "1AX5ouiCN4KWN29LhemIHCnHdVy9VJNfX"
+  },
+  {
+   "file": "sri-gurduara-jot-parkash-sahib-brampton-03.jpg",
+   "drive": "1c5HaybQZww1gYknwVWfwEeNVKxIR097V"
+  },
+  {
+   "file": "sri-gurduara-jot-parkash-sahib-brampton-04.jpg",
+   "drive": "11dREDgPD8Os3ylXwM5OTb8tCFQKwtOoF"
+  }
+ ],
  "ontario-khalsa-darbar-mississauga": [],
  "guru-singh-sabha-mississauga": [],
  "shiromani-sikh-sangat-mississauga": [],
@@ -585,23 +611,234 @@
    "drive": "1n5ashzrZEaq5jkmJb3U7YvTyGp6pFZuT"
   }
  ],
- "gurdwara-nanak-darbar-community-center-montreal": [],
- "gurbani-sagar-montreal": [],
- "nanaksar-montreal": [],
+ "gurdwara-nanak-darbar-community-center-montreal": [
+  {
+   "file": "gurdwara-guru-nanak-darbar-park-extension-montreal-01.jpg",
+   "drive": "16ZuLLCOMahAeonw6zOh2BcevrKfH35rF"
+  },
+  {
+   "file": "gurdwara-guru-nanak-darbar-park-extension-montreal-02.jpg",
+   "drive": "1M_PJmwQZbpBQYTU3tN3MXvXkpfD5brJ3"
+  },
+  {
+   "file": "gurdwara-guru-nanak-darbar-park-extension-montreal-03.jpg",
+   "drive": "1LP8Z76epqAKy9NvA6LUZDzwmR-nYXZVf"
+  },
+  {
+   "file": "gurdwara-guru-nanak-darbar-park-extension-montreal-04.jpg",
+   "drive": "1zlvSKUOanyRVsQKRCmM2YAcA8k86HJM8"
+  },
+  {
+   "file": "gurdwara-guru-nanak-darbar-park-extension-montreal-05.jpg",
+   "drive": "1xiZeSymrgvDuc5VNuDSEYJWkf_ot09ic"
+  }
+ ],
+ "gurbani-sagar-montreal": [
+  {
+   "file": "shri-guru-ravidass-temple-gurbani-sagar-montreal-01.jpg",
+   "drive": "1MGDqnY_MrcwsEH8-3XvC7vXQ_coBZCZa"
+  },
+  {
+   "file": "shri-guru-ravidass-temple-gurbani-sagar-montreal-02.jpg",
+   "drive": "1DzMJpNvspyVSZMXBPHUXFxgfQHE47ng8"
+  },
+  {
+   "file": "shri-guru-ravidass-temple-gurbani-sagar-montreal-03.jpg",
+   "drive": "1c7_C995Sy66t-EFPrfO5S3rOKzLX60gZ"
+  },
+  {
+   "file": "shri-guru-ravidass-temple-gurbani-sagar-montreal-04.jpg",
+   "drive": "1pkzrlWkYk3f3JjtjuaDWTdNUxTE67IvS"
+  }
+ ],
+ "nanaksar-montreal": [
+  {
+   "file": "nanaksar-montreal-01.jpg",
+   "drive": "1ug-d17LIPhc2b-WEjuvtJQZY76FUiAQf"
+  },
+  {
+   "file": "nanaksar-montreal-02.jpg",
+   "drive": "15lPIRVhJRMfdxYNzTE1TVvqG7Ru8Ewx5"
+  },
+  {
+   "file": "nanaksar-montreal-03.jpg",
+   "drive": "1lVNC_JZhKEInYQQZ_1KMNpQH4yhky2np"
+  },
+  {
+   "file": "nanaksar-montreal-04.jpg",
+   "drive": "1YarVkusCBNXOQGLRm2p8edM9B0_EJ-Du"
+  },
+  {
+   "file": "nanaksar-montreal-05.jpg",
+   "drive": "1rsFkPF07cHd2RUFO0Lv7aCVggIkv5Vcq"
+  },
+  {
+   "file": "nanaksar-montreal-06.jpg",
+   "drive": "1lAAiW3iW8po707PWq7wWeQmPmv_1XLN3"
+  }
+ ],
  "gurdwara-guru-nanak-darbar-lasalle": [
   {
    "file": "gurdwara-guru-nanak-darbar-lasalle-montreal-01.jpg",
    "drive": "1BUDVdEEF4kusQwhmqCqBBuMYax0MptdH"
   }
  ],
- "gurdwara-sahib-greater-montreal": [],
- "gurdwara-brahm-bunga-sahib-brossard": [],
- "gurdwara-sahib-vaudreuil-dorion": [],
- "gurdwara-sahib-quebec": [],
- "sikh-society-of-saskatchewan": [],
- "gurdwara-corman-park": [],
- "sikh-society-of-regina": [],
- "gurudwara-guru-nanak-sikh-centre-regina": [],
+ "gurdwara-sahib-greater-montreal": [
+  {
+   "file": "gurdwara-sahib-greater-montreal-dollard-des-ormeaux-01.jpg",
+   "drive": "1sA1Z67H2ht7yeb5YliQFBSRWXt6wlPkT"
+  },
+  {
+   "file": "gurdwara-sahib-greater-montreal-dollard-des-ormeaux-02.jpg",
+   "drive": "1XJnXIFk2qj-oNpQA8-9uPnmXo2So1Wh3"
+  },
+  {
+   "file": "gurdwara-sahib-greater-montreal-dollard-des-ormeaux-03.jpg",
+   "drive": "1hI_a7z44WvUDTkzV6zCna3_756wyQdIm"
+  },
+  {
+   "file": "gurdwara-sahib-greater-montreal-dollard-des-ormeaux-04.jpg",
+   "drive": "1S6MnLkQctEpxXlXNw0pDwRDFM7wz8CHF"
+  },
+  {
+   "file": "gurdwara-sahib-greater-montreal-dollard-des-ormeaux-05.jpg",
+   "drive": "1w_NoH6JTWJ_iZdMlt98Y5oGrZCwF2mk6"
+  },
+  {
+   "file": "gurdwara-sahib-greater-montreal-dollard-des-ormeaux-06.jpg",
+   "drive": "1JQ5_VJula6XWjyQQKjeZ89iYzOYPB36c"
+  },
+  {
+   "file": "gurdwara-sahib-greater-montreal-dollard-des-ormeaux-07.jpg",
+   "drive": "1hFak4U2lY6Pbnu8vmsEl3td-mxeJEslA"
+  }
+ ],
+ "gurdwara-brahm-bunga-sahib-brossard": [
+  {
+   "file": "gurdwara-brahm-bunga-sahib-brossard-01.jpg",
+   "drive": "1iW-0eZBdbQXw2TkyzsO5YB4M4zUXADv1"
+  },
+  {
+   "file": "gurdwara-brahm-bunga-sahib-brossard-02.jpg",
+   "drive": "1kcw2zQ8PRZeCh53f_yMPRFHlLhVZHaXR"
+  }
+ ],
+ "gurdwara-sahib-vaudreuil-dorion": [
+  {
+   "file": "gurdwara-sahib-vaudreuil-dorion-01.jpg",
+   "drive": "14td0b3FC1cS2kHKxEyU7FOXfKiqEfus1"
+  },
+  {
+   "file": "gurdwara-sahib-vaudreuil-dorion-02.jpg",
+   "drive": "1854e7mEtJn8KUpE-JJ3oFw0_ulsiy2MO"
+  },
+  {
+   "file": "gurdwara-sahib-vaudreuil-dorion-03.jpg",
+   "drive": "19QsLyFga-eizemKBM5o-mkGljaRfZj4p"
+  },
+  {
+   "file": "gurdwara-sahib-vaudreuil-dorion-04.jpg",
+   "drive": "1Njf7pAQrd5orIlko16nz9_2ZKt9kdcRY"
+  }
+ ],
+ "gurdwara-sahib-quebec": [
+  {
+   "file": "gurdwara-sahib-quebec-quebec-city-01.jpg",
+   "drive": "1nOM49VdC5KILRYjEgNRyX6nq9SFHsw6l"
+  },
+  {
+   "file": "gurdwara-sahib-quebec-quebec-city-02.jpg",
+   "drive": "1cUrSXGDWI-s-BYB90eD308ddiolgtpqL"
+  },
+  {
+   "file": "gurdwara-sahib-quebec-quebec-city-03.jpg",
+   "drive": "1BI6_K7XGLlmsGDUiwlciCYKF2_A0YWEO"
+  },
+  {
+   "file": "gurdwara-sahib-quebec-quebec-city-04.jpg",
+   "drive": "1QsrMb3V_hTdsQ2XSkF9vI2z_uXEU9QIN"
+  },
+  {
+   "file": "gurdwara-sahib-quebec-quebec-city-05.jpg",
+   "drive": "11Ne_YeMpuezlb8oQ9cZuBGWYCG5hNf2I"
+  },
+  {
+   "file": "gurdwara-sahib-quebec-quebec-city-06.jpg",
+   "drive": "11myqiXLchyTqQ59fC7wETBB0zs1jvsZX"
+  }
+ ],
+ "sikh-society-of-saskatchewan": [
+  {
+   "file": "sikh-society-of-saskatchewan-saskatoon-01.jpg",
+   "drive": "1u1ir8IeFgC5N26e7wqOixTgi5_u_TFzq"
+  },
+  {
+   "file": "sikh-society-of-saskatchewan-saskatoon-02.jpg",
+   "drive": "1Wgy1gX2rnXv4sVXkkq2_fbm09BUshhfY"
+  },
+  {
+   "file": "sikh-society-of-saskatchewan-saskatoon-03.jpg",
+   "drive": "1egnu7DQSIZvcJrtQ6xtd6TFkX7Bi0jf3"
+  },
+  {
+   "file": "sikh-society-of-saskatchewan-saskatoon-04.jpg",
+   "drive": "1RenbLSht5eZqvAkUFuH9Z2lTHxnI8wZc"
+  },
+  {
+   "file": "sikh-society-of-saskatchewan-saskatoon-05.jpg",
+   "drive": "12LTXwp63WcRrlgdrq63eLOGqSj9K6lbU"
+  },
+  {
+   "file": "sikh-society-of-saskatchewan-saskatoon-06.jpg",
+   "drive": "1Dsfu7hZZlCZIG-y9D47CcFUvznXVNI5S"
+  }
+ ],
+ "gurdwara-corman-park": [
+  {
+   "file": "gurdwara-corman-park-01.jpg",
+   "drive": "1EcatIucs4XqHwHO7Wz4P9RYOF806qHEZ"
+  },
+  {
+   "file": "gurdwara-corman-park-02.jpg",
+   "drive": "176X0tPjGzeO-erFG4UpagpKw0SKrhBAV"
+  },
+  {
+   "file": "gurdwara-corman-park-03.jpg",
+   "drive": "16uijZzsOT1pZTAsw1c7qYFHdR4mV57kM"
+  }
+ ],
+ "sikh-society-of-regina": [
+  {
+   "file": "gurdwara-sahib-regina-01.jpg",
+   "drive": "1H5kKgtF333ibX23dAIX-Krz9FceWs43V"
+  },
+  {
+   "file": "gurdwara-sahib-regina-02.jpg",
+   "drive": "18DRYSsSDxoq8S3Vpq2QFNgHwrwB9zWGe"
+  },
+  {
+   "file": "gurdwara-sahib-regina-03.jpg",
+   "drive": "1GYQy1g4LD8qKRZyWS2CI_0maDKefbedf"
+  },
+  {
+   "file": "gurdwara-sahib-regina-04.jpg",
+   "drive": "1RdKTXp2r17IEO9OG9Roq13zdudGAJNy1"
+  }
+ ],
+ "gurudwara-guru-nanak-sikh-centre-regina": [
+  {
+   "file": "gurudwara-guru-nanak-sikh-centre-regina-01.jpg",
+   "drive": "1EpaQFwug5TFr2EiDiGF1utdbyNyC8710"
+  },
+  {
+   "file": "gurudwara-guru-nanak-sikh-centre-regina-02.jpg",
+   "drive": "1inaDp1CC45R056yJn1zxaLf9CZM3Qx1v"
+  },
+  {
+   "file": "gurudwara-guru-nanak-sikh-centre-regina-03.jpg",
+   "drive": "197-mxs_EkMo7DEiaRsqq_Crk1pXOSH4R"
+  }
+ ],
  "maritime-sikh-society": [
   {
    "file": "maritime-sikh-society-halifax-01.jpg",
@@ -676,5 +913,38 @@
    "drive": "1h87DMb3QFiFgD1M4MBz6nqiwUwRbSHe8"
   }
  ],
- "gurdwara-akaljot-sahib-whitehorse-yukon": []
+ "gurdwara-akaljot-sahib-whitehorse-yukon": [
+  {
+   "file": "gurdwara-akaljot-sahib-whitehorse-01.jpg",
+   "drive": "1lCLXszOTN2wELxE-bGYBgVV9TQzIfMzN"
+  },
+  {
+   "file": "gurdwara-akaljot-sahib-whitehorse-02.jpg",
+   "drive": "1nW3wZAHmmuntvAL2c09Q5zsKHnk7Hc9d"
+  },
+  {
+   "file": "gurdwara-akaljot-sahib-whitehorse-03.jpg",
+   "drive": "1Uga7wKalCst8JYTcKvOWduWSyNZZmaad"
+  },
+  {
+   "file": "gurdwara-akaljot-sahib-whitehorse-04.jpg",
+   "drive": "1FvaTR_6gwECcpENRB7alFqKZ-Lj1dG7f"
+  },
+  {
+   "file": "gurdwara-akaljot-sahib-whitehorse-05.jpg",
+   "drive": "1HBqK5i0wLNUUKuom7K9XAL-j51XtFL6I"
+  },
+  {
+   "file": "gurdwara-akaljot-sahib-whitehorse-06.jpg",
+   "drive": "1MkzSlCvb68BI04n2fy6nHtJcRhqd7HLG"
+  },
+  {
+   "file": "gurdwara-akaljot-sahib-whitehorse-07.jpg",
+   "drive": "1h-qaLYs2N6qds6CC357WApQtzhm1arzt"
+  },
+  {
+   "file": "gurdwara-akaljot-sahib-whitehorse-08.jpg",
+   "drive": "1ZPY6sIwHsHfRn78UiffsNXAaqtAktCk0"
+  }
+ ]
 }

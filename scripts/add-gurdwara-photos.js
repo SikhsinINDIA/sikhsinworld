@@ -30,7 +30,7 @@ const slugify = s => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g,
 const rclone = (...a) => execFileSync(RCLONE, a, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
 // Forgive spelling variants: Gurudwara/Gurdwara/Gurduara, Sahab/Sahib, a trailing "Inc"
 const norm = s => slugify(s).replace(/\bgur(u|d)?(d)?(w|u)ara\b/g, 'gurdwara').replace(/\bsahab\b/g, 'sahib').replace(/-inc$/, '');
-const keysOf = g => [g.wg, gurdwaraSlug(g), slugify(g.n), slugify(`${g.n} ${g.c}`)].map(norm);
+const keysOf = g => [g.wg, gurdwaraSlug(g), slugify(g.n), slugify(`${g.n} ${g.c}`), g.aka && slugify(g.aka)].filter(Boolean).map(norm);
 
 (async () => {
   // Group the photos in the folder by Gurdwara name

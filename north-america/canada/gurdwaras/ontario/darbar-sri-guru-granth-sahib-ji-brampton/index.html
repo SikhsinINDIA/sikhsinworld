@@ -12,16 +12,15 @@
   <meta property="og:title" content="Darbar Sri Guru Granth Sahib Ji, Brampton, Ontario – Address and Details | Sikhs in World">
   <meta property="og:description" content="Darbar Sri Guru Granth Sahib Ji is a neighbourhood Gurdwara on Deerhurst Drive in Brampton, the city with the largest Sikh community in Canada. Address: 187 Deerhurst Dr, Brampton, ON.">
   <meta property="og:url" content="https://sikhsinworld.com/north-america/canada/gurdwaras/ontario/darbar-sri-guru-granth-sahib-ji-brampton/">
-  <meta property="og:image" content="https://sikhsinworld.com/pictures/sikhsinworld-share.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image" content="https://lh3.googleusercontent.com/d/1TqfzmiblxZjPGPCjlWLKDtEEQAc_owO2=w1200">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://sikhsinworld.com/pictures/sikhsinworld-share.jpg">
+  <meta name="twitter:image" content="https://lh3.googleusercontent.com/d/1TqfzmiblxZjPGPCjlWLKDtEEQAc_owO2=w1200">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/gurdwara.css">
+  <link rel="preconnect" href="https://lh3.googleusercontent.com">
   <script type="application/ld+json">[{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"World","item":"https://sikhsinworld.com/"},{"@type":"ListItem","position":2,"name":"North America","item":"https://sikhsinworld.com/north-america/"},{"@type":"ListItem","position":3,"name":"Canada","item":"https://sikhsinworld.com/north-america/canada/"},{"@type":"ListItem","position":4,"name":"Gurudwaras in Canada","item":"https://sikhsinworld.com/north-america/canada/gurdwaras/"},{"@type":"ListItem","position":5,"name":"Ontario","item":"https://sikhsinworld.com/north-america/canada/gurdwaras/ontario/"},{"@type":"ListItem","position":6,"name":"Darbar Sri Guru Granth Sahib Ji","item":"https://sikhsinworld.com/north-america/canada/gurdwaras/ontario/darbar-sri-guru-granth-sahib-ji-brampton/"}]},{"@context":"https://schema.org","@type":"PlaceOfWorship","name":"Darbar Sri Guru Granth Sahib Ji","url":"https://sikhsinworld.com/north-america/canada/gurdwaras/ontario/darbar-sri-guru-granth-sahib-ji-brampton/","description":"Darbar Sri Guru Granth Sahib Ji is a neighbourhood Gurdwara on Deerhurst Drive in Brampton, the city with the largest Sikh community in Canada. It serves local families with daily prayers, kirtan and langar, and like every Gurdwara its doors are open to visitors of all backgrounds.","address":{"@type":"PostalAddress","streetAddress":"187 Deerhurst Dr","addressLocality":"Brampton","addressRegion":"ON","addressCountry":"CA"}}]</script>
 </head>
 <body>
@@ -43,6 +42,15 @@
   <!-- ── INTRO BANNER ── -->
   <div class="intro-banner">
     <p>Darbar Sri Guru Granth Sahib Ji is a neighbourhood Gurdwara on Deerhurst Drive in Brampton, the city with the largest Sikh community in Canada.</p>
+  </div>
+  <!-- ── GALLERY ── -->
+  <div class="gallery-wrapper">
+    <img id="galleryMain" class="gallery-main" src="https://lh3.googleusercontent.com/d/1TqfzmiblxZjPGPCjlWLKDtEEQAc_owO2=w1200" alt="Darbar Sri Guru Granth Sahib Ji, Brampton" onclick="openLightbox(this.src, 'Darbar Sri Guru Granth Sahib Ji, Brampton')">
+    <div class="gallery-thumbs">
+      <img loading="lazy" class="gallery-thumb active" src="https://lh3.googleusercontent.com/d/1TqfzmiblxZjPGPCjlWLKDtEEQAc_owO2=w1200" alt="Darbar Sri Guru Granth Sahib Ji, Brampton — view 1" onclick="selectSlide(0)">
+      <img loading="lazy" class="gallery-thumb" src="https://lh3.googleusercontent.com/d/1v03KuY_T9f_E06KFh47yX-JQs5pVIVK9=w1200" alt="Darbar Sri Guru Granth Sahib Ji, Brampton — view 2" onclick="selectSlide(1)">
+    </div>
+    <div class="gallery-hint">Tap any photo to enlarge</div>
   </div>
   <!-- ── DETAIL ── -->
   <div class="detail-wrapper">
@@ -129,5 +137,15 @@
     </div>
   </div>
 </div>
+<!-- ── LIGHTBOX ── -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕ &nbsp;Close</button>
+  <img id="lightbox-img" src="" alt="Enlarged view of the selected picture">
+  <button class="lb-download" onclick="downloadCurrentImage()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 5v10M7 15l5 5 5-5"/><rect x="3" y="19" width="18" height="2" rx="1"/></svg>
+    Download Image
+  </button>
+</div>
+<script src="/js/gurdwara-gallery.js"></script>
 </body>
 </html>
