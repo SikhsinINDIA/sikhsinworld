@@ -18,13 +18,17 @@ const gurdwaraSlug = g => {
 // The photo list (scripts/gurdwara-photos-<country>.json) holds each file's Drive ID.
 const photoFolder = (regionSlug, country, g) =>
   `${regionSlug}/${slugify(country)}/${slugify(cityOf(g)) || 'other'}/${gurdwaraSlug(g)}/`;
+// Photos are listed under the Gurdwara’s worldgurudwaras.com slug where it has one, else its page slug
+const photoKey = g => g.wg || gurdwaraSlug(g);
 const driveImage = id => `https://lh3.googleusercontent.com/d/${id}=w1200`;
 
 module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug, esc, photos = {} }) {
   const country = dir.country;
-  const photosOf = g => (photos[g.wg] || []).map(p => driveImage(p.drive));
+  const photosOf = g => (photos[photoKey(g)] || []).map(p => driveImage(p.drive));
   const base = `/${region.slug}/${slug(country)}/gurdwaras/`;
   const total = dir.provinces.reduce((t, p) => t + p.list.length, 0);
+  // Words for the country’s divisions, e.g. Province / provinces and territories, State / states and territories
+  const Div = dir.division || 'Province', div = Div.toLowerCase(), divs = dir.divisions || `${div}s`;
 
   const ICON = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M16 3 L16 8" stroke="#F7941D" stroke-width="2" stroke-linecap="round"/>
@@ -45,7 +49,7 @@ module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug,
   const fullAddress = (g, prov) => [g.a, g.c && g.c.replace(/\s*\(.*\)$/, '').replace(/ area$/, ''), [prov.abbr, g.pc].filter(Boolean).join(' ')].filter(Boolean).join(', ');
   const place = (g, prov) => [g.c, prov.name].filter(Boolean).join(', ');
   const gSlug = gurdwaraSlug;
-  const mapsUrl = (g, prov) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(g.n + ', ' + fullAddress(g, prov) + ', Canada')}`;
+  const mapsUrl = (g, prov) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(g.n + ', ' + fullAddress(g, prov) + ', ' + country)}`;
 
   function poster({ url, title, description, eyebrow = 'Sikh Heritage &amp; Holy Places', hero, subtitle, banner, body, back, related, footLeft, ld, image, gallery }) {
     const hasPhotos = body.includes('lh3.googleusercontent.com');
@@ -177,15 +181,15 @@ ${related.more.map(([t, h]) => `      <li><a href="${h}">${esc(t)}</a></li>`).jo
   urls.push(base);
   write(`${base.slice(1)}index.html`, poster({
     url: base,
-    title: `Gurudwaras in ${country} – ${total} Gurdwaras by Province | Sikhs in World`,
-    description: `Directory of ${total} Gurudwaras in ${country}, province by province, with addresses, maps and a short introduction to each Gurdwara.`,
+    title: `Gurudwaras in ${country} – ${total} Gurdwaras by ${Div} | Sikhs in World`,
+    description: `Directory of ${total} Gurudwaras in ${country}, ${div} by ${div}, with addresses, maps and a short introduction to each Gurdwara.`,
     hero: heroTitle(`Gurudwaras in ${country}`),
-    subtitle: `${total} Gurudwaras across ${dir.provinces.length} provinces and territories`,
-    banner: `From the first Gurdwara in Vancouver in 1908 to new sangats in the far north, ${country} is home to the largest Sikh community outside India.`,
-    body: `  <!-- ── PROVINCES ── -->
+    subtitle: `${total} Gurudwaras across ${dir.provinces.length} ${divs}`,
+    banner: dir.banner,
+    body: `  <!-- ── ${Div.toUpperCase()}S ── -->
   <div class="cities-wrapper">
-    <div class="section-heading">Choose a <span>Province</span></div>
-    <div class="section-sub">Tap a province to see its Gurudwaras</div>
+    <div class="section-heading">Choose a <span>${Div}</span></div>
+    <div class="section-sub">Tap a ${div} to see its Gurudwaras</div>
     <div class="city-grid">
 ${dir.provinces.map(p => `      <a class="city-card" href="${base}${slug(p.name)}/">
         <div class="city-icon">
@@ -247,7 +251,7 @@ ${cities.map(c => `${cities.length > 1 ? `    <h2 class="city-heading">${esc(c.n
     }).join('\n')}`).join('\n')}
   </div>`,
       back: base,
-      related: { main: countryLinks, moreTitle: `Gurudwaras in other provinces`, more: dir.provinces.filter(p => p !== prov).map(p => [`Gurudwaras in ${p.name}`, `${base}${slug(p.name)}/`]) },
+      related: { main: countryLinks, moreTitle: `Gurudwaras in other ${div === 'state' ? 'states and territories' : divs.split(' ')[0]}`, more: dir.provinces.filter(p => p !== prov).map(p => [`Gurudwaras in ${p.name}`, `${base}${slug(p.name)}/`]) },
       ld: crumbLd([...crumbsTo, [prov.name, pUrl]])
     }));
 
@@ -269,9 +273,9 @@ ${pics.slice(0, 4).map((p, n) => `      <img loading="lazy" class="gallery-thumb
       const sameCity = prov.list.filter(x => x !== g && x.c && g.c && x.c.replace(/\s*\(.*\)$/, '') === g.c.replace(/\s*\(.*\)$/, ''));
       const nearby = (sameCity.length ? sameCity : prov.list.filter(x => x !== g)).slice(0, 9);
       const facts = [
-        ['Address', esc(addr + ', Canada')],
+        ['Address', esc(addr + ', ' + country)],
         ['City', esc(g.c || 'See address')],
-        ['Province', esc(prov.name)],
+        [Div, esc(prov.name)],
         g.y && ['Established', esc(g.y)],
         g.ph && ['Phone', `<a href="tel:+1${g.ph.replace(/\D/g, '')}">${esc(g.ph)}</a>`],
         g.w && ['Website', `<a href="${esc(g.w)}" target="_blank" rel="noopener">${esc(g.w.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''))}</a>`]
@@ -314,7 +318,7 @@ ${facts.map(([l, v]) => `        <div class="fact">
         },
         ld: [crumbLd([...crumbsTo, [prov.name, pUrl], [g.n, gUrl]]), {
           '@context': 'https://schema.org', '@type': 'PlaceOfWorship', name: g.n, url: SITE + gUrl, description: g.p,
-          address: { '@type': 'PostalAddress', streetAddress: g.a, addressLocality: (g.c || '').replace(/\s*\(.*\)$/, '') || undefined, addressRegion: prov.abbr, postalCode: g.pc, addressCountry: 'CA' },
+          address: { '@type': 'PostalAddress', streetAddress: g.a, addressLocality: (g.c || '').replace(/\s*\(.*\)$/, '') || undefined, addressRegion: prov.abbr, postalCode: g.pc, addressCountry: dir.code },
           telephone: g.ph, sameAs: g.w, foundingDate: g.y && /^\d{4}$/.test(g.y) ? g.y : undefined
         }]
       }));
@@ -325,3 +329,4 @@ ${facts.map(([l, v]) => `        <div class="fact">
 
 module.exports.photoFolder = photoFolder;
 module.exports.gurdwaraSlug = gurdwaraSlug;
+module.exports.photoKey = photoKey;

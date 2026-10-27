@@ -6,7 +6,9 @@
    Names and addresses from the public listings on worldgurudwaras.com and the
    Gurdwaras' own websites (Oct 2026). Empty fields are simply left out. */
 module.exports = {
-  country: 'Canada',
+  country: 'Canada', code: 'CA',
+  division: 'Province', divisions: 'provinces and territories',
+  banner: 'From the first Gurdwara in Vancouver in 1908 to new sangats in the far north, Canada is home to the largest Sikh community outside India.',
   provinces: [
     {
       name: 'Ontario', abbr: 'ON',

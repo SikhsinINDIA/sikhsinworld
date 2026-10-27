@@ -17,11 +17,15 @@ const os = require('os');
 const path = require('path');
 const { execFileSync } = require('child_process');
 const { createCanvas, loadImage } = require('@napi-rs/canvas');
-const { photoFolder, gurdwaraSlug } = require('./build-gurdwaras');
+const { photoFolder, gurdwaraSlug, photoKey } = require('./build-gurdwaras');
 
 const RCLONE = process.env.RCLONE || 'C:/Users/Hp/Downloads/rclone-v1.74.4-windows-amd64/rclone.exe';
 const DRIVE = 'gdrive:SikhsinWorld/01-world-gurudwaras/';
-const COUNTRIES = [{ data: require('./gurdwaras-canada'), region: 'north-america', photos: 'gurdwara-photos-canada.json' }];
+const COUNTRIES = [
+  { data: require('./gurdwaras-canada'), region: 'north-america', photos: 'gurdwara-photos-canada.json' },
+  { data: require('./gurdwaras-australia'), region: 'australia-nz', photos: 'gurdwara-photos-australia.json' },
+  { data: require('./gurdwaras-new-zealand'), region: 'australia-nz', photos: 'gurdwara-photos-new-zealand.json' }
+];
 
 const args = process.argv.slice(2);
 const replace = args.includes('--replace');
@@ -47,7 +51,7 @@ const keysOf = g => [g.wg, gurdwaraSlug(g), slugify(g.n), slugify(`${g.n} ${g.c}
       const key = keysOf(g).find(k => groups[k]);
       const files = key && groups[key];
       if (!files) continue;
-      if ((manifest[g.wg] || []).length && !replace) { console.log(`skip  ${g.n} (already has photos)`); continue; }
+      if ((manifest[photoKey(g)] || []).length && !replace) { console.log(`skip  ${g.n} (already has photos)`); continue; }
 
       // Resize into a temporary copy of the Drive folder, then upload
       const folder = photoFolder(c.region, c.data.country, g);
@@ -65,7 +69,7 @@ const keysOf = g => [g.wg, gurdwaraSlug(g), slugify(g.n), slugify(`${g.n} ${g.c}
       rclone('sync', tmp, DRIVE + folder);
       fs.rmSync(tmp, { recursive: true, force: true });
       const ids = Object.fromEntries(JSON.parse(rclone('lsjson', '--files-only', DRIVE + folder)).map(e => [e.Name, e.ID]));
-      manifest[g.wg] = names.map(n => ({ file: n, drive: ids[n] }));
+      manifest[photoKey(g)] = names.map(n => ({ file: n, drive: ids[n] }));
       console.log(`added ${g.n}, ${g.c}: ${names.length} photos → ${folder}`);
     }
     fs.writeFileSync(file, JSON.stringify(manifest, null, 1));
