@@ -55,7 +55,12 @@
  "gurudwara-sahib-guru-darbar-quesnel": [],
  "gurdwara-sahib-miri-piri-khalsa-darbar-terrace-bc": [],
  "guru-nanak-sikh-temple-fort-st-john": [],
- "dashmesh-culture-center-calgary": [],
+ "dashmesh-culture-center-calgary": [
+  "dashmesh-culture-center-calgary-01.jpg",
+  "dashmesh-culture-center-calgary-02.jpg",
+  "dashmesh-culture-center-calgary-03.jpg",
+  "dashmesh-culture-center-calgary-04.jpg"
+ ],
  "gurdwara-darbar-sri-guru-granth-sahib-ji-calgary": [
   "gurdwara-darbar-sri-guru-granth-sahib-ji-calgary-01.jpg",
   "gurdwara-darbar-sri-guru-granth-sahib-ji-calgary-02.jpg",
@@ -63,26 +68,51 @@
  ],
  "guru-ram-das-darbar-calgary": [
   "guru-ram-das-darbar-calgary-01.jpg",
-  "guru-ram-das-darbar-calgary-02.jpg"
+  "guru-ram-das-darbar-calgary-02.jpg",
+  "guru-ram-das-darbar-calgary-03.jpg"
  ],
- "sikh-society-of-calgary": [],
+ "sikh-society-of-calgary": [
+  "sikh-society-of-calgary-01.jpg",
+  "sikh-society-of-calgary-02.jpg",
+  "sikh-society-of-calgary-03.jpg",
+  "sikh-society-of-calgary-04.jpg"
+ ],
  "guru-ravidass-community-centre-calgary": [
   "guru-ravidass-community-centre-calgary-01.jpg",
   "guru-ravidass-community-centre-calgary-02.jpg"
  ],
- "brahm-bunga-spiritual-fellowship-calgary": [],
+ "brahm-bunga-spiritual-fellowship-calgary": [
+  "brahm-bunga-spiritual-fellowship-calgary-01.jpg"
+ ],
  "gurdwara-dukh-nivaran-sahib-edmonton": [
   "gurdwara-dukh-nivaran-sahib-edmonton-01.jpg",
-  "gurdwara-dukh-nivaran-sahib-edmonton-02.jpg"
+  "gurdwara-dukh-nivaran-sahib-edmonton-02.jpg",
+  "gurdwara-dukh-nivaran-sahib-edmonton-03.jpg"
  ],
  "gurdwara-darbar-sri-guru-granth-sahib-edmonton": [
   "gurdwara-darbar-sri-guru-granth-sahib-edmonton-01.jpg",
   "gurdwara-darbar-sri-guru-granth-sahib-edmonton-02.jpg",
-  "gurdwara-darbar-sri-guru-granth-sahib-edmonton-03.jpg"
+  "gurdwara-darbar-sri-guru-granth-sahib-edmonton-03.jpg",
+  "gurdwara-darbar-sri-guru-granth-sahib-edmonton-04.jpg"
  ],
- "gurudwara-millwoods": [],
- "gurdwara-nanak-sar-edmonton": [],
- "sikh-temple-grande-prairie": [],
+ "gurudwara-millwoods": [
+  "gurudwara-millwoods-01.jpg",
+  "gurudwara-millwoods-02.jpg",
+  "gurudwara-millwoods-03.jpg"
+ ],
+ "gurdwara-nanak-sar-edmonton": [
+  "gurdwara-nanak-sar-edmonton-01.jpg",
+  "gurdwara-nanak-sar-edmonton-02.jpg",
+  "gurdwara-nanak-sar-edmonton-03.jpg",
+  "gurdwara-nanak-sar-edmonton-04.jpg",
+  "gurdwara-nanak-sar-edmonton-05.jpg",
+  "gurdwara-nanak-sar-edmonton-06.jpg"
+ ],
+ "sikh-temple-grande-prairie": [
+  "sikh-temple-grande-prairie-01.jpg",
+  "sikh-temple-grande-prairie-02.jpg",
+  "sikh-temple-grande-prairie-03.jpg"
+ ],
  "fort-mcmurray-sikh-society": [],
  "guru-nanak-darbar-winnipeg": [],
  "khalsa-diwan-society-manitoba-inc": [],
