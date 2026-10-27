@@ -67,7 +67,7 @@ function page({ url, title, description, crumbs = [], body }) {
 <body>
 <header class="top">
   <div class="wrap top-in">
-    <a class="brand" href="/"><img src="/pictures/sikhsinworld-logo.png" width="62" height="77" alt="Sikhs in World – sikhsinworld.com"></a>
+    <a class="brand" href="/"><img src="/pictures/sikhsinworld-logo.png" width="105" height="130" alt="Sikhs in World – sikhsinworld.com"></a>
     <nav class="family" aria-label="Sikhs in family of sites">
       <a href="/" class="on">World</a>
       <a href="${INDIA}">India</a>
