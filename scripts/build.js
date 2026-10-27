@@ -11,6 +11,7 @@ const buildGurdwaras = require('./build-gurdwaras');
 
 // Full Gurdwara directories, by country (one page per Gurdwara)
 const DIRECTORIES = { 'Canada': require('./gurdwaras-canada') };
+const PHOTOS = { 'Canada': require('./gurdwara-photos-canada.json') };
 
 const ROOT = path.join(__dirname, '..');
 const SITE = 'https://sikhsinworld.com';
@@ -182,7 +183,7 @@ ${r.countries.map(c => '    ' + countryLink(r, c)).join('\n')}
     if (!c) throw new Error('No country data for ' + name);
     const url = `/${r.slug}/${slug(name)}/`;
     urls.push(url);
-    const directory = DIRECTORIES[name] && buildGurdwaras({ dir: DIRECTORIES[name], region: r, write, urls, SITE, slug, esc });
+    const directory = DIRECTORIES[name] && buildGurdwaras({ dir: DIRECTORIES[name], region: r, write, urls, SITE, slug, esc, photos: PHOTOS[name] });
     write(`${r.slug}/${slug(name)}/index.html`, page({
       url,
       title: `Sikhs in ${name} – History, Gurdwaras and Community | Sikhs in World`,

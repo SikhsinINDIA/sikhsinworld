@@ -6,8 +6,10 @@
      <region>/<country>/gurdwaras/<province>/            every Gurdwara in a province
      <region>/<country>/gurdwaras/<province>/<gurdwara>/ one page per Gurdwara
    ────────────────────────────────────────────────────────────── */
-module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug, esc }) {
+module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug, esc, photos = {} }) {
   const country = dir.country;
+  const photoDir = `/pictures/gurdwaras/${slug(country)}/`;
+  const photosOf = g => (photos[g.wg] || []).map(f => photoDir + f);
   const base = `/${region.slug}/${slug(country)}/gurdwaras/`;
   const total = dir.provinces.reduce((t, p) => t + p.list.length, 0);
 
@@ -35,9 +37,10 @@ module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug,
   };
   const mapsUrl = (g, prov) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(g.n + ', ' + fullAddress(g, prov) + ', Canada')}`;
 
-  function poster({ url, title, description, eyebrow = 'Sikh Heritage &amp; Holy Places', hero, subtitle, banner, body, back, related, footLeft, ld }) {
+  function poster({ url, title, description, eyebrow = 'Sikh Heritage &amp; Holy Places', hero, subtitle, banner, body, back, related, footLeft, ld, image, gallery }) {
     const canonical = SITE + url;
     const share = encodeURIComponent(canonical);
+    const ogImage = image ? SITE + image : `${SITE}/pictures/sikhsinworld-share.jpg`;
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,11 +55,11 @@ module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug,
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(description)}">
   <meta property="og:url" content="${canonical}">
-  <meta property="og:image" content="${SITE}/pictures/sikhsinworld-share.jpg">
+  <meta property="og:image" content="${ogImage}">${image ? '' : `
   <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image:height" content="630">`}
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="${SITE}/pictures/sikhsinworld-share.jpg">
+  <meta name="twitter:image" content="${ogImage}">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -131,7 +134,17 @@ ${related.more.map(([t, h]) => `      <li><a href="${h}">${esc(t)}</a></li>`).jo
       <div class="footer-right">Waheguru Ji Ka Khalsa &middot; Waheguru Ji Ki Fateh</div>
     </div>
   </div>
+</div>${gallery ? `
+<!-- ── LIGHTBOX ── -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕ &nbsp;Close</button>
+  <img id="lightbox-img" src="" alt="Enlarged view of the selected picture">
+  <button class="lb-download" onclick="downloadCurrentImage()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 5v10M7 15l5 5 5-5"/><rect x="3" y="19" width="18" height="2" rx="1"/></svg>
+    Download Image
+  </button>
 </div>
+<script src="/js/gurdwara-gallery.js"></script>` : ''}
 </body>
 </html>
 `;
@@ -201,7 +214,12 @@ ${dir.provinces.map(p => `      <a class="city-card" href="${base}${slug(p.name)
       banner: prov.intro,
       body: `  <!-- ── GURUDWARAS ── -->
   <div class="gurus-wrapper">
-${cities.map(c => `${cities.length > 1 ? `    <h2 class="city-heading">${esc(c.name)}</h2>\n` : ''}${c.list.map(g => `    <div class="guru-section">
+${cities.map(c => `${cities.length > 1 ? `    <h2 class="city-heading">${esc(c.name)}</h2>\n` : ''}${c.list.map(g => {
+      const pic = photosOf(g)[0];
+      return `    <div class="guru-section${pic && i++ % 2 ? ' reverse' : ''}">${pic ? `
+      <div class="guru-image-wrap">
+        <a href="${pUrl}${gSlug(g)}/"><img loading="lazy" class="guru-image" src="${pic}" alt="${esc(g.n)}, ${esc(g.c || prov.name)}"></a>
+      </div>` : ''}
       <div class="guru-text">
         <div class="guru-name-heading"><span>${esc(g.n)}</span><br>${esc(g.c || prov.name)}</div>
         <div class="guru-attribute">Location: ${esc(fullAddress(g, prov))}</div>
@@ -213,7 +231,8 @@ ${cities.map(c => `${cities.length > 1 ? `    <h2 class="city-heading">${esc(c.n
           ${ARROW}
         </a>
       </div>
-    </div>`).join('\n')}`).join('\n')}
+    </div>`;
+    }).join('\n')}`).join('\n')}
   </div>`,
       back: base,
       related: { main: countryLinks, moreTitle: `Gurudwaras in other provinces`, more: dir.provinces.filter(p => p !== prov).map(p => [`Gurudwaras in ${p.name}`, `${base}${slug(p.name)}/`]) },
@@ -224,6 +243,17 @@ ${cities.map(c => `${cities.length > 1 ? `    <h2 class="city-heading">${esc(c.n
       const gUrl = `${pUrl}${gSlug(g)}/`;
       urls.push(gUrl);
       const addr = fullAddress(g, prov);
+      const pics = photosOf(g);
+      const label = `${g.n}, ${g.c || prov.name}`;
+      const gallery = pics.length ? `  <!-- ── GALLERY ── -->
+  <div class="gallery-wrapper">
+    <img id="galleryMain" class="gallery-main" src="${pics[0]}" alt="${esc(label)}" onclick="openLightbox(this.src, '${esc(label).replace(/'/g, '&#39;')}')">${pics.length > 1 ? `
+    <div class="gallery-thumbs">
+${pics.slice(0, 4).map((p, n) => `      <img loading="lazy" class="gallery-thumb${n ? '' : ' active'}" src="${p}" alt="${esc(label)} — view ${n + 1}" onclick="selectSlide(${n})">`).join('\n')}
+    </div>` : ''}
+    <div class="gallery-hint">Tap any photo to enlarge</div>
+  </div>
+` : '';
       const sameCity = prov.list.filter(x => x !== g && x.c && g.c && x.c.replace(/\s*\(.*\)$/, '') === g.c.replace(/\s*\(.*\)$/, ''));
       const nearby = (sameCity.length ? sameCity : prov.list.filter(x => x !== g)).slice(0, 9);
       const facts = [
@@ -241,7 +271,9 @@ ${cities.map(c => `${cities.length > 1 ? `    <h2 class="city-heading">${esc(c.n
         hero: heroTitle(g.n),
         subtitle: `${place(g, prov)} — ${country}`,
         banner: firstSentence(g.p),
-        body: `  <!-- ── DETAIL ── -->
+        image: pics[0],
+        gallery: pics.length > 0,
+        body: `${gallery}  <!-- ── DETAIL ── -->
   <div class="detail-wrapper">
     <div class="guru-section" style="display:block; border-bottom:none; padding:4px 0 0;">
       <div class="guru-name-heading"><span>${esc(g.n)}</span><br>${esc(g.c || prov.name)}</div>
