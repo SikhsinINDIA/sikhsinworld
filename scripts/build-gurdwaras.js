@@ -6,10 +6,20 @@
      <region>/<country>/gurdwaras/<province>/            every Gurdwara in a province
      <region>/<country>/gurdwaras/<province>/<gurdwara>/ one page per Gurdwara
    ────────────────────────────────────────────────────────────── */
+const slugify = s => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const cityOf = g => (g.c || '').replace(/\s*\(.*\)$/, '').replace(/ area$/, '').replace(/^near /, '');
+const gurdwaraSlug = g => {
+  const name = slugify(g.n), city = slugify(cityOf(g));
+  return city && !name.includes(city) ? `${name}-${city}` : name;
+};
+// Photos live in the same kind of tree as on sikhsinindia.com, one folder per Gurdwara:
+// pictures/world-gurudwaras/<continent>/<country>/<city>/<gurdwara>/<gurdwara>-01.jpg
+const photoFolder = (regionSlug, country, g) =>
+  `pictures/world-gurudwaras/${regionSlug}/${slugify(country)}/${slugify(cityOf(g)) || 'other'}/${gurdwaraSlug(g)}/`;
+
 module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug, esc, photos = {} }) {
   const country = dir.country;
-  const photoDir = `/pictures/gurdwaras/${slug(country)}/`;
-  const photosOf = g => (photos[g.wg] || []).map(f => photoDir + f);
+  const photosOf = g => (photos[g.wg] || []).map(f => '/' + photoFolder(region.slug, country, g) + f);
   const base = `/${region.slug}/${slug(country)}/gurdwaras/`;
   const total = dir.provinces.reduce((t, p) => t + p.list.length, 0);
 
@@ -31,10 +41,7 @@ module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug,
   const firstSentence = p => (p.match(/^.*?[.!?](\s|$)/) || [p])[0].trim();
   const fullAddress = (g, prov) => [g.a, g.c && g.c.replace(/\s*\(.*\)$/, '').replace(/ area$/, ''), [prov.abbr, g.pc].filter(Boolean).join(' ')].filter(Boolean).join(', ');
   const place = (g, prov) => [g.c, prov.name].filter(Boolean).join(', ');
-  const gSlug = g => {
-    const name = slug(g.n), city = slug((g.c || '').replace(/\s*\(.*\)$/, '').replace(/ area$/, '').replace(/^near /, ''));
-    return city && !name.includes(city) ? `${name}-${city}` : name;
-  };
+  const gSlug = gurdwaraSlug;
   const mapsUrl = (g, prov) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(g.n + ', ' + fullAddress(g, prov) + ', Canada')}`;
 
   function poster({ url, title, description, eyebrow = 'Sikh Heritage &amp; Holy Places', hero, subtitle, banner, body, back, related, footLeft, ld, image, gallery }) {
@@ -310,3 +317,6 @@ ${facts.map(([l, v]) => `        <div class="fact">
   }
   return { url: base, total };
 };
+
+module.exports.photoFolder = photoFolder;
+module.exports.gurdwaraSlug = gurdwaraSlug;
