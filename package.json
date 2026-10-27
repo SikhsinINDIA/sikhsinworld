@@ -1,0 +1,12 @@
+{
+  "name": "sikhsinworld",
+  "private": true,
+  "description": "Static site builder for sikhsinworld.com",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "photos": "node scripts/add-gurdwara-photos.js"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "^0.1.100"
+  }
+}
