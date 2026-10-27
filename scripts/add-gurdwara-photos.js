@@ -28,20 +28,24 @@ const replace = args.includes('--replace');
 const dir = args.find(a => !a.startsWith('--')) || path.join(os.homedir(), 'Downloads');
 const slugify = s => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const rclone = (...a) => execFileSync(RCLONE, a, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+// Forgive spelling variants: Gurudwara/Gurdwara/Gurduara, Sahab/Sahib, a trailing "Inc"
+const norm = s => slugify(s).replace(/\bgur(u|d)?(d)?(w|u)ara\b/g, 'gurdwara').replace(/\bsahab\b/g, 'sahib').replace(/-inc$/, '');
+const keysOf = g => [g.wg, gurdwaraSlug(g), slugify(g.n), slugify(`${g.n} ${g.c}`)].map(norm);
 
 (async () => {
   // Group the photos in the folder by Gurdwara name
   const groups = {};
   for (const f of fs.readdirSync(dir)) {
     const m = f.match(/^(.*)-(\d+)\.(jpe?g|png|webp)$/i);
-    if (m) (groups[slugify(m[1])] = groups[slugify(m[1])] || []).push([+m[2], f]);
+    if (m) (groups[norm(m[1])] = groups[norm(m[1])] || []).push([+m[2], f]);
   }
 
   for (const c of COUNTRIES) {
     const file = path.join(__dirname, c.photos);
     const manifest = JSON.parse(fs.readFileSync(file, 'utf8'));
     for (const g of c.data.provinces.flatMap(p => p.list)) {
-      const files = groups[g.wg] || groups[gurdwaraSlug(g)];
+      const key = keysOf(g).find(k => groups[k]);
+      const files = key && groups[key];
       if (!files) continue;
       if ((manifest[g.wg] || []).length && !replace) { console.log(`skip  ${g.n} (already has photos)`); continue; }
 
@@ -66,6 +70,6 @@ const rclone = (...a) => execFileSync(RCLONE, a, { encoding: 'utf8', stdio: ['ig
     }
     fs.writeFileSync(file, JSON.stringify(manifest, null, 1));
   }
-  const used = new Set(COUNTRIES.flatMap(c => c.data.provinces.flatMap(p => p.list.flatMap(g => [g.wg, gurdwaraSlug(g)]))));
+  const used = new Set(COUNTRIES.flatMap(c => c.data.provinces.flatMap(p => p.list.flatMap(keysOf))));
   for (const k of Object.keys(groups)) if (!used.has(k)) console.log(`no Gurdwara matches "${k}"`);
 })();

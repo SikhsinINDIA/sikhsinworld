@@ -12,16 +12,15 @@
   <meta property="og:title" content="Winnipeg South Sikh Centre, Winnipeg, Manitoba – Address and Details | Sikhs in World">
   <meta property="og:description" content="Winnipeg South Sikh Centre on Wilkes Avenue is a registered charity serving south Winnipeg. Address: 1248 Wilkes Ave, Winnipeg, MB R3S 0A1.">
   <meta property="og:url" content="https://sikhsinworld.com/north-america/canada/gurdwaras/manitoba/winnipeg-south-sikh-centre/">
-  <meta property="og:image" content="https://sikhsinworld.com/pictures/sikhsinworld-share.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image" content="https://lh3.googleusercontent.com/d/1EpcLhB4LSXpCjkOfRE-3Anb234ZT06o_=w1200">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://sikhsinworld.com/pictures/sikhsinworld-share.jpg">
+  <meta name="twitter:image" content="https://lh3.googleusercontent.com/d/1EpcLhB4LSXpCjkOfRE-3Anb234ZT06o_=w1200">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/gurdwara.css">
+  <link rel="preconnect" href="https://lh3.googleusercontent.com">
   <script type="application/ld+json">[{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"World","item":"https://sikhsinworld.com/"},{"@type":"ListItem","position":2,"name":"North America","item":"https://sikhsinworld.com/north-america/"},{"@type":"ListItem","position":3,"name":"Canada","item":"https://sikhsinworld.com/north-america/canada/"},{"@type":"ListItem","position":4,"name":"Gurudwaras in Canada","item":"https://sikhsinworld.com/north-america/canada/gurdwaras/"},{"@type":"ListItem","position":5,"name":"Manitoba","item":"https://sikhsinworld.com/north-america/canada/gurdwaras/manitoba/"},{"@type":"ListItem","position":6,"name":"Winnipeg South Sikh Centre","item":"https://sikhsinworld.com/north-america/canada/gurdwaras/manitoba/winnipeg-south-sikh-centre/"}]},{"@context":"https://schema.org","@type":"PlaceOfWorship","name":"Winnipeg South Sikh Centre","url":"https://sikhsinworld.com/north-america/canada/gurdwaras/manitoba/winnipeg-south-sikh-centre/","description":"Winnipeg South Sikh Centre on Wilkes Avenue is a registered charity serving south Winnipeg. Parkash is at 5 am and Rehras at 5:30 pm each day, and the Sunday Kirtan Darbar runs through the morning, followed by langar in the hall downstairs. Its website explains Gurdwara etiquette for first-time visitors.","address":{"@type":"PostalAddress","streetAddress":"1248 Wilkes Ave","addressLocality":"Winnipeg","addressRegion":"MB","postalCode":"R3S 0A1","addressCountry":"CA"},"telephone":"(204) 488-7096","sameAs":"https://southsikhcentre.ca/"}]</script>
 </head>
 <body>
@@ -43,6 +42,17 @@
   <!-- ── INTRO BANNER ── -->
   <div class="intro-banner">
     <p>Winnipeg South Sikh Centre on Wilkes Avenue is a registered charity serving south Winnipeg.</p>
+  </div>
+  <!-- ── GALLERY ── -->
+  <div class="gallery-wrapper">
+    <img id="galleryMain" class="gallery-main" src="https://lh3.googleusercontent.com/d/1EpcLhB4LSXpCjkOfRE-3Anb234ZT06o_=w1200" alt="Winnipeg South Sikh Centre, Winnipeg" onclick="openLightbox(this.src, 'Winnipeg South Sikh Centre, Winnipeg')">
+    <div class="gallery-thumbs">
+      <img loading="lazy" class="gallery-thumb active" src="https://lh3.googleusercontent.com/d/1EpcLhB4LSXpCjkOfRE-3Anb234ZT06o_=w1200" alt="Winnipeg South Sikh Centre, Winnipeg — view 1" onclick="selectSlide(0)">
+      <img loading="lazy" class="gallery-thumb" src="https://lh3.googleusercontent.com/d/1tKo4VeIGOfin9rteIODwi4wcqN-r6MxZ=w1200" alt="Winnipeg South Sikh Centre, Winnipeg — view 2" onclick="selectSlide(1)">
+      <img loading="lazy" class="gallery-thumb" src="https://lh3.googleusercontent.com/d/1z0hsivZ4i2XgHePejZweEkr7v2g4yzoi=w1200" alt="Winnipeg South Sikh Centre, Winnipeg — view 3" onclick="selectSlide(2)">
+      <img loading="lazy" class="gallery-thumb" src="https://lh3.googleusercontent.com/d/1yLQ2j42vJFMeaMry2rdj06vkS9pUDOr-=w1200" alt="Winnipeg South Sikh Centre, Winnipeg — view 4" onclick="selectSlide(3)">
+    </div>
+    <div class="gallery-hint">Tap any photo to enlarge</div>
   </div>
   <!-- ── DETAIL ── -->
   <div class="detail-wrapper">
@@ -135,5 +145,15 @@
     </div>
   </div>
 </div>
+<!-- ── LIGHTBOX ── -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕ &nbsp;Close</button>
+  <img id="lightbox-img" src="" alt="Enlarged view of the selected picture">
+  <button class="lb-download" onclick="downloadCurrentImage()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 5v10M7 15l5 5 5-5"/><rect x="3" y="19" width="18" height="2" rx="1"/></svg>
+    Download Image
+  </button>
+</div>
+<script src="/js/gurdwara-gallery.js"></script>
 </body>
 </html>

@@ -12,16 +12,15 @@
   <meta property="og:title" content="Ramgarhia Association of Manitoba, Winnipeg, Manitoba – Address and Details | Sikhs in World">
   <meta property="og:description" content="The Ramgarhia Association of Manitoba runs a Gurdwara on Archibald Street in Winnipeg. Address: 566 Archibald St, Winnipeg, MB.">
   <meta property="og:url" content="https://sikhsinworld.com/north-america/canada/gurdwaras/manitoba/ramgarhia-association-of-manitoba-winnipeg/">
-  <meta property="og:image" content="https://sikhsinworld.com/pictures/sikhsinworld-share.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image" content="https://lh3.googleusercontent.com/d/1-tqbEUuTpk9uVDfJcj1CppZXbl4EA-_a=w1200">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://sikhsinworld.com/pictures/sikhsinworld-share.jpg">
+  <meta name="twitter:image" content="https://lh3.googleusercontent.com/d/1-tqbEUuTpk9uVDfJcj1CppZXbl4EA-_a=w1200">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/gurdwara.css">
+  <link rel="preconnect" href="https://lh3.googleusercontent.com">
   <script type="application/ld+json">[{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"World","item":"https://sikhsinworld.com/"},{"@type":"ListItem","position":2,"name":"North America","item":"https://sikhsinworld.com/north-america/"},{"@type":"ListItem","position":3,"name":"Canada","item":"https://sikhsinworld.com/north-america/canada/"},{"@type":"ListItem","position":4,"name":"Gurudwaras in Canada","item":"https://sikhsinworld.com/north-america/canada/gurdwaras/"},{"@type":"ListItem","position":5,"name":"Manitoba","item":"https://sikhsinworld.com/north-america/canada/gurdwaras/manitoba/"},{"@type":"ListItem","position":6,"name":"Ramgarhia Association of Manitoba","item":"https://sikhsinworld.com/north-america/canada/gurdwaras/manitoba/ramgarhia-association-of-manitoba-winnipeg/"}]},{"@context":"https://schema.org","@type":"PlaceOfWorship","name":"Ramgarhia Association of Manitoba","url":"https://sikhsinworld.com/north-america/canada/gurdwaras/manitoba/ramgarhia-association-of-manitoba-winnipeg/","description":"The Ramgarhia Association of Manitoba runs a Gurdwara on Archibald Street in Winnipeg. It serves all sangat with daily diwan, kirtan and langar.","address":{"@type":"PostalAddress","streetAddress":"566 Archibald St","addressLocality":"Winnipeg","addressRegion":"MB","addressCountry":"CA"},"telephone":"(204) 237-7788"}]</script>
 </head>
 <body>
@@ -43,6 +42,17 @@
   <!-- ── INTRO BANNER ── -->
   <div class="intro-banner">
     <p>The Ramgarhia Association of Manitoba runs a Gurdwara on Archibald Street in Winnipeg.</p>
+  </div>
+  <!-- ── GALLERY ── -->
+  <div class="gallery-wrapper">
+    <img id="galleryMain" class="gallery-main" src="https://lh3.googleusercontent.com/d/1-tqbEUuTpk9uVDfJcj1CppZXbl4EA-_a=w1200" alt="Ramgarhia Association of Manitoba, Winnipeg" onclick="openLightbox(this.src, 'Ramgarhia Association of Manitoba, Winnipeg')">
+    <div class="gallery-thumbs">
+      <img loading="lazy" class="gallery-thumb active" src="https://lh3.googleusercontent.com/d/1-tqbEUuTpk9uVDfJcj1CppZXbl4EA-_a=w1200" alt="Ramgarhia Association of Manitoba, Winnipeg — view 1" onclick="selectSlide(0)">
+      <img loading="lazy" class="gallery-thumb" src="https://lh3.googleusercontent.com/d/17yToTdqI24B0MnUG50cDfd91QN9E3WxE=w1200" alt="Ramgarhia Association of Manitoba, Winnipeg — view 2" onclick="selectSlide(1)">
+      <img loading="lazy" class="gallery-thumb" src="https://lh3.googleusercontent.com/d/1rXBdqKGXDUYhARPz54N5c67IBaPSNdMy=w1200" alt="Ramgarhia Association of Manitoba, Winnipeg — view 3" onclick="selectSlide(2)">
+      <img loading="lazy" class="gallery-thumb" src="https://lh3.googleusercontent.com/d/1-b8J-C_0zOF7lLVnOqCA2YtK3KHGfqCP=w1200" alt="Ramgarhia Association of Manitoba, Winnipeg — view 4" onclick="selectSlide(3)">
+    </div>
+    <div class="gallery-hint">Tap any photo to enlarge</div>
   </div>
   <!-- ── DETAIL ── -->
   <div class="detail-wrapper">
@@ -131,5 +141,15 @@
     </div>
   </div>
 </div>
+<!-- ── LIGHTBOX ── -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕ &nbsp;Close</button>
+  <img id="lightbox-img" src="" alt="Enlarged view of the selected picture">
+  <button class="lb-download" onclick="downloadCurrentImage()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 5v10M7 15l5 5 5-5"/><rect x="3" y="19" width="18" height="2" rx="1"/></svg>
+    Download Image
+  </button>
+</div>
+<script src="/js/gurdwara-gallery.js"></script>
 </body>
 </html>

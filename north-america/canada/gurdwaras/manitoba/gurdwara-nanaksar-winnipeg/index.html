@@ -12,16 +12,15 @@
   <meta property="og:title" content="Gurdwara Nanaksar, Winnipeg, Manitoba – Address and Details | Sikhs in World">
   <meta property="og:description" content="Gurdwara Nanaksar in Winnipeg began in 1982, when the local sangat bought a church on St David Road, borrowing against their own homes, after a visit by Sant Baba Gurdev Singh Ji of Nanaksar. Address: 255 St David Rd, Winnipeg, MB.">
   <meta property="og:url" content="https://sikhsinworld.com/north-america/canada/gurdwaras/manitoba/gurdwara-nanaksar-winnipeg/">
-  <meta property="og:image" content="https://sikhsinworld.com/pictures/sikhsinworld-share.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image" content="https://lh3.googleusercontent.com/d/1Hs2aS--mFgYQ5FJTnYV_9dItFm5cv0N8=w1200">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://sikhsinworld.com/pictures/sikhsinworld-share.jpg">
+  <meta name="twitter:image" content="https://lh3.googleusercontent.com/d/1Hs2aS--mFgYQ5FJTnYV_9dItFm5cv0N8=w1200">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/gurdwara.css">
+  <link rel="preconnect" href="https://lh3.googleusercontent.com">
   <script type="application/ld+json">[{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"World","item":"https://sikhsinworld.com/"},{"@type":"ListItem","position":2,"name":"North America","item":"https://sikhsinworld.com/north-america/"},{"@type":"ListItem","position":3,"name":"Canada","item":"https://sikhsinworld.com/north-america/canada/"},{"@type":"ListItem","position":4,"name":"Gurudwaras in Canada","item":"https://sikhsinworld.com/north-america/canada/gurdwaras/"},{"@type":"ListItem","position":5,"name":"Manitoba","item":"https://sikhsinworld.com/north-america/canada/gurdwaras/manitoba/"},{"@type":"ListItem","position":6,"name":"Gurdwara Nanaksar","item":"https://sikhsinworld.com/north-america/canada/gurdwaras/manitoba/gurdwara-nanaksar-winnipeg/"}]},{"@context":"https://schema.org","@type":"PlaceOfWorship","name":"Gurdwara Nanaksar","url":"https://sikhsinworld.com/north-america/canada/gurdwaras/manitoba/gurdwara-nanaksar-winnipeg/","description":"Gurdwara Nanaksar in Winnipeg began in 1982, when the local sangat bought a church on St David Road, borrowing against their own homes, after a visit by Sant Baba Gurdev Singh Ji of Nanaksar. Kirtan began there in July 1982. The Gurdwara is known for its large dome and holds a monthly Pooranmashi programme.","address":{"@type":"PostalAddress","streetAddress":"255 St David Rd","addressLocality":"Winnipeg","addressRegion":"MB","addressCountry":"CA"},"telephone":"(204) 255-7503","foundingDate":"1982"}]</script>
 </head>
 <body>
@@ -43,6 +42,17 @@
   <!-- ── INTRO BANNER ── -->
   <div class="intro-banner">
     <p>Gurdwara Nanaksar in Winnipeg began in 1982, when the local sangat bought a church on St David Road, borrowing against their own homes, after a visit by Sant Baba Gurdev Singh Ji of Nanaksar.</p>
+  </div>
+  <!-- ── GALLERY ── -->
+  <div class="gallery-wrapper">
+    <img id="galleryMain" class="gallery-main" src="https://lh3.googleusercontent.com/d/1Hs2aS--mFgYQ5FJTnYV_9dItFm5cv0N8=w1200" alt="Gurdwara Nanaksar, Winnipeg" onclick="openLightbox(this.src, 'Gurdwara Nanaksar, Winnipeg')">
+    <div class="gallery-thumbs">
+      <img loading="lazy" class="gallery-thumb active" src="https://lh3.googleusercontent.com/d/1Hs2aS--mFgYQ5FJTnYV_9dItFm5cv0N8=w1200" alt="Gurdwara Nanaksar, Winnipeg — view 1" onclick="selectSlide(0)">
+      <img loading="lazy" class="gallery-thumb" src="https://lh3.googleusercontent.com/d/1V8qnlWStuSnKF7zNSv9rivylH1SvR-IM=w1200" alt="Gurdwara Nanaksar, Winnipeg — view 2" onclick="selectSlide(1)">
+      <img loading="lazy" class="gallery-thumb" src="https://lh3.googleusercontent.com/d/1QtUx-QuxkTIx49MJ4xFL-SysDBU-Kwcu=w1200" alt="Gurdwara Nanaksar, Winnipeg — view 3" onclick="selectSlide(2)">
+      <img loading="lazy" class="gallery-thumb" src="https://lh3.googleusercontent.com/d/1S4yYx0sDDAvtA8qLBm9vftb5CYBv1ylG=w1200" alt="Gurdwara Nanaksar, Winnipeg — view 4" onclick="selectSlide(3)">
+    </div>
+    <div class="gallery-hint">Tap any photo to enlarge</div>
   </div>
   <!-- ── DETAIL ── -->
   <div class="detail-wrapper">
@@ -135,5 +145,15 @@
     </div>
   </div>
 </div>
+<!-- ── LIGHTBOX ── -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕ &nbsp;Close</button>
+  <img id="lightbox-img" src="" alt="Enlarged view of the selected picture">
+  <button class="lb-download" onclick="downloadCurrentImage()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 5v10M7 15l5 5 5-5"/><rect x="3" y="19" width="18" height="2" rx="1"/></svg>
+    Download Image
+  </button>
+</div>
+<script src="/js/gurdwara-gallery.js"></script>
 </body>
 </html>
