@@ -7,6 +7,10 @@
 const fs = require('fs');
 const path = require('path');
 const { REGIONS, COUNTRIES, INDIA, UAE } = require('./data');
+const buildGurdwaras = require('./build-gurdwaras');
+
+// Full Gurdwara directories, by country (one page per Gurdwara)
+const DIRECTORIES = { 'Canada': require('./gurdwaras-canada') };
 
 const ROOT = path.join(__dirname, '..');
 const SITE = 'https://sikhsinworld.com';
@@ -178,6 +182,7 @@ ${r.countries.map(c => '    ' + countryLink(r, c)).join('\n')}
     if (!c) throw new Error('No country data for ' + name);
     const url = `/${r.slug}/${slug(name)}/`;
     urls.push(url);
+    const directory = DIRECTORIES[name] && buildGurdwaras({ dir: DIRECTORIES[name], region: r, write, urls, SITE, slug, esc });
     write(`${r.slug}/${slug(name)}/index.html`, page({
       url,
       title: `Sikhs in ${name} – History, Gurdwaras and Community | Sikhs in World`,
@@ -194,7 +199,9 @@ ${c.story.map(p => `  <p>${esc(p)}</p>`).join('\n')}
   <div class="grid">
 ${c.gurdwaras.map(([g, place, note]) => `    <div class="card plain"><h3>${esc(g)}</h3><p class="place">${esc(place)}</p><p>${esc(note)}</p><p><a href="https://www.google.com/maps/search/?api=1&amp;query=${encodeURIComponent(g + ' ' + place)}">Open in Google Maps</a></p></div>`).join('\n')}
   </div>
-  <p class="note">A full directory of Gurdwaras in ${esc(name)}, with addresses and diwan times, is coming soon.</p>
+  ${directory
+    ? `<p><a class="btn" href="${directory.url}">See all ${directory.total} Gurdwaras in ${esc(name)} →</a></p>`
+    : `<p class="note">A full directory of Gurdwaras in ${esc(name)}, with addresses and diwan times, is coming soon.</p>`}
 
   <h2 id="events">Events and Gurpurabs</h2>
   <p class="note">Gurpurab dates and local events for ${esc(name)}, shown in local time, are coming soon. Until then, see the <a href="${LIBRARY[3][1]}">Sikh calendar</a> on Sikhs in India.</p>
