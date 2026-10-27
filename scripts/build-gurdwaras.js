@@ -12,14 +12,17 @@ const gurdwaraSlug = g => {
   const name = slugify(g.n), city = slugify(cityOf(g));
   return city && !name.includes(city) ? `${name}-${city}` : name;
 };
-// Photos live in the same kind of tree as on sikhsinindia.com, one folder per Gurdwara:
-// pictures/world-gurudwaras/<continent>/<country>/<city>/<gurdwara>/<gurdwara>-01.jpg
+// Photos are kept in Google Drive (SikhsinWorld/01-world-gurudwaras), one folder per Gurdwara,
+// in the same kind of tree as the Gurdwara pictures on sikhsinindia.com:
+//   <continent>/<country>/<city>/<gurdwara>/<gurdwara>-01.jpg
+// The photo list (scripts/gurdwara-photos-<country>.json) holds each file's Drive ID.
 const photoFolder = (regionSlug, country, g) =>
-  `pictures/world-gurudwaras/${regionSlug}/${slugify(country)}/${slugify(cityOf(g)) || 'other'}/${gurdwaraSlug(g)}/`;
+  `${regionSlug}/${slugify(country)}/${slugify(cityOf(g)) || 'other'}/${gurdwaraSlug(g)}/`;
+const driveImage = id => `https://lh3.googleusercontent.com/d/${id}=w1200`;
 
 module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug, esc, photos = {} }) {
   const country = dir.country;
-  const photosOf = g => (photos[g.wg] || []).map(f => '/' + photoFolder(region.slug, country, g) + f);
+  const photosOf = g => (photos[g.wg] || []).map(p => driveImage(p.drive));
   const base = `/${region.slug}/${slug(country)}/gurdwaras/`;
   const total = dir.provinces.reduce((t, p) => t + p.list.length, 0);
 
@@ -45,9 +48,10 @@ module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug,
   const mapsUrl = (g, prov) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(g.n + ', ' + fullAddress(g, prov) + ', Canada')}`;
 
   function poster({ url, title, description, eyebrow = 'Sikh Heritage &amp; Holy Places', hero, subtitle, banner, body, back, related, footLeft, ld, image, gallery }) {
+    const hasPhotos = body.includes('lh3.googleusercontent.com');
     const canonical = SITE + url;
     const share = encodeURIComponent(canonical);
-    const ogImage = image ? SITE + image : `${SITE}/pictures/sikhsinworld-share.jpg`;
+    const ogImage = image || `${SITE}/pictures/sikhsinworld-share.jpg`;
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,7 +75,8 @@ module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug,
   <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/gurdwara.css">
+  <link rel="stylesheet" href="/css/gurdwara.css">${image || hasPhotos ? `
+  <link rel="preconnect" href="https://lh3.googleusercontent.com">` : ''}
   <script type="application/ld+json">${JSON.stringify(ld)}</script>
 </head>
 <body>

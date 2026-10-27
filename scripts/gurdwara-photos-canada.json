@@ -27,7 +27,10 @@
  "shaheed-garh-sahib-west-flamborough": [],
  "sikh-association-of-brantford": [],
  "fort-erie-khalsa-darbar": [
-  "fort-erie-khalsa-darbar-01.jpg"
+  {
+   "file": "fort-erie-khalsa-darbar-01.jpg",
+   "drive": "1cH9nu9tm_vTcJxyfsO1W7g3fGMhsy18E"
+  }
  ],
  "sikh-society-of-niagara-falls": [],
  "siri-guru-singh-sabha-cambridge": [],
@@ -43,7 +46,10 @@
  "gurudwara-kendri-siri-guru-singh-sabha-cornwall": [],
  "gurdwara-dukh-nivaran-sahib-vancouver": [],
  "gurdwara-amrit-parkash-vancouver": [
-  "gurdwara-amrit-parkash-surrey-01.jpg"
+  {
+   "file": "gurdwara-amrit-parkash-surrey-01.jpg",
+   "drive": "1mxwRwROKqR9IFmCSIufYaS-TqUXX31Hy"
+  }
  ],
  "gurudwara-guru-teg-bahadur-sahib-cloverdale": [],
  "satsang-baba-budha-ji-delta": [],
@@ -56,62 +62,170 @@
  "gurdwara-sahib-miri-piri-khalsa-darbar-terrace-bc": [],
  "guru-nanak-sikh-temple-fort-st-john": [],
  "dashmesh-culture-center-calgary": [
-  "gurdwara-dashmesh-culture-centre-calgary-01.jpg",
-  "gurdwara-dashmesh-culture-centre-calgary-02.jpg",
-  "gurdwara-dashmesh-culture-centre-calgary-03.jpg",
-  "gurdwara-dashmesh-culture-centre-calgary-04.jpg"
+  {
+   "file": "gurdwara-dashmesh-culture-centre-calgary-01.jpg",
+   "drive": "1y6oqJBJG8sL050SdxPQst-BPbTlq1yY_"
+  },
+  {
+   "file": "gurdwara-dashmesh-culture-centre-calgary-02.jpg",
+   "drive": "1p6EXDr737c9frvjr5bqlj5yCze_vc4M_"
+  },
+  {
+   "file": "gurdwara-dashmesh-culture-centre-calgary-03.jpg",
+   "drive": "1y97iE_qzAN8HSYVW2W_GSERydn0Nq682"
+  },
+  {
+   "file": "gurdwara-dashmesh-culture-centre-calgary-04.jpg",
+   "drive": "1-MPUtg5xW0vb1n80Bd43DsXHyDUdc2Jj"
+  }
  ],
  "gurdwara-darbar-sri-guru-granth-sahib-ji-calgary": [
-  "gurdwara-darbar-sri-guru-granth-sahib-ji-calgary-01.jpg",
-  "gurdwara-darbar-sri-guru-granth-sahib-ji-calgary-02.jpg",
-  "gurdwara-darbar-sri-guru-granth-sahib-ji-calgary-03.jpg"
+  {
+   "file": "gurdwara-darbar-sri-guru-granth-sahib-ji-calgary-01.jpg",
+   "drive": "1OKd9PyDnGAi_ZHjh7_D3A9N6GK1G9iqO"
+  },
+  {
+   "file": "gurdwara-darbar-sri-guru-granth-sahib-ji-calgary-02.jpg",
+   "drive": "1-FiJxSW16QhNB0Tdnj7n9dD4Bp2GmfUg"
+  },
+  {
+   "file": "gurdwara-darbar-sri-guru-granth-sahib-ji-calgary-03.jpg",
+   "drive": "1Ni_0OtLwCRqIqBdtzbSmH0S_alIURAzU"
+  }
  ],
  "guru-ram-das-darbar-calgary": [
-  "guru-ram-das-darbar-calgary-01.jpg",
-  "guru-ram-das-darbar-calgary-02.jpg",
-  "guru-ram-das-darbar-calgary-03.jpg"
+  {
+   "file": "guru-ram-das-darbar-calgary-01.jpg",
+   "drive": "13x34pKZkqgrOyeY51MrWZkf0IMGYqgbo"
+  },
+  {
+   "file": "guru-ram-das-darbar-calgary-02.jpg",
+   "drive": "1n9xu-EsIUZS-GyCoYiHxJEMSc56PNV6E"
+  },
+  {
+   "file": "guru-ram-das-darbar-calgary-03.jpg",
+   "drive": "1nzxyQgmtZbayq7tVt-F0kyKMR2IyGSQs"
+  }
  ],
  "sikh-society-of-calgary": [
-  "sikh-society-of-calgary-01.jpg",
-  "sikh-society-of-calgary-02.jpg",
-  "sikh-society-of-calgary-03.jpg",
-  "sikh-society-of-calgary-04.jpg"
+  {
+   "file": "sikh-society-of-calgary-01.jpg",
+   "drive": "1QcVBq2xoS5HZARLeGENeXtovGc35bpuF"
+  },
+  {
+   "file": "sikh-society-of-calgary-02.jpg",
+   "drive": "1LO4JVckyLQWXJ3gkQlo2n22AllYOZEE7"
+  },
+  {
+   "file": "sikh-society-of-calgary-03.jpg",
+   "drive": "1wAHBs0l86oRt4JbZTFXe17QEB-oRuR-k"
+  },
+  {
+   "file": "sikh-society-of-calgary-04.jpg",
+   "drive": "1M2JByFWrqF83vqE_AC3upUcOabuSRZ3V"
+  }
  ],
  "guru-ravidass-community-centre-calgary": [
-  "guru-ravidass-community-centre-calgary-01.jpg",
-  "guru-ravidass-community-centre-calgary-02.jpg"
+  {
+   "file": "guru-ravidass-community-centre-calgary-01.jpg",
+   "drive": "12RDBmcszNhPy95XRdlF4GDjZFdhWELhc"
+  },
+  {
+   "file": "guru-ravidass-community-centre-calgary-02.jpg",
+   "drive": "1suTvGOkeJFK01HHbIWUd9rPKTmIFBOIg"
+  }
  ],
  "brahm-bunga-spiritual-fellowship-calgary": [
-  "brahm-bunga-spiritual-fellowship-calgary-01.jpg"
+  {
+   "file": "brahm-bunga-spiritual-fellowship-calgary-01.jpg",
+   "drive": "1H2nvya_Pr8yc_YkeE9UJimgimt_wQ2fQ"
+  }
  ],
  "gurdwara-dukh-nivaran-sahib-edmonton": [
-  "gurdwara-dukh-nivaran-sahib-edmonton-01.jpg",
-  "gurdwara-dukh-nivaran-sahib-edmonton-02.jpg",
-  "gurdwara-dukh-nivaran-sahib-edmonton-03.jpg"
+  {
+   "file": "gurdwara-dukh-nivaran-sahib-edmonton-01.jpg",
+   "drive": "1x9sgymOCl26pFzLKdbKscDPONanchMFU"
+  },
+  {
+   "file": "gurdwara-dukh-nivaran-sahib-edmonton-02.jpg",
+   "drive": "1al5ZBXLGtXgPTspBWeaj18VTOVZU7isy"
+  },
+  {
+   "file": "gurdwara-dukh-nivaran-sahib-edmonton-03.jpg",
+   "drive": "13i-x1riU-1jZs36hb5PPxQEzHZ1zF7iv"
+  }
  ],
  "gurdwara-darbar-sri-guru-granth-sahib-edmonton": [
-  "gurdwara-darbar-sri-guru-granth-sahib-edmonton-01.jpg",
-  "gurdwara-darbar-sri-guru-granth-sahib-edmonton-02.jpg",
-  "gurdwara-darbar-sri-guru-granth-sahib-edmonton-03.jpg",
-  "gurdwara-darbar-sri-guru-granth-sahib-edmonton-04.jpg"
+  {
+   "file": "gurdwara-darbar-sri-guru-granth-sahib-edmonton-01.jpg",
+   "drive": "1_tx_fk0k6xAjBq6cSQu_p8XvbvmHsIQl"
+  },
+  {
+   "file": "gurdwara-darbar-sri-guru-granth-sahib-edmonton-02.jpg",
+   "drive": "1ntzcGRLztGhEvQo2MY1GhfhLYbN08rt1"
+  },
+  {
+   "file": "gurdwara-darbar-sri-guru-granth-sahib-edmonton-03.jpg",
+   "drive": "1PWGkadgsGSNvHt-1MuKpZnxXdoFxGEMR"
+  },
+  {
+   "file": "gurdwara-darbar-sri-guru-granth-sahib-edmonton-04.jpg",
+   "drive": "14zjRnJ1JvUlHaMrE93cgwz2NwWaFyZrF"
+  }
  ],
  "gurudwara-millwoods": [
-  "gurdwara-millwoods-edmonton-01.jpg",
-  "gurdwara-millwoods-edmonton-02.jpg",
-  "gurdwara-millwoods-edmonton-03.jpg"
+  {
+   "file": "gurdwara-millwoods-edmonton-01.jpg",
+   "drive": "1bDoyQBkhyiWIvngtU8k2WU2nmVMH0fy3"
+  },
+  {
+   "file": "gurdwara-millwoods-edmonton-02.jpg",
+   "drive": "1SZAkTUlhxxPNopwt-BmFAeGBk8Tf5RnH"
+  },
+  {
+   "file": "gurdwara-millwoods-edmonton-03.jpg",
+   "drive": "14ZI9tfE28H5lBvtxtwHIMsiel_MLtXot"
+  }
  ],
  "gurdwara-nanak-sar-edmonton": [
-  "nanaksar-gurudwara-edmonton-01.jpg",
-  "nanaksar-gurudwara-edmonton-02.jpg",
-  "nanaksar-gurudwara-edmonton-03.jpg",
-  "nanaksar-gurudwara-edmonton-04.jpg",
-  "nanaksar-gurudwara-edmonton-05.jpg",
-  "nanaksar-gurudwara-edmonton-06.jpg"
+  {
+   "file": "nanaksar-gurudwara-edmonton-01.jpg",
+   "drive": "1efXEXKbTXYwG72hgjmPZp3zDjMR08OPP"
+  },
+  {
+   "file": "nanaksar-gurudwara-edmonton-02.jpg",
+   "drive": "1IyN6nN-WrSvw_xcQpeqPhN-0PZiEeAwu"
+  },
+  {
+   "file": "nanaksar-gurudwara-edmonton-03.jpg",
+   "drive": "1OF33PUeqM_rjVcWVYUpxY7Xrbk-pm5YF"
+  },
+  {
+   "file": "nanaksar-gurudwara-edmonton-04.jpg",
+   "drive": "1Y4Kq9_5flxGBHrkP1A3EOXg5iCJHzuXC"
+  },
+  {
+   "file": "nanaksar-gurudwara-edmonton-05.jpg",
+   "drive": "1jbM7XWv4JbaGEpbhhTdBq02WgVrND99M"
+  },
+  {
+   "file": "nanaksar-gurudwara-edmonton-06.jpg",
+   "drive": "1Mfrz8hJcLqJ6iLyKVmAvL3ww1oQmYy1K"
+  }
  ],
  "sikh-temple-grande-prairie": [
-  "sikh-temple-grande-prairie-01.jpg",
-  "sikh-temple-grande-prairie-02.jpg",
-  "sikh-temple-grande-prairie-03.jpg"
+  {
+   "file": "sikh-temple-grande-prairie-01.jpg",
+   "drive": "1YdtWP_gwQItIhqMmKCdMweR2_B8MLwr2"
+  },
+  {
+   "file": "sikh-temple-grande-prairie-02.jpg",
+   "drive": "1fg_YtcMhFrK-KTW7XqHwj6x7vxgsZVq_"
+  },
+  {
+   "file": "sikh-temple-grande-prairie-03.jpg",
+   "drive": "1_yegL7XkXjihk6dVGQHmMY3XknWixWfl"
+  }
  ],
  "fort-mcmurray-sikh-society": [],
  "guru-nanak-darbar-winnipeg": [],
@@ -127,7 +241,10 @@
  "gurbani-sagar-montreal": [],
  "nanaksar-montreal": [],
  "gurdwara-guru-nanak-darbar-lasalle": [
-  "gurdwara-guru-nanak-darbar-lasalle-montreal-01.jpg"
+  {
+   "file": "gurdwara-guru-nanak-darbar-lasalle-montreal-01.jpg",
+   "drive": "1BUDVdEEF4kusQwhmqCqBBuMYax0MptdH"
+  }
  ],
  "gurdwara-sahib-greater-montreal": [],
  "gurdwara-brahm-bunga-sahib-brossard": [],
