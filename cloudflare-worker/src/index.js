@@ -121,7 +121,7 @@ function rewrite(response, pageUrl, path) {
     .on('a[href="https://sikhsinworld.com/"]', {
       // India's "Sikhs in World" buttons point here; on this site they lead to the same page in India
       element(el) {
-        el.setAttribute('href', pageUrl);
+        el.setAttribute('href', INDIA + path);
         if (el.getAttribute('title')) el.setAttribute('title', 'Sikhs in India: this page on sikhsinindia.com');
         el.setInnerContent('Sikhs in India &#8599;', { html: true });
       }
