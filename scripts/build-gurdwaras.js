@@ -25,6 +25,13 @@ const driveImage = id => `https://lh3.googleusercontent.com/d/${id}=w1200`;
 module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug, esc, photos = {} }) {
   const country = dir.country;
   const photosOf = g => (photos[photoKey(g)] || []).map(p => driveImage(p.drive));
+  // Photos from Wikimedia Commons carry a credit (author, licence, source page), shown wherever the photo is
+  const creditsOf = g => (photos[photoKey(g)] || []).map(p => p.credit);
+  const creditHtml = c => c ? `<a href="${esc(c.page)}" target="_blank" rel="noopener">${esc(c.by || 'Unknown author')}</a>, ${c.licenseUrl ? `<a href="${esc(c.licenseUrl)}" target="_blank" rel="noopener">${esc(c.license)}</a>` : esc(c.license)}, via Wikimedia Commons` : '';
+  const CREDIT_STYLE = 'font-size:12px;opacity:.75;margin-top:6px;line-height:1.5';
+  // Gurdwaras taken from OpenStreetMap (g.osm, e.g. "node/123") need its licence credit
+  const OSM_CREDIT = 'Some addresses come from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a>, available under the Open Database Licence.';
+  const usesOsm = dir.provinces.some(p => p.list.some(g => g.osm));
   const base = `/${region.slug}/${slug(country)}/gurdwaras/`;
   const total = dir.provinces.reduce((t, p) => t + p.list.length, 0);
   const gurdwaras = n => `${n} Gurdwara${n === 1 ? '' : 's'}`, gurudwaras = n => `${n} Gurudwara${n === 1 ? '' : 's'}`;
@@ -205,7 +212,7 @@ ${dir.provinces.map(p => `      <a class="city-card" href="${base}${slug(p.name)
         <div class="city-arrow">${ARROW}</div>
       </a>`).join('\n')}
     </div>
-    <div class="legend">Addresses come from public listings and the Gurdwaras’ own websites. Know a Gurdwara we have missed, or spotted a change? Write to <b><a href="mailto:sikhsinindia@gmail.com" style="color:inherit">sikhsinindia@gmail.com</a></b>.</div>
+    <div class="legend">Addresses come from public listings and the Gurdwaras’ own websites. Know a Gurdwara we have missed, or spotted a change? Write to <b><a href="mailto:sikhsinindia@gmail.com" style="color:inherit">sikhsinindia@gmail.com</a></b>.${usesOsm ? ' ' + OSM_CREDIT : ''}</div>
   </div>`,
     back: `/${region.slug}/${slug(country)}/`,
     related: { main: countryLinks.slice(1).concat([['Sikhs in World home', '/']]) },
@@ -234,10 +241,11 @@ ${dir.provinces.map(p => `      <a class="city-card" href="${base}${slug(p.name)
       body: `  <!-- ── GURUDWARAS ── -->
   <div class="gurus-wrapper">
 ${cities.map(c => `${cities.length > 1 ? `    <h2 class="city-heading">${esc(c.name)}</h2>\n` : ''}${c.list.map(g => {
-      const pic = photosOf(g)[0];
+      const pic = photosOf(g)[0], credit = creditsOf(g)[0];
       return `    <div class="guru-section${pic && i++ % 2 ? ' reverse' : ''}">${pic ? `
       <div class="guru-image-wrap">
-        <a href="${pUrl}${gSlug(g)}/"><img loading="lazy" class="guru-image" src="${pic}" alt="${esc(g.n)}, ${esc(g.c || prov.name)}"></a>
+        <a href="${pUrl}${gSlug(g)}/"><img loading="lazy" class="guru-image" src="${pic}" alt="${esc(g.n)}, ${esc(g.c || prov.name)}"></a>${credit ? `
+        <div style="${CREDIT_STYLE}">Photo: ${creditHtml(credit)}</div>` : ''}
       </div>` : ''}
       <div class="guru-text">
         <div class="guru-name-heading"><span>${esc(g.n)}</span><br>${esc(g.c || prov.name)}</div>
@@ -251,7 +259,8 @@ ${cities.map(c => `${cities.length > 1 ? `    <h2 class="city-heading">${esc(c.n
         </a>
       </div>
     </div>`;
-    }).join('\n')}`).join('\n')}
+    }).join('\n')}`).join('\n')}${prov.list.some(g => g.osm) ? `
+    <p style="${CREDIT_STYLE}">${OSM_CREDIT}</p>` : ''}
   </div>`,
       back: base,
       related: { main: countryLinks, moreTitle: `Gurudwaras in other ${div === 'state' ? 'states and territories' : divs.split(' ')[0]}`, more: dir.provinces.filter(p => p !== prov).map(p => [`Gurudwaras in ${p.name}`, `${base}${slug(p.name)}/`]) },
@@ -263,6 +272,7 @@ ${cities.map(c => `${cities.length > 1 ? `    <h2 class="city-heading">${esc(c.n
       urls.push(gUrl);
       const addr = fullAddress(g, prov);
       const pics = photosOf(g);
+      const credits = creditsOf(g).slice(0, 4).filter(Boolean);
       const label = `${g.n}, ${g.c || prov.name}`;
       const gallery = pics.length ? `  <!-- ── GALLERY ── -->
   <div class="gallery-wrapper">
@@ -270,7 +280,8 @@ ${cities.map(c => `${cities.length > 1 ? `    <h2 class="city-heading">${esc(c.n
     <div class="gallery-thumbs">
 ${pics.slice(0, 4).map((p, n) => `      <img loading="lazy" class="gallery-thumb${n ? '' : ' active'}" src="${p}" alt="${esc(label)} — view ${n + 1}" onclick="selectSlide(${n})">`).join('\n')}
     </div>` : ''}
-    <div class="gallery-hint">Tap any photo to enlarge</div>
+    <div class="gallery-hint">Tap any photo to enlarge</div>${credits.length ? `
+    <div style="${CREDIT_STYLE}">Photo${credits.length > 1 ? 's' : ''}: ${credits.map(creditHtml).join('; ')}</div>` : ''}
   </div>
 ` : '';
       const sameCity = prov.list.filter(x => x !== g && x.c && g.c && x.c.replace(/\s*\(.*\)$/, '') === g.c.replace(/\s*\(.*\)$/, ''));
@@ -309,7 +320,7 @@ ${facts.map(([l, v]) => `        <div class="fact">
       <div class="detail-actions">
         <a class="btn-detailed" href="${esc(mapsUrl(g, prov))}" target="_blank" rel="noopener">Open in Google Maps ${ARROW}</a>
       </div>
-      <p class="check-note">Diwan and langar times can change, so please check with the Gurdwara before you travel. Spotted something out of date? Write to <a href="mailto:sikhsinindia@gmail.com">sikhsinindia@gmail.com</a>.</p>
+      <p class="check-note">Diwan and langar times can change, so please check with the Gurdwara before you travel. Spotted something out of date? Write to <a href="mailto:sikhsinindia@gmail.com">sikhsinindia@gmail.com</a>.${g.osm ? ` Address from <a href="https://www.openstreetmap.org/${esc(g.osm)}" target="_blank" rel="noopener">OpenStreetMap</a> (© OpenStreetMap contributors, Open Database Licence).` : ''}</p>
     </div>
   </div>`,
         back: pUrl,

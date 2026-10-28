@@ -21,28 +21,15 @@ const { photoFolder, gurdwaraSlug, photoKey } = require('./build-gurdwaras');
 
 const RCLONE = process.env.RCLONE || 'C:/Users/Hp/Downloads/rclone-v1.74.4-windows-amd64/rclone.exe';
 const DRIVE = 'gdrive:SikhsinWorld/01-world-gurudwaras/';
-const COUNTRIES = [
-  { data: require('./gurdwaras-canada'), region: 'north-america', photos: 'gurdwara-photos-canada.json' },
-  { data: require('./gurdwaras-australia'), region: 'australia-nz', photos: 'gurdwara-photos-australia.json' },
-  { data: require('./gurdwaras-new-zealand'), region: 'australia-nz', photos: 'gurdwara-photos-new-zealand.json' },
-  { data: require('./gurdwaras-thailand'), region: 'east-southeast-asia', photos: 'gurdwara-photos-thailand.json' },
-  { data: require('./gurdwaras-singapore'), region: 'east-southeast-asia', photos: 'gurdwara-photos-singapore.json' },
-  { data: require('./gurdwaras-hong-kong'), region: 'east-southeast-asia', photos: 'gurdwara-photos-hong-kong.json' },
-  { data: require('./gurdwaras-argentina'), region: 'south-america', photos: 'gurdwara-photos-argentina.json' },
-  { data: require('./gurdwaras-japan'), region: 'east-southeast-asia', photos: 'gurdwara-photos-japan.json' },
-  { data: require('./gurdwaras-mauritius'), region: 'africa', photos: 'gurdwara-photos-mauritius.json' },
-  { data: require('./gurdwaras-united-kingdom'), region: 'europe', photos: 'gurdwara-photos-united-kingdom.json' },
-  { data: require('./gurdwaras-ireland'), region: 'europe', photos: 'gurdwara-photos-ireland.json' },
-  { data: require('./gurdwaras-netherlands'), region: 'europe', photos: 'gurdwara-photos-netherlands.json' },
-  { data: require('./gurdwaras-spain'), region: 'europe', photos: 'gurdwara-photos-spain.json' },
-  { data: require('./gurdwaras-france'), region: 'europe', photos: 'gurdwara-photos-france.json' },
-  { data: require('./gurdwaras-italy'), region: 'europe', photos: 'gurdwara-photos-italy.json' },
-  { data: require('./gurdwaras-united-states'), region: 'north-america', photos: 'gurdwara-photos-united-states.json' }
-];
+const COUNTRIES = require('./directories').directories;
 
 const args = process.argv.slice(2);
 const replace = args.includes('--replace');
 const dir = args.find(a => !a.startsWith('--')) || path.join(os.homedir(), 'Downloads');
+// Photos that need a credit (e.g. from Wikimedia Commons) are listed in <folder>/credits.json:
+//   { "<file name>": { "by": author, "license": "CC BY-SA 4.0", "licenseUrl": …, "page": source page } }
+const creditsFile = path.join(dir, 'credits.json');
+const credits = fs.existsSync(creditsFile) ? JSON.parse(fs.readFileSync(creditsFile, 'utf8')) : {};
 const slugify = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const rclone = (...a) => execFileSync(RCLONE, a, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
 // Forgive spelling variants: Gurudwara/Gurdwara/Gurduara, Sahab/Sahib, a trailing "Inc"
@@ -71,7 +58,7 @@ const keysOf = g => [g.wg, gurdwaraSlug(g), slugify(g.n), slugify(`${g.n} ${g.c}
 
   for (const c of COUNTRIES) {
     const file = path.join(__dirname, c.photos);
-    const manifest = JSON.parse(fs.readFileSync(file, 'utf8'));
+    const manifest = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
     for (const g of c.data.provinces.flatMap(p => p.list)) {
       const key = keysOf(g).find(k => groups[k]);
       const files = key && groups[key];
@@ -81,7 +68,7 @@ const keysOf = g => [g.wg, gurdwaraSlug(g), slugify(g.n), slugify(`${g.n} ${g.c}
       // Resize into a temporary copy of the Drive folder, then upload
       const folder = photoFolder(c.region, c.data.country, g);
       const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'gurdwara-'));
-      const names = [];
+      const names = [], credit = {};
       for (const [, f] of files.sort((a, b) => a[0] - b[0])) {
         const img = await loadImage(fs.readFileSync(path.join(dir, f)));
         const w = Math.min(1200, img.width), h = Math.round(img.height * w / img.width);
@@ -90,11 +77,12 @@ const keysOf = g => [g.wg, gurdwaraSlug(g), slugify(g.n), slugify(`${g.n} ${g.c}
         const name = `${gurdwaraSlug(g)}-${String(names.length + 1).padStart(2, '0')}.jpg`;
         fs.writeFileSync(path.join(tmp, name), cv.toBuffer('image/jpeg', 82));
         names.push(name);
+        if (credits[f]) credit[name] = credits[f];
       }
       rclone('sync', tmp, DRIVE + folder);
       fs.rmSync(tmp, { recursive: true, force: true });
       const ids = Object.fromEntries(JSON.parse(rclone('lsjson', '--files-only', DRIVE + folder)).map(e => [e.Name, e.ID]));
-      manifest[photoKey(g)] = names.map(n => ({ file: n, drive: ids[n] }));
+      manifest[photoKey(g)] = names.map(n => credit[n] ? { file: n, drive: ids[n], credit: credit[n] } : { file: n, drive: ids[n] });
       console.log(`added ${g.n}, ${g.c}: ${names.length} photos → ${folder}`);
     }
     fs.writeFileSync(file, JSON.stringify(manifest, null, 1));
