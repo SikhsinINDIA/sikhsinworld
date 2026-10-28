@@ -6,29 +6,37 @@
      <region>/<country>/gurdwaras/<province>/            every Gurdwara in a province
      <region>/<country>/gurdwaras/<province>/<gurdwara>/ one page per Gurdwara
    ────────────────────────────────────────────────────────────── */
+const fs = require('fs');
+const path = require('path');
 const slugify = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const cityOf = g => (g.c || '').replace(/\s*\(.*\)$/, '').replace(/ area$/, '').replace(/^near /, '');
 const gurdwaraSlug = g => {
   const name = slugify(g.n), city = slugify(cityOf(g));
   return city && !name.includes(city) ? `${name}-${city}` : name;
 };
-// Photos are kept in Google Drive (SikhsinWorld/01-world-gurudwaras), one folder per Gurdwara,
-// in the same kind of tree as the Gurdwara pictures on sikhsinindia.com:
-//   <continent>/<country>/<city>/<gurdwara>/<gurdwara>-01.jpg
-// The photo list (scripts/gurdwara-photos-<country>.json) holds each file's Drive ID.
-const photoFolder = (regionSlug, country, g) =>
-  `${regionSlug}/${slugify(country)}/${slugify(cityOf(g)) || 'other'}/${gurdwaraSlug(g)}/`;
-// Photos are listed under the Gurdwara’s worldgurudwaras.com slug where it has one, else its page slug
-const photoKey = g => g.wg || gurdwaraSlug(g);
-const driveImage = id => `https://lh3.googleusercontent.com/d/${id}=w1200`;
+// Photos live in this repository, one folder per Gurdwara, laid out like the page addresses
+// (as on sikhsinindia.com):
+//   pictures/04-gurudwaras/<NN-region>/<country>/<province>/<gurdwara>/<gurdwara>-01.webp
+// They are shown in file-name order: -01 is the main photo (lists, sharing), and the gallery
+// shows up to 4. Add, rename or delete files there, then rebuild. A credit.json in the folder
+// ({ "<file>": { by, license, licenseUrl, page } }) credits photos that need it (Wikimedia Commons).
+// Google Drive (SikhsinWorld/01-world-gurudwaras) keeps the originals as a backup.
+const photoDir = (regionDir, country, province, g) =>
+  `pictures/${regionDir}/${slugify(country)}/${slugify(province)}/${gurdwaraSlug(g)}`;
+function photosIn(rel) {
+  const dir = path.join(__dirname, '..', rel);
+  if (!fs.existsSync(dir)) return [];
+  const credits = fs.existsSync(path.join(dir, 'credit.json')) ? JSON.parse(fs.readFileSync(path.join(dir, 'credit.json'), 'utf8')) : {};
+  return fs.readdirSync(dir).filter(f => /\.(webp|jpe?g|png)$/i.test(f)).sort()
+    .map(f => ({ src: `/${rel}/${f}`, credit: credits[f] }));
+}
 
 // The poster page shared by every Gurdwara page (and the world map page)
 const BACK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>`;
 function posterPage({ url, title, description, eyebrow = 'Sikh Heritage &amp; Holy Places', hero, subtitle, banner, body, back, related, footLeft, ld, image, gallery }, { esc, SITE }) {
-  const hasPhotos = body.includes('lh3.googleusercontent.com');
   const canonical = SITE + url;
   const share = encodeURIComponent(canonical);
-  const ogImage = image || `${SITE}/pictures/sikhsinworld-share.jpg`;
+  const ogImage = image ? (image.startsWith('/') ? SITE + image : image) : `${SITE}/pictures/sikhsinworld-share.jpg`;
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,8 +60,7 @@ function posterPage({ url, title, description, eyebrow = 'Sikh Heritage &amp; Ho
   <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/gurdwara.css">${image || hasPhotos ? `
-  <link rel="preconnect" href="https://lh3.googleusercontent.com">` : ''}
+  <link rel="stylesheet" href="/css/gurdwara.css">
   <script type="application/ld+json">${JSON.stringify(ld)}</script>
 </head>
 <body>
@@ -139,11 +146,11 @@ ${related.more.map(([t, h]) => `      <li><a href="${h}">${esc(t)}</a></li>`).jo
 `;
 }
 
-module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug, esc, photos = {} }) {
+module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug, esc }) {
   const country = dir.country;
-  const photosOf = g => (photos[photoKey(g)] || []).map(p => driveImage(p.drive));
+  const photosOf = (g, prov) => photosIn(photoDir(region.dir, country, prov.name, g)).map(p => p.src);
   // Photos from Wikimedia Commons carry a credit (author, licence, source page), shown wherever the photo is
-  const creditsOf = g => (photos[photoKey(g)] || []).map(p => p.credit);
+  const creditsOf = (g, prov) => photosIn(photoDir(region.dir, country, prov.name, g)).map(p => p.credit);
   const creditHtml = c => c ? `<a href="${esc(c.page)}" target="_blank" rel="noopener">${esc(c.by || 'Unknown author')}</a>, ${c.licenseUrl ? `<a href="${esc(c.licenseUrl)}" target="_blank" rel="noopener">${esc(c.license)}</a>` : esc(c.license)}, via Wikimedia Commons` : '';
   const CREDIT_STYLE = 'font-size:12px;opacity:.75;margin-top:6px;line-height:1.5';
   // Gurdwaras taken from OpenStreetMap (g.osm, e.g. "node/123") need its licence credit
@@ -244,7 +251,7 @@ ${dir.provinces.map(p => `      <a class="city-card" href="${base}${slug(p.name)
       body: `  <!-- ── GURUDWARAS ── -->
   <div class="gurus-wrapper">
 ${cities.map(c => `${cities.length > 1 ? `    <h2 class="city-heading">${esc(c.name)}</h2>\n` : ''}${c.list.map(g => {
-      const pic = photosOf(g)[0], credit = creditsOf(g)[0];
+      const pic = photosOf(g, prov)[0], credit = creditsOf(g, prov)[0];
       return `    <div class="guru-section${pic && i++ % 2 ? ' reverse' : ''}">${pic ? `
       <div class="guru-image-wrap">
         <a href="${pUrl}${gSlug(g)}/"><img loading="lazy" class="guru-image" src="${pic}" alt="${esc(g.n)}, ${esc(g.c || prov.name)}"></a>${credit ? `
@@ -274,8 +281,8 @@ ${cities.map(c => `${cities.length > 1 ? `    <h2 class="city-heading">${esc(c.n
       const gUrl = `${pUrl}${gSlug(g)}/`;
       urls.push(gUrl);
       const addr = fullAddress(g, prov);
-      const pics = photosOf(g);
-      const credits = creditsOf(g).slice(0, 4).filter(Boolean);
+      const pics = photosOf(g, prov);
+      const credits = creditsOf(g, prov).slice(0, 4).filter(Boolean);
       const label = `${g.n}, ${g.c || prov.name}`;
       const gallery = pics.length ? `  <!-- ── GALLERY ── -->
   <div class="gallery-wrapper">
@@ -344,7 +351,6 @@ ${facts.map(([l, v]) => `        <div class="fact">
   return { url: base, total };
 };
 
-module.exports.photoFolder = photoFolder;
+module.exports.photoDir = photoDir;
 module.exports.gurdwaraSlug = gurdwaraSlug;
-module.exports.photoKey = photoKey;
 module.exports.posterPage = posterPage;

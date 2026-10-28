@@ -5,10 +5,9 @@
    plus the Gurdwaras found on OpenStreetMap (scripts/gurdwaras-osm.json),
    which are added to the same provinces, or make up the whole directory
    for countries without a hand-written list.
-   Photos: scripts/gurdwara-photos-<country>.json
+   Photos: pictures/04-gurudwaras/… (see photoDir in build-gurdwaras.js)
    ────────────────────────────────────────────────────────────── */
-const fs = require('fs');
-const path = require('path');
+const { REGIONS } = require('./data');
 
 const HAND = [
   ['canada', 'north-america'], ['united-states', 'north-america'],
@@ -19,7 +18,6 @@ const HAND = [
   ['united-kingdom', 'europe'], ['ireland', 'europe'], ['netherlands', 'europe'], ['spain', 'europe'], ['france', 'europe'], ['italy', 'europe']
 ];
 const OSM = require('./gurdwaras-osm.json');
-const slugify = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 // Hand-written list + OpenStreetMap additions, province by province
 function merge(dir, extra) {
@@ -33,21 +31,17 @@ function merge(dir, extra) {
   return { ...dir, provinces };
 }
 
-const photosFile = country => `gurdwara-photos-${slugify(country)}.json`;
 const directories = [];
 for (const [file, region] of HAND) {
   const dir = require(`./gurdwaras-${file}`);
-  directories.push({ data: merge(dir, OSM[dir.country]), region, photos: photosFile(dir.country) });
+  directories.push({ data: merge(dir, OSM[dir.country]), region });
 }
 for (const [country, d] of Object.entries(OSM)) {
   if (directories.some(x => x.data.country === country)) continue;
   const { region, ...dir } = d;
-  directories.push({ data: dir, region, photos: photosFile(country) });
+  directories.push({ data: dir, region });
 }
-// Photo list of a directory ({} until it has photos)
-const photosOf = d => {
-  const f = path.join(__dirname, d.photos);
-  return fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : {};
-};
+// The region's folder, numbered in the order of REGIONS, e.g. 04-gurudwaras/03-europe
+const regionDir = slug => `04-gurudwaras/${String(REGIONS.findIndex(r => r.slug === slug) + 1).padStart(2, '0')}-${slug}`;
 
-module.exports = { directories, photosOf };
+module.exports = { directories, regionDir };

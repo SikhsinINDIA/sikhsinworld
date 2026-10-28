@@ -10,7 +10,7 @@
  * repository, and is never copied.
  *
  * For each request:
- *   - section 4 and sikhsinworld.com's own files (its styles, logo, sitemap…):
+ *   - section 4 and sikhsinworld.com's own files (its styles, logo, Gurdwara photos, sitemap…):
  *     sikhsinworld.com's own site (GitHub Pages) first, sikhsinindia.com if it
  *     doesn't have it (e.g. India's state Gurdwara pages);
  *   - everything else: sikhsinindia.com first, sikhsinworld.com if India doesn't
@@ -33,7 +33,7 @@ const INDIA_LOGOS = /(^|\/)(sikhsinindia\.png|sikhsinindia\.webp|sikhsinindia-lo
 const INDIA_MAP = /^\/((hi|pa)\/)?04-gurudwaras\/04-gurudwaras-in-india\.html$/;
 const INDIA_GURDWARAS = /^\/((hi|pa)\/)?04-gurudwaras\//;
 // sikhsinworld.com's own: section 4 and the files its pages use
-const WORLD_FIRST = /^\/(04-gurudwaras\/|css\/(style|gurdwara)\.css$|js\/gurdwara-gallery\.js$|pictures\/sikhsinworld|sitemap\.xml$|robots\.txt$|cloudflare-worker\/)/;
+const WORLD_FIRST = /^\/(04-gurudwaras\/|css\/(style|gurdwara)\.css$|js\/gurdwara-gallery\.js$|pictures\/sikhsinworld|pictures\/04-gurudwaras\/0[1-8]-(south-asia|middle-east|europe|north-america|south-america|africa|east-southeast-asia|australia-nz)\/|sitemap\.xml$|robots\.txt$|cloudflare-worker\/)/;
 
 export default {
   async fetch(request, env) {
