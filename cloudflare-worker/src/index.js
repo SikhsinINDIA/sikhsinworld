@@ -56,16 +56,30 @@ export default {
 // The same address on sikhsinindia.com, or null if India doesn't have it
 async function fromIndia(url, request) {
   const indiaUrl = INDIA + url.pathname + url.search;
-  const india = await fetch(indiaUrl, { headers: request.headers, redirect: 'manual' });
+  // Not the browser's "has it changed?" headers: they refer to a rewritten copy, not to India's page
+  const headers = new Headers(request.headers);
+  for (const h of ['If-None-Match', 'If-Modified-Since', 'If-Match', 'If-Unmodified-Since', 'If-Range']) headers.delete(h);
+  const india = await fetch(indiaUrl, { headers, redirect: 'manual' });
   if (india.status === 404) return null;
-  if (india.status >= 300 && india.status < 400) {
+  if ([301, 302, 303, 307, 308].includes(india.status) && india.headers.get('Location')) {
     // keep redirects on this site, e.g. /hi → /hi/
     const to = new URL(india.headers.get('Location'), indiaUrl);
     if (to.origin === INDIA) return Response.redirect(url.origin + to.pathname + to.search, india.status);
     return india;
   }
-  if (!(india.headers.get('Content-Type') || '').includes('text/html')) return india;
+  // "Not modified" (the browser's cached copy is current) has no page to rewrite
+  if (india.status !== 200 || !(india.headers.get('Content-Type') || '').includes('text/html')) return india;
   return rewrite(india, indiaUrl, url.pathname);
+}
+
+// The rewritten page is not the page sikhsinindia.com's ETag / Last-Modified describe, so they are
+// dropped: otherwise a browser keeps an old rewritten copy (e.g. with an old icon) until India changes.
+function withoutValidators(response) {
+  const headers = new Headers(response.headers);
+  headers.delete('ETag');
+  headers.delete('Last-Modified');
+  headers.set('Cache-Control', 'public, max-age=600');
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
 }
 
 function rewrite(response, pageUrl, path) {
@@ -121,5 +135,5 @@ function rewrite(response, pageUrl, path) {
         if (/Sikhs ?In ?India/i.test(t.text)) t.replace(t.text.replace(/Sikhs ?In ?India\.com/gi, 'SikhsInWorld.com').replace(/Sikhs in India/gi, 'Sikhs in World'), { html: true });
       }
     })
-    .transform(response);
+    .transform(withoutValidators(response));
 }
