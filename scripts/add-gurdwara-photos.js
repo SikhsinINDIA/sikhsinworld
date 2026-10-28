@@ -24,7 +24,9 @@ const DRIVE = 'gdrive:SikhsinWorld/01-world-gurudwaras/';
 const COUNTRIES = [
   { data: require('./gurdwaras-canada'), region: 'north-america', photos: 'gurdwara-photos-canada.json' },
   { data: require('./gurdwaras-australia'), region: 'australia-nz', photos: 'gurdwara-photos-australia.json' },
-  { data: require('./gurdwaras-new-zealand'), region: 'australia-nz', photos: 'gurdwara-photos-new-zealand.json' }
+  { data: require('./gurdwaras-new-zealand'), region: 'australia-nz', photos: 'gurdwara-photos-new-zealand.json' },
+  { data: require('./gurdwaras-thailand'), region: 'east-southeast-asia', photos: 'gurdwara-photos-thailand.json' },
+  { data: require('./gurdwaras-singapore'), region: 'east-southeast-asia', photos: 'gurdwara-photos-singapore.json' }
 ];
 
 const args = process.argv.slice(2);

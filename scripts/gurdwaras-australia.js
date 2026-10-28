@@ -6,7 +6,7 @@
    facts from SBS, Queensland Religious Places, State Library of SA and WA, and others.
    Empty fields are simply left out. */
 module.exports = {
-  country: 'Australia', code: 'AU',
+  country: 'Australia', code: 'AU', dial: '61',
   division: 'State', divisions: 'states and territories',
   banner: 'Sikhs first came to Australia in the late 1800s, and the country’s first Gurdwara opened in Woolgoolga in 1968. Today there are Gurdwaras in every mainland state.',
   provinces: [

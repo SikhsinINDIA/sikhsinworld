@@ -45,6 +45,8 @@ module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug,
     const cut = w.length <= 2 ? 1 : 2;
     return `${esc(w.slice(0, cut).join(' '))} <span>${esc(w.slice(cut).join(' '))}</span>`;
   };
+  // Phone link: a number written with + keeps its own code, a local one gets the country’s (+1 by default)
+  const telOf = ph => ph.trim().startsWith('+') ? `+${ph.replace(/\D/g, '')}` : `+${dir.dial || '1'}${ph.replace(/\D/g, '').replace(/^0/, '')}`;
   const firstSentence = p => (p.match(/^.*?[.!?](\s|$)/) || [p])[0].trim();
   const fullAddress = (g, prov) => [g.a, g.c && g.c.replace(/\s*\(.*\)$/, '').replace(/ area$/, ''), [prov.abbr, g.pc].filter(Boolean).join(' ')].filter(Boolean).join(', ');
   const place = (g, prov) => [g.c, prov.name].filter(Boolean).join(', ');
@@ -277,7 +279,7 @@ ${pics.slice(0, 4).map((p, n) => `      <img loading="lazy" class="gallery-thumb
         ['City', esc(g.c || 'See address')],
         [Div, esc(prov.name)],
         g.y && ['Established', esc(g.y)],
-        g.ph && ['Phone', `<a href="tel:+1${g.ph.replace(/\D/g, '')}">${esc(g.ph)}</a>`],
+        g.ph && ['Phone', `<a href="tel:${telOf(g.ph)}">${esc(g.ph)}</a>`],
         g.w && ['Website', `<a href="${esc(g.w)}" target="_blank" rel="noopener">${esc(g.w.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''))}</a>`]
       ].filter(Boolean);
       write(`${gUrl.slice(1)}index.html`, poster({

@@ -10,8 +10,8 @@ const { REGIONS, COUNTRIES, INDIA, UAE } = require('./data');
 const buildGurdwaras = require('./build-gurdwaras');
 
 // Full Gurdwara directories, by country (one page per Gurdwara)
-const DIRECTORIES = { 'Canada': require('./gurdwaras-canada'), 'Australia': require('./gurdwaras-australia'), 'New Zealand': require('./gurdwaras-new-zealand') };
-const PHOTOS = { 'Canada': require('./gurdwara-photos-canada.json'), 'Australia': require('./gurdwara-photos-australia.json'), 'New Zealand': require('./gurdwara-photos-new-zealand.json') };
+const DIRECTORIES = { 'Canada': require('./gurdwaras-canada'), 'Australia': require('./gurdwaras-australia'), 'New Zealand': require('./gurdwaras-new-zealand'), 'Thailand': require('./gurdwaras-thailand'), 'Singapore': require('./gurdwaras-singapore') };
+const PHOTOS = { 'Canada': require('./gurdwara-photos-canada.json'), 'Australia': require('./gurdwara-photos-australia.json'), 'New Zealand': require('./gurdwara-photos-new-zealand.json'), 'Thailand': require('./gurdwara-photos-thailand.json'), 'Singapore': require('./gurdwara-photos-singapore.json') };
 
 const ROOT = path.join(__dirname, '..');
 const SITE = 'https://sikhsinworld.com';

@@ -6,7 +6,7 @@
    facts from Te Ara (the Encyclopedia of New Zealand), Indian Newslink and others.
    Empty fields are simply left out. */
 module.exports = {
-  country: 'New Zealand', code: 'NZ',
+  country: 'New Zealand', code: 'NZ', dial: '64',
   division: 'Region', divisions: 'regions',
   banner: 'Sikhs first came to New Zealand in the early 1900s. The country’s first Gurdwara opened at Te Rapa, near Hamilton, in 1977, and today there are Gurdwaras from Auckland to Christchurch.',
   provinces: [

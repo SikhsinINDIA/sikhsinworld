@@ -61,8 +61,8 @@ const REGIONS = [
     slug: 'east-southeast-asia', name: 'East & Southeast Asia',
     intro: 'Sikhs arrived in Southeast Asia in the late 1800s as police, soldiers and traders, and built Gurdwaras that are now well over a century old.',
     countries: [
-      ['Malaysia', 'page'], ['Singapore', 'page'],
-      ['Thailand', 'soon'], ['Hong Kong', 'soon'], ['Philippines', 'soon'], ['Indonesia', 'soon'], ['Japan', 'soon']
+      ['Malaysia', 'page'], ['Singapore', 'page'], ['Thailand', 'page'],
+      ['Hong Kong', 'soon'], ['Philippines', 'soon'], ['Indonesia', 'soon'], ['Japan', 'soon']
     ]
   },
   {
@@ -154,6 +154,15 @@ const COUNTRIES = {
     ],
     gurdwaras: [
       ['Central Sikh Gurdwara', 'Towner Road', 'Main Gurdwara of Singapore']
+    ]
+  },
+  'Thailand': {
+    story: [
+      'Sikhs came to Thailand from the 1880s, many by way of Burma, and opened the first Gurdwaras in Chiang Mai in 1907 and Bangkok in 1912.',
+      'Most Thai Sikhs live in Bangkok, around the great Gurdwara in Phahurat, and there are Gurdwaras from Chiang Rai in the north to Phuket and Songkhla in the south.'
+    ],
+    gurdwaras: [
+      ['Gurdwara Siri Guru Singh Sabha', 'Phahurat, Bangkok', 'Main Gurdwara of Thailand (1933)']
     ]
   },
   'Australia': {
