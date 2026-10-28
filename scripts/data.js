@@ -46,14 +46,15 @@ const REGIONS = [
     slug: 'south-america', name: 'South America',
     intro: 'Small but growing Sikh communities, with sangats gathering in the larger cities.',
     countries: [
-      ['Argentina', 'soon'], ['Brazil', 'soon'], ['Chile', 'soon']
+      ['Argentina', 'page'], ['Peru', 'page'],
+      ['Brazil', 'soon'], ['Chile', 'soon']
     ]
   },
   {
     slug: 'africa', name: 'Africa',
     intro: 'Sikh craftsmen and engineers helped build East Africa’s railways from the 1890s, and historic Gurdwaras still stand along the line.',
     countries: [
-      ['Kenya', 'page'],
+      ['Kenya', 'page'], ['Mauritius', 'page'],
       ['Uganda', 'soon'], ['Tanzania', 'soon'], ['South Africa', 'soon'], ['Nigeria', 'soon']
     ]
   },
@@ -62,7 +63,7 @@ const REGIONS = [
     intro: 'Sikhs arrived in Southeast Asia in the late 1800s as police, soldiers and traders, and built Gurdwaras that are now well over a century old.',
     countries: [
       ['Malaysia', 'page'], ['Singapore', 'page'], ['Thailand', 'page'], ['Hong Kong', 'page'],
-      ['Philippines', 'soon'], ['Indonesia', 'soon'], ['Japan', 'soon']
+      ['Japan', 'page'], ['Philippines', 'soon'], ['Indonesia', 'soon']
     ]
   },
   {
@@ -163,6 +164,42 @@ const COUNTRIES = {
     ],
     gurdwaras: [
       ['Gurdwara Siri Guru Singh Sabha', 'Phahurat, Bangkok', 'Main Gurdwara of Thailand (1933)']
+    ]
+  },
+  'Argentina': {
+    story: [
+      'Punjabi Sikhs came to Argentina in the early 1900s, many to work on the railways, and settled in the northern province of Salta.',
+      'Their Gurdwara in Rosario de la Frontera, built around 1990, is often called the only Gurdwara in South America.'
+    ],
+    gurdwaras: [
+      ['Gurdwara Nanaksar', 'Rosario de la Frontera, Salta', 'The only Gurdwara in Argentina']
+    ]
+  },
+  'Peru': {
+    story: [
+      'Peru’s Sikh sangat is small and centred on Lima, made up of Punjabi families and Peruvians who have embraced the Sikh way of life.'
+    ],
+    gurdwaras: [
+      ['Gurdwara Guru Nanak Sahib', 'Vargas Machuca 233, Lima', 'Run by the Sikh Simran Sewa Sabha']
+    ]
+  },
+  'Japan': {
+    story: [
+      'Sikh traders settled in Yokohama and Kobe in the early 1900s, and Kobe’s Guru Nanak Darbar was for many years the only Gurdwara in Japan.',
+      'Today a second Gurdwara in Tokyo serves a small sangat of Punjabi, Indian and Japanese families.'
+    ],
+    gurdwaras: [
+      ['Guru Nanak Darbar', 'Chuo-ku, Kobe', 'Japan’s oldest Gurdwara'],
+      ['Guru Nanak Darbar Tokyo', 'Bunkyo, Tokyo', 'Open on Sunday mornings']
+    ]
+  },
+  'Mauritius': {
+    story: [
+      'Mauritius has a small Sikh community, many of them professionals in the capital, Port Louis.',
+      'Its one Gurdwara, built in the 1990s, welcomes Mauritians of every background to Sunday prayers and langar.'
+    ],
+    gurdwaras: [
+      ['Sri Guru Singh Sabha', 'Grand River North West, Port Louis', 'The only Gurdwara in Mauritius']
     ]
   },
   'Hong Kong': {

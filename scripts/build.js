@@ -10,8 +10,8 @@ const { REGIONS, COUNTRIES, INDIA, UAE } = require('./data');
 const buildGurdwaras = require('./build-gurdwaras');
 
 // Full Gurdwara directories, by country (one page per Gurdwara)
-const DIRECTORIES = { 'Canada': require('./gurdwaras-canada'), 'Australia': require('./gurdwaras-australia'), 'New Zealand': require('./gurdwaras-new-zealand'), 'Thailand': require('./gurdwaras-thailand'), 'Singapore': require('./gurdwaras-singapore'), 'Hong Kong': require('./gurdwaras-hong-kong') };
-const PHOTOS = { 'Canada': require('./gurdwara-photos-canada.json'), 'Australia': require('./gurdwara-photos-australia.json'), 'New Zealand': require('./gurdwara-photos-new-zealand.json'), 'Thailand': require('./gurdwara-photos-thailand.json'), 'Singapore': require('./gurdwara-photos-singapore.json'), 'Hong Kong': require('./gurdwara-photos-hong-kong.json') };
+const DIRECTORIES = { 'Canada': require('./gurdwaras-canada'), 'Australia': require('./gurdwaras-australia'), 'New Zealand': require('./gurdwaras-new-zealand'), 'Thailand': require('./gurdwaras-thailand'), 'Singapore': require('./gurdwaras-singapore'), 'Hong Kong': require('./gurdwaras-hong-kong'), 'Argentina': require('./gurdwaras-argentina'), 'Peru': require('./gurdwaras-peru'), 'Japan': require('./gurdwaras-japan'), 'Mauritius': require('./gurdwaras-mauritius'), 'United Kingdom': require('./gurdwaras-united-kingdom') };
+const PHOTOS = { 'Canada': require('./gurdwara-photos-canada.json'), 'Australia': require('./gurdwara-photos-australia.json'), 'New Zealand': require('./gurdwara-photos-new-zealand.json'), 'Thailand': require('./gurdwara-photos-thailand.json'), 'Singapore': require('./gurdwara-photos-singapore.json'), 'Hong Kong': require('./gurdwara-photos-hong-kong.json'), 'Argentina': require('./gurdwara-photos-argentina.json'), 'Peru': {}, 'Japan': require('./gurdwara-photos-japan.json'), 'Mauritius': require('./gurdwara-photos-mauritius.json'), 'United Kingdom': require('./gurdwara-photos-united-kingdom.json') };
 
 const ROOT = path.join(__dirname, '..');
 const SITE = 'https://sikhsinworld.com';

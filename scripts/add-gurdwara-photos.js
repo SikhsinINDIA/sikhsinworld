@@ -27,7 +27,11 @@ const COUNTRIES = [
   { data: require('./gurdwaras-new-zealand'), region: 'australia-nz', photos: 'gurdwara-photos-new-zealand.json' },
   { data: require('./gurdwaras-thailand'), region: 'east-southeast-asia', photos: 'gurdwara-photos-thailand.json' },
   { data: require('./gurdwaras-singapore'), region: 'east-southeast-asia', photos: 'gurdwara-photos-singapore.json' },
-  { data: require('./gurdwaras-hong-kong'), region: 'east-southeast-asia', photos: 'gurdwara-photos-hong-kong.json' }
+  { data: require('./gurdwaras-hong-kong'), region: 'east-southeast-asia', photos: 'gurdwara-photos-hong-kong.json' },
+  { data: require('./gurdwaras-argentina'), region: 'south-america', photos: 'gurdwara-photos-argentina.json' },
+  { data: require('./gurdwaras-japan'), region: 'east-southeast-asia', photos: 'gurdwara-photos-japan.json' },
+  { data: require('./gurdwaras-mauritius'), region: 'africa', photos: 'gurdwara-photos-mauritius.json' },
+  { data: require('./gurdwaras-united-kingdom'), region: 'europe', photos: 'gurdwara-photos-united-kingdom.json' }
 ];
 
 const args = process.argv.slice(2);
@@ -45,6 +49,18 @@ const keysOf = g => [g.wg, gurdwaraSlug(g), slugify(g.n), slugify(`${g.n} ${g.c}
   for (const f of fs.readdirSync(dir)) {
     const m = f.match(/^(.*)-(\d+)\.(jpe?g|png|webp)$/i);
     if (m) (groups[norm(m[1])] = groups[norm(m[1])] || []).push([+m[2], f]);
+  }
+
+  // A photo name that fits more than one Gurdwara (e.g. "Gurdwara Nanaksar") is left alone:
+  // rename it with the city, e.g. "Gurdwara Nanaksar Brampton-1.jpg"
+  const fits = {};
+  for (const c of COUNTRIES) for (const g of c.data.provinces.flatMap(p => p.list)) {
+    const key = keysOf(g).find(k => groups[k]);
+    if (key) (fits[key] = fits[key] || []).push(`${g.n}, ${g.c} (${c.data.country})`);
+  }
+  for (const [key, list] of Object.entries(fits)) if (list.length > 1) {
+    console.log(`AMBIGUOUS "${key}" fits ${list.join('; ')} — add the city to the file names`);
+    delete groups[key];
   }
 
   for (const c of COUNTRIES) {
