@@ -1,0 +1,15 @@
+name = "sikhsinworld-frame"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+# Runs in front of every sikhsinworld.com address once the domain is on Cloudflare.
+routes = [
+  { pattern = "sikhsinworld.com/*", zone_name = "sikhsinworld.com" },
+  { pattern = "www.sikhsinworld.com/*", zone_name = "sikhsinworld.com" }
+]
+
+[vars]
+# Where sikhsinworld.com's own pages come from. Leave unset in production: the
+# Worker then asks the domain's own origin (GitHub Pages). For local testing
+# (wrangler dev) it is set to the live site, see README.md.
+# WORLD_ORIGIN = "https://sikhsinworld.com"
