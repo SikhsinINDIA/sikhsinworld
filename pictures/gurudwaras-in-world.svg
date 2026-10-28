@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177 140" width="177" height="140" role="img" aria-label="Gurudwaras in the World">
+  <defs>
+    <radialGradient id="sea" cx="38%" cy="32%" r="75%">
+      <stop offset="0" stop-color="#7cc8ff"/>
+      <stop offset="0.55" stop-color="#2f86d6"/>
+      <stop offset="1" stop-color="#174f96"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe58a"/>
+      <stop offset="0.5" stop-color="#f7b733"/>
+      <stop offset="1" stop-color="#d98b0b"/>
+    </linearGradient>
+    <linearGradient id="dome" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff2b8"/>
+      <stop offset="0.45" stop-color="#ffc93c"/>
+      <stop offset="1" stop-color="#d98b0b"/>
+    </linearGradient>
+    <linearGradient id="flag" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff9a1f"/>
+      <stop offset="1" stop-color="#f26b00"/>
+    </linearGradient>
+    <clipPath id="globe"><circle cx="92" cy="60" r="52"/></clipPath>
+  </defs>
+
+  <!-- globe -->
+  <circle cx="92" cy="60" r="55" fill="#d6ecff"/>
+  <circle cx="92" cy="60" r="52" fill="url(#sea)"/>
+  <g clip-path="url(#globe)">
+    <g fill="#5cc46a" stroke="#3a9a4c" stroke-width="0.8" stroke-linejoin="round">
+      <!-- the Americas -->
+      <path d="M44 22c8-6 20-6 26 0 4 5-2 9-6 12-5 3-3 9-7 12-4 3-9 1-12 5-2 3 1 8-2 11-4-6-9-14-8-24 1-7 3-12 9-16z"/>
+      <path d="M58 70c6-2 11 3 11 9 0 7-4 12-6 19-1 5-4 9-7 7-2-6 0-12-2-18-2-6-2-15 4-17z"/>
+      <!-- Europe and Africa -->
+      <path d="M90 18c6-3 13-2 17 2 2 4-3 6-6 7-4 1-6 4-10 3-4-1-6-5-5-8 1-2 2-3 4-4z"/>
+      <path d="M88 36c8-2 16 0 20 6 3 6 1 13-2 19-3 7-4 15-10 18-5-4-5-11-8-17-3-6-8-10-7-17 1-5 3-8 7-9z"/>
+      <!-- Asia and Australia -->
+      <path d="M112 20c10-4 22 0 28 8 4 6 1 13-5 15-6 2-9-3-15-1-5 2-10 0-12-5-2-6-1-14 4-17z"/>
+      <path d="M128 70c6-2 12 1 13 6 1 5-4 8-9 8-5 0-9-3-9-7 0-3 2-6 5-7z"/>
+    </g>
+    <g fill="none" stroke="#ffffff" stroke-opacity="0.28" stroke-width="0.8">
+      <ellipse cx="92" cy="60" rx="52" ry="18"/>
+      <ellipse cx="92" cy="60" rx="22" ry="52"/>
+      <line x1="40" y1="60" x2="144" y2="60"/>
+    </g>
+    <!-- light on the globe -->
+    <ellipse cx="72" cy="34" rx="20" ry="12" fill="#ffffff" fill-opacity="0.18"/>
+  </g>
+
+  <!-- ground shadow -->
+  <ellipse cx="92" cy="133" rx="62" ry="5" fill="#1a2340" fill-opacity="0.18"/>
+
+  <!-- Nishan Sahib -->
+  <rect x="24" y="44" width="2.6" height="88" rx="1.2" fill="#8a5a12"/>
+  <circle cx="25.3" cy="42.5" r="2.6" fill="url(#gold)"/>
+  <path d="M26.6 47 L50 55 L26.6 63 Z" fill="url(#flag)" stroke="#d65a00" stroke-width="0.8" stroke-linejoin="round"/>
+
+  <!-- Gurdwara -->
+  <g stroke="#a86a06" stroke-width="1" stroke-linejoin="round">
+    <!-- side domes -->
+    <path d="M52 92c0-7 4-11 8-11s8 4 8 11z" fill="url(#dome)"/>
+    <path d="M116 92c0-7 4-11 8-11s8 4 8 11z" fill="url(#dome)"/>
+    <line x1="60" y1="81" x2="60" y2="76" stroke-width="1.4"/>
+    <line x1="124" y1="81" x2="124" y2="76" stroke-width="1.4"/>
+    <!-- main dome -->
+    <path d="M72 84c0-14 9-24 20-24s20 10 20 24z" fill="url(#dome)"/>
+    <path d="M92 60v-9" stroke-width="1.6"/>
+    <circle cx="92" cy="49.5" r="2.4" fill="url(#gold)"/>
+    <!-- upper storey -->
+    <rect x="68" y="84" width="48" height="12" fill="url(#gold)"/>
+    <!-- main hall -->
+    <rect x="48" y="92" width="88" height="38" rx="1.5" fill="url(#gold)"/>
+    <rect x="44" y="128" width="96" height="5" rx="1.2" fill="#e9a21d"/>
+  </g>
+  <!-- arches -->
+  <g fill="#7a3d00" fill-opacity="0.82">
+    <path d="M57 126v-12a5 5 0 0 1 10 0v12z"/>
+    <path d="M71 126v-12a5 5 0 0 1 10 0v12z"/>
+    <path d="M87 126v-15a5 5 0 0 1 10 0v15z"/>
+    <path d="M103 126v-12a5 5 0 0 1 10 0v12z"/>
+    <path d="M117 126v-12a5 5 0 0 1 10 0v12z"/>
+    <path d="M75 94.5v-4.5a3 3 0 0 1 6 0v4.5z"/>
+    <path d="M89 94.5v-4.5a3 3 0 0 1 6 0v4.5z"/>
+    <path d="M103 94.5v-4.5a3 3 0 0 1 6 0v4.5z"/>
+  </g>
+  <!-- trim line -->
+  <line x1="48" y1="104" x2="136" y2="104" stroke="#a86a06" stroke-width="0.9"/>
+</svg>

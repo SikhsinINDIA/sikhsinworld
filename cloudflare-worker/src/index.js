@@ -18,6 +18,7 @@
  * Pages from sikhsinindia.com are changed on the way through:
  *   - the Sikhs in India logo becomes the Sikhs in World logo;
  *   - SikhsInIndia.com in the <title> becomes SikhsInWorld.com;
+ *   - the home page's Gurudwaras card shows the world icon (pictures/gurudwaras-in-world.svg);
  *   - links to India's Gurudwaras map open the world map instead (except inside
  *     India's own Gurdwara pages, so their back links stay in India's map);
  *   - pictures, scripts and styles load straight from sikhsinindia.com, so they
@@ -29,11 +30,13 @@
 const INDIA = 'https://sikhsinindia.com';
 const WORLD_LOGO = '/pictures/sikhsinworld-logo.png';
 const WORLD_MAP = '/04-gurudwaras/04-gurudwaras-in-world.html';
+const INDIA_GURDWARAS_ICON = '/pictures/00-index/web/03-gurudwaras.webp';
+const WORLD_GURDWARAS_ICON = '/pictures/gurudwaras-in-world.svg';
 const INDIA_LOGOS = /(^|\/)(sikhsinindia\.png|sikhsinindia\.webp|sikhsinindia-logo\.png)$/;
 const INDIA_MAP = /^\/((hi|pa)\/)?04-gurudwaras\/04-gurudwaras-in-india\.html$/;
 const INDIA_GURDWARAS = /^\/((hi|pa)\/)?04-gurudwaras\//;
 // sikhsinworld.com's own: section 4 and the files its pages use
-const WORLD_FIRST = /^\/(04-gurudwaras\/|css\/(style|gurdwara)\.css$|js\/gurdwara-gallery\.js$|pictures\/sikhsinworld|pictures\/04-gurudwaras\/0[1-8]-(south-asia|middle-east|europe|north-america|south-america|africa|east-southeast-asia|australia-nz)\/|sitemap\.xml$|robots\.txt$|cloudflare-worker\/)/;
+const WORLD_FIRST = /^\/(04-gurudwaras\/|css\/(style|gurdwara)\.css$|js\/gurdwara-gallery\.js$|pictures\/sikhsinworld|pictures\/gurudwaras-in-world\.svg$|pictures\/04-gurudwaras\/0[1-8]-(south-asia|middle-east|europe|north-america|south-america|africa|east-southeast-asia|australia-nz)\/|sitemap\.xml$|robots\.txt$|cloudflare-worker\/)/;
 
 export default {
   async fetch(request, env) {
@@ -78,9 +81,15 @@ function rewrite(response, pageUrl, path) {
     .on('img', {
       element(el) {
         const src = el.getAttribute('src') || '';
-        if (INDIA_LOGOS.test(new URL(src, pageUrl).pathname)) {
+        const at = new URL(src, pageUrl).pathname;
+        if (INDIA_LOGOS.test(at)) {
           el.setAttribute('src', WORLD_LOGO);
           el.setAttribute('alt', 'Sikhs in World logo');
+          el.removeAttribute('srcset');
+        } else if (!inIndiaGurdwaras && at === INDIA_GURDWARAS_ICON) {
+          // the home page's Gurudwaras card opens the world map, so it shows the world icon
+          el.setAttribute('src', WORLD_GURDWARAS_ICON);
+          el.setAttribute('alt', 'Gurudwaras in the World');
           el.removeAttribute('srcset');
         } else if (src && !/^(https?:|data:|\/\/)/.test(src)) {
           el.setAttribute('src', new URL(src, pageUrl).href);
