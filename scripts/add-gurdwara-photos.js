@@ -31,7 +31,13 @@ const COUNTRIES = [
   { data: require('./gurdwaras-argentina'), region: 'south-america', photos: 'gurdwara-photos-argentina.json' },
   { data: require('./gurdwaras-japan'), region: 'east-southeast-asia', photos: 'gurdwara-photos-japan.json' },
   { data: require('./gurdwaras-mauritius'), region: 'africa', photos: 'gurdwara-photos-mauritius.json' },
-  { data: require('./gurdwaras-united-kingdom'), region: 'europe', photos: 'gurdwara-photos-united-kingdom.json' }
+  { data: require('./gurdwaras-united-kingdom'), region: 'europe', photos: 'gurdwara-photos-united-kingdom.json' },
+  { data: require('./gurdwaras-ireland'), region: 'europe', photos: 'gurdwara-photos-ireland.json' },
+  { data: require('./gurdwaras-netherlands'), region: 'europe', photos: 'gurdwara-photos-netherlands.json' },
+  { data: require('./gurdwaras-spain'), region: 'europe', photos: 'gurdwara-photos-spain.json' },
+  { data: require('./gurdwaras-france'), region: 'europe', photos: 'gurdwara-photos-france.json' },
+  { data: require('./gurdwaras-italy'), region: 'europe', photos: 'gurdwara-photos-italy.json' },
+  { data: require('./gurdwaras-united-states'), region: 'north-america', photos: 'gurdwara-photos-united-states.json' }
 ];
 
 const args = process.argv.slice(2);

@@ -31,8 +31,8 @@ const REGIONS = [
     intro: 'From Southall to Novellara, Europe is home to some of the largest Sikh sangats outside India, with Gurdwaras in almost every major city.',
     countries: [
       ['United Kingdom', 'page'], ['Italy', 'page'],
-      ['Germany', 'soon'], ['France', 'soon'], ['Netherlands', 'soon'], ['Belgium', 'soon'],
-      ['Spain', 'soon'], ['Portugal', 'soon'], ['Austria', 'soon'], ['Norway', 'soon'], ['Ireland', 'soon']
+      ['Germany', 'soon'], ['France', 'page'], ['Netherlands', 'page'], ['Belgium', 'soon'],
+      ['Spain', 'page'], ['Portugal', 'soon'], ['Austria', 'soon'], ['Norway', 'soon'], ['Ireland', 'page']
     ]
   },
   {
@@ -100,13 +100,50 @@ const COUNTRIES = {
       ['Guru Nanak Gurdwara', 'Smethwick, Birmingham', 'Long-established sangat in the West Midlands']
     ]
   },
+  'Ireland': {
+    story: [
+      'Sikhs began settling in Ireland in the 1970s, and more came in the 1980s and the 2000s.',
+      'Dublin’s Gurdwara, Guru Nanak Darbar, opened in a former cinema in Ballsbridge in the late 1980s.'
+    ],
+    gurdwaras: [
+      ['Guru Nanak Darbar', 'Ballsbridge, Dublin', 'The Gurdwara of Dublin, in a former cinema']
+    ]
+  },
+  'Netherlands': {
+    story: [
+      'The Netherlands has a small Sikh community, mostly in and around Amsterdam, many of whom came from Afghanistan and Punjab.',
+      'The Sikh Society of the Netherlands shares Sikhi in Dutch, and Amsterdam has several Gurdwaras.'
+    ],
+    gurdwaras: [
+      ['Gurdwara Maan Sarovar Sahib', 'Amsterdam', 'The Gurdwara closest to the centre, in a canal-city townhouse']
+    ]
+  },
+  'Spain': {
+    story: [
+      'Sikhs began settling in Spain in the 1990s, and the community is now about 25,000 strong and growing fast.',
+      'About half live in and around Barcelona, which also has about half of Spain’s Gurdwaras.'
+    ],
+    gurdwaras: [
+      ['Gurdwara Gurdarshan Sahib', 'El Raval, Barcelona', 'A townhouse Gurdwara just off La Rambla']
+    ]
+  },
+  'France': {
+    story: [
+      'Tens of thousands of Sikh soldiers fought and fell in France in the two World Wars. Maharaja Duleep Singh spent his last years in Paris.',
+      'Today’s small Sikh community is centred on Bobigny, north-east of Paris, which holds a Vaisakhi Nagar Kirtan each year.'
+    ],
+    gurdwaras: [
+      ['Gurdwara Singh Sabha', 'Bobigny, Paris', 'The largest Gurdwara in France']
+    ]
+  },
   'Italy': {
     story: [
       'Sikhs began settling in northern Italy in the 1980s and 1990s, many working on dairy farms in Lombardy and Emilia-Romagna, the heartland of Parmigiano Reggiano.',
       'Today Italy has one of the largest Sikh communities in continental Europe.'
     ],
     gurdwaras: [
-      ['Gurdwara Singh Sabha', 'Novellara (Reggio Emilia)', 'One of the largest Gurdwaras in Europe']
+      ['Gurdwara Singh Sabha', 'Novellara (Reggio Emilia)', 'One of the largest Gurdwaras in Europe'],
+      ['Darbar Sri Guru Granth Sahib Ji', 'San Prospero, Parma', 'A great Gurdwara among the fields']
     ]
   },
   'Canada': {
