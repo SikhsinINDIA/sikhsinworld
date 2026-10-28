@@ -111,12 +111,6 @@ ${crumbHtml ? `<div class="wrap">${crumbHtml}</div>\n` : ''}${body}
 `;
 }
 
-function countryLink(region, [name, kind, href]) {
-  if (kind === 'external') return `<a class="chip ext" href="${href}">${esc(name)} <span>↗ own site</span></a>`;
-  if (kind === 'page') return `<a class="chip" href="/${region.dir}/${slug(name)}/">${esc(name)}</a>`;
-  return `<span class="chip soon" title="Page coming soon">${esc(name)} <span>soon</span></span>`;
-}
-
 function write(rel, html) {
   const f = path.join(ROOT, rel);
   fs.mkdirSync(path.dirname(f), { recursive: true });
@@ -162,29 +156,8 @@ ${REGIONS.map(r => `    <a class="card" href="/${r.dir}/">
 }));
 
 // ── Regions and countries ────────────────────────────────────
-// Every region page leads back to the world map of the eight regions
-const BACK_TO_MAP = '<p><a class="btn ghost" href="/04-gurudwaras/04-gurudwaras-in-world.html">← Back to the world map</a></p>';
+// Region pages are maps, built with the world map in build-world-map.js
 for (const r of REGIONS) {
-  urls.push(`/${r.dir}/`);
-  const built = r.countries.filter(c => c[1] !== 'soon').length;
-  write(`${r.dir}/index.html`, page({
-    url: `/${r.dir}/`,
-    title: `Sikhs in ${r.name} – Sikh Communities and Gurdwaras | Sikhs in World`,
-    description: `Sikh communities in ${r.name}: ${r.countries.map(c => c[0]).join(', ')}. History, Gurdwaras and sangat country by country.`,
-    crumbs: [[r.name]],
-    body: `<section class="wrap">
-  ${BACK_TO_MAP}
-  <h1>Sikhs in ${esc(r.name)}</h1>
-  <p class="lead">${esc(r.intro)}</p>
-  <h2>Countries</h2>
-  <div class="chips">
-${r.countries.map(c => '    ' + countryLink(r, c)).join('\n')}
-  </div>
-  ${built < r.countries.length ? `<p class="note">Countries marked <b>soon</b> are being written. Would you like to help with your country? Write to <a href="mailto:sikhsinindia@gmail.com">sikhsinindia@gmail.com</a>.</p>` : ''}
-  ${BACK_TO_MAP}
-</section>`
-  }));
-
   for (const [name, kind] of r.countries) {
     if (kind !== 'page') continue;
     const c = COUNTRIES[name];
@@ -227,8 +200,8 @@ ${LIBRARY.map(([t, h]) => `    <a class="chip" href="${h}">${t}</a>`).join('\n')
   }
 }
 
-// ── World map of Gurudwaras ──────────────────────────────────
-require('./build-world-map')({ REGIONS, DIRECTORIES, write, urls, SITE, slug, esc });
+// ── World and region maps of Gurudwaras ──────────────────────
+require('./build-world-map')({ REGIONS, DIRECTORIES, INDIA, write, urls, SITE, slug, esc });
 
 // ── Old addresses ────────────────────────────────────────────
 // Until October 2026 the regions sat at the top level (/europe/…). Their old folders are

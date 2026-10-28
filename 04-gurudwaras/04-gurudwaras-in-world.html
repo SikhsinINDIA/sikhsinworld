@@ -46,14 +46,17 @@
   </div>
   <style>
     .map-wrapper { background: var(--cream); padding: 22px 20px 10px; position: relative; }
-    .map-wrapper svg#world-map { width: 100%; max-width: 1000px; height: auto; display: block; margin: 0 auto; }
-    #world-map .region { stroke: #fff; stroke-width: 0.8; cursor: pointer; transition: filter 0.2s ease; }
-    #world-map .other { fill: #e6e1d6; stroke: #fff; stroke-width: 0.8; }
-    #world-map .borders { fill: none; stroke: rgba(255,255,255,0.75); stroke-width: 0.4; pointer-events: none; }
-    #world-map .dot { stroke: #fff; stroke-width: 1.2; cursor: pointer; }
-    #world-map .region-label { font: 700 13px Lato, sans-serif; fill: #1a2340; text-anchor: middle; pointer-events: none;
+    .map-wrapper svg.atlas { width: 100%; max-width: 1000px; height: auto; display: block; margin: 0 auto; }
+    .atlas .region { stroke: #fff; stroke-width: 0.8; cursor: pointer; transition: filter 0.2s ease; }
+    .atlas .other { fill: #e6e1d6; stroke: #fff; stroke-width: 0.8; }
+    .atlas .soon { fill: #ebe6dc; stroke: #fff; stroke-width: 0.8; cursor: default; }
+    .atlas .borders { fill: none; stroke: rgba(255,255,255,0.75); stroke-width: 0.4; pointer-events: none; }
+    .atlas .dot { stroke: #e8830a; stroke-width: 1.5; cursor: pointer; }
+    .atlas .region-label { font: 700 13px Lato, sans-serif; fill: #1a2340; text-anchor: middle; pointer-events: none;
       paint-order: stroke; stroke: rgba(255,255,255,0.85); stroke-width: 3px; }
-    #world-map a:hover .region, #world-map a:active .region, #world-map a:focus .region, #world-map .region.demo-hover {
+    .atlas .region-label.muted { fill: #8a8577; font-weight: 400; }
+    #region-map .region-label { font-size: 19px; }
+    .atlas a:hover .region, .atlas a:active .region, .atlas a:focus .region, .atlas .region.demo-hover {
       stroke: var(--gold); stroke-width: 2.4;
       filter: brightness(1.12) saturate(1.6) drop-shadow(0 0 5px rgba(247,148,29,0.85));
     }
@@ -81,13 +84,17 @@
     .seo-links ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 6px 18px; }
     .seo-links a { display: block; padding: 8px 0; color: #002B6D; text-decoration: none; border-bottom: 1px solid rgba(0,43,109,.12); font-size: 14px; }
     .seo-links a:hover { color: #e8830a; }
-    .seo-links small { color: #777; }
-    @media (max-width: 600px) { .map-wrapper { padding: 14px 6px 6px; } .map-hint { font-size: 9px; letter-spacing: 1px; } #world-map .region-label { font-size: 15px; } }
+    .seo-links small, .seo-links .soon-note { color: #777; }
+    .seo-links .soon-note { font-size: 13px; margin: 12px 0 0; }
+    .map-back { text-align: center; margin: 22px 0 6px; }
+    .map-back a { display: inline-block; border: 2px solid var(--navy); color: var(--navy); font-weight: 700; text-decoration: none; padding: 10px 20px; border-radius: 8px; }
+    .map-back a:hover { background: var(--gold); border-color: var(--gold); }
+    @media (max-width: 600px) { .map-wrapper { padding: 14px 6px 6px; } .map-hint { font-size: 9px; letter-spacing: 1px; } .atlas .region-label { font-size: 15px; } #region-map .region-label { font-size: 24px; } }
   </style>
   <!-- ── WORLD MAP ── -->
   <div class="map-wrapper">
     <div id="tooltip" class="tooltip"></div>
-    <svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" id="world-map" role="img" aria-label="Map of the world in eight regions">
+    <svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" id="world-map" class="atlas" role="img" aria-label="Map of the world in eight regions">
       <path class="other" d="M690,169.5L691.4,172.5L692.2,172.2L694,172.9L694.2,174.2L695,176L692.3,176L690.5,175.8L689.2,177.2L688.1,177.6L687.4,178.2L686.1,177.2L685.7,174.5L684.9,174.3L684.9,173.3L683.4,172.6L682.5,173.7L682.5,175L682.2,175.5L680.7,175.4L680.2,176.9L679.1,176.3L677.5,177.3L676.6,176.9L674.5,176.2L673,176.2L672.2,176.1L670.8,175.2L670.7,176.4L668.6,177L668.6,179.6L667.3,180.6L665.4,181.1L665.1,182.6L663.2,183L660.3,181.8L659.6,179L657.6,178.9L654.1,176L651.9,175.7L648.7,174.1L646.8,173.8L645.8,174.4L644.1,174.3L642.5,176.1L640.4,176.7L639.5,174.5L639.3,171.1L637,170L637.3,167.8L635.6,167.6L635.6,164.9L638.2,165.7L640.2,164.6L638,162.7L636.9,160.9L635,161.7L635.2,164L634,162L633.7,161.2L634.1,159.8L633.4,158.7L630.2,157.6L628.5,154.8L626.9,153.9L626.6,152.9L629.1,153.2L628.8,150.9L630.8,150.4L633.1,150.8L632.8,147.7L632,145.8L629.5,145.9L627.2,145.2L624.6,146.6L622.5,147.2L621.1,146.7L621,145.1L619,143L617.2,143.1L614.6,140.9L615.5,138.5L614.7,137.9L615.9,134.5L618.8,136.3L618.6,134L622.8,130.6L626.6,130.5L632.4,132.7L635.7,134L637.9,132.6L641.7,132.6L645.3,134.2L645.7,133.3L649.2,133.4L649.4,131.9L644.8,129.8L646.7,128.3L646,127.5L648,126.7L645.7,124.6L646.4,123.5L655,122.4L655.9,121.7L661.4,120.6L663.1,119.3L667.6,120L669.5,123.1L671.7,122.4L675.2,123.4L675.6,125.1L677.8,124.9L682.7,122L682.2,123L686.2,125.4L694.6,133.2L695.2,131.6L699.3,133.4L702.5,132.6L704,133.1L705.9,134.9L707.9,135.5L709.4,136.9L712.4,136.4L714.5,138.3L713.4,140.4L711.5,140.7L712.6,143.9L711.7,145.3L706.4,144.3L706.6,150L705.5,150.7L701,151.9L705,157.5L703.5,158.3L704.3,160.1L704.2,160.9L700.6,162.6L700.1,163.9L696.9,164.3L696.5,166.3L693.7,165.9L692.1,166.5L690,168L690.6,168.8ZM615.4,168.6L614.2,167.7L612.2,166.9L612.2,165.3L611.6,164.2L608.9,162.6L606.2,162.8L606.3,161.4L605.4,159.2L603.7,158L602.3,157.6L601.2,156.7L601.4,156.3L603.7,156.8L607.5,157.4L611.2,158.9L611.7,159.5L613.2,159L615.7,159.6L616.7,161L618.4,161.7L619.1,161.8L621.2,163.8L622.4,164L622.7,163.2L624,161.9L625.6,163.6L627.3,165.8L628.6,166L629.5,166.9L627.4,167.1L627.4,169.6L627.2,170.8L626.3,171.5L626.7,173.1L626.1,173.3L624.2,171.6L624.8,170L623.9,169L622.9,169.3L620.3,171.7L619.4,171.8L617.5,171.3L616,169.8Z"/>
       <a href="/04-gurudwaras/01-south-asia/" aria-label="South Asia · 27 Gurudwaras"><path id="r-south-asia" class="region" data-name="South Asia · 27 Gurudwaras" fill="#ffdfba" d="M742.6,225.9L742.5,227.1L740.6,227.1L737.3,227.7L737.9,230.2L736.7,232.1L733,234.3L730.5,238.1L728.6,240.1L726.2,242.2L726.3,243.7L725,244.5L722.7,245.7L721.4,245.9L720.8,248.3L721.8,252.5L722.2,255.2L721.2,258.3L721.6,263.8L720.2,263.9L719.1,266.4L720,267.5L717.5,268.4L716.7,270.6L715.6,271.5L712.8,268.5L711.3,264L710,260.7L708.9,259.2L707.2,256.1L706.2,252L705.6,250L702.6,245.6L700.9,239.3L699.6,235.1L699.1,231.2L698.2,228.2L694.5,230.1L692.5,229.7L688.5,225.8L689.7,224.6L688.7,223.4L685.1,220.6L683,219.8L681.9,217.4L679.5,215L674.6,215.6L670.2,215.6L666.4,216.1L667,212.3L670.6,210.6L670.2,209.1L668.8,208.6L668.3,205.8L665.6,204.3L664.2,202.4L662.6,200.7L664.6,197.7L664,195.6L661.9,195.1L661.4,193L660.1,190.4L660.9,188.6L659.7,188.2L660,185.8L660.3,181.8L663.2,183L665.1,182.6L665.4,181.1L667.3,180.6L668.6,179.6L668.6,177L670.7,176.4L670.8,175.2L672.2,176.1L673,176.2L674.5,176.2L676.6,176.9L677.5,177.3L679.1,176.3L680.2,176.9L680.7,175.4L682.2,175.5L682.5,175L682.5,173.7L683.4,172.6L684.9,173.3L684.9,174.3L685.7,174.5L686.1,177.2L687.4,178.2L688.1,177.6L689.2,177.2L690.5,175.8L692.3,176L695,176L695.7,177L698,178.5L699.4,181L704,182.3L707.7,186.1L708,188.7L709.4,190.4L709.7,192L707.7,191.6L709.2,195.2L712.3,197.2L716.4,199.5L717.4,198.7L719.7,199.7L722.9,201.8L724.5,202.3L725.7,203.9L727.9,204.5L730.4,205.9L733.5,206.7L736.7,207L738.2,206.3L739,208.9L740.3,206.5L741.5,205.6L743.6,206.4L745.1,206.5L746.4,207.3L748.5,206.9L750.4,204.5L753,202.5L755.5,203.3L757.1,201.9L758.8,203.9L758.2,205.3L761.2,205.8L761.7,207L760.9,207.6L761.5,209.6L759.5,209L756.5,211.2L756.9,213.1L756,215.8L756.2,217.4L755.5,220.1L753.2,219.3L753.7,222.7L753.3,223.8L753.8,225.2L752.6,226L752.9,228.3L751.9,227.8L752.5,230.4L751.4,228.7L751,227.1L750.2,225.5L748.8,223.6L746.2,223.5L746.7,224.8L746.1,226.6L744.9,226L744.6,226.6L743.8,226.2ZM727.5,272.9L727.2,276.3L726.1,277.2L723.7,278L722.3,275.4L721.6,270.8L722.5,265.5L724.6,267.3L726,269.6Z"/></a>
       <a href="/04-gurudwaras/02-middle-east/" aria-label="Middle East · 1 Gurudwara"><path id="r-middle-east" class="region" data-name="Middle East · 1 Gurudwara" fill="#ffffba" d="M593.4,201.7L593,200.9L591.1,196.1L591.8,195.1L591.6,194.9L592.2,193.4L592.5,190.9L592.8,190.1L592.8,190.1L593.5,187.4L594.6,185.1L594.6,185L594.1,182.5L594.6,181.2L593.5,179.7L594.3,178.5L592.8,178.8L590.5,178L588.9,179.9L585,180.3L582.7,178.5L579.9,178.4L579.4,179.8L577.6,180.2L575,178.4L572.1,178.5L570.3,175.3L568.2,173.5L569.3,171L567.5,169.4L570.1,166.3L574,166.2L574.8,163.8L579.7,164.2L582.6,162.1L585.4,161.2L589.6,161.1L594.4,163.4L598.2,164.6L601.2,164.1L603.4,164.4L606.2,162.8L608.9,162.6L611.6,164.2L612.2,165.3L612.2,166.9L614.2,167.7L615.4,168.6L616,169.8L617.5,171.3L619.4,171.8L620.3,171.7L622.9,169.3L623.9,169L624.8,170L624.2,171.6L626.1,173.3L626.7,173.1L627.9,175.5L630.4,176.2L632.5,177.8L636.3,178.4L640.2,177.5L640.4,176.7L642.5,176.1L644.1,174.3L645.8,174.4L646.8,173.8L648.7,174.1L651.9,175.7L654.1,176L657.6,178.9L659.6,179L660.3,181.8L660,185.8L659.7,188.2L660.9,188.6L660.1,190.4L661.4,193L661.9,195.1L664,195.6L664.6,197.7L662.6,200.7L664.2,202.4L665.6,204.3L668.3,205.8L668.8,208.6L670.2,209.1L670.6,210.6L667,212.3L666.4,216.1L661.2,215.1L658.2,214.4L655.1,214L653.4,210L652.1,209.4L650.1,210L647.6,211.5L644.1,210.5L641.1,208L638.4,207L636.3,204L633.7,199.6L632.4,200.2L630.5,199.1L629.7,200.3L628.1,200.2L628.8,201.6L628.7,202.4L629.8,204.8L631.2,207.6L632.6,208.4L633.2,209.5L635.2,210.9L635.5,212.2L635.3,213.3L635.8,214.4L636.7,215.3L637.1,216.4L637.6,217.2L637.2,214.8L637.7,213.1L638.4,212.7L639.4,213.7L639.6,215.6L639.2,217.6L639.9,218.8L640.3,218.6L640.5,219.5L642.6,219L644.9,219.1L646.5,219.2L648.1,217L649.9,214.9L651.4,212.9L652,211.8L652.4,212.1L652.3,213.4L652,214L652.7,216.6L654.2,218.8L655.8,220L657.8,220.4L659.5,221L661,222.9L661.8,223.9L662.8,224.4L662.9,225.1L662.1,227L661.8,227.9L660.7,229L659.9,231.2L658.7,231L658.2,231.8L657.9,233.4L658.4,235.6L658.2,236L657,236L655.3,237.2L655.2,238.8L654.6,239.5L652.9,239.4L651.9,240.3L652,241.6L650.8,242.5L649.2,242.2L647.5,243.2L646.2,243.4L644.3,244.3L643.8,245.7L643.9,246.8L641.2,248.2L636.9,249.7L634.5,252L633.3,252.2L632.5,252L630.9,253.3L629.2,254L626.9,254.1L626.2,254.3L625.6,255.2L624.9,255.4L624.5,256.2L623.2,256.1L622.3,256.6L620.4,256.4L619.6,254.5L619.6,252.8L619.1,251.8L618.4,249.4L617.5,248.1L618.1,247.9L617.7,246.4L618,245.8L617.8,244.4L617.4,243L616.5,242.1L616.2,240.8L614.7,239.6L613.1,236.9L612.2,234.2L610.1,232L608.9,231.5L606.8,228.4L606.4,226.1L606.4,224.2L604.5,220.6L603.2,219.3L601.6,218.7L600.6,216.8L600.7,216.1L599.8,214.4L599,213.7L597.7,211.3L595.9,208.6L594.3,206.4L593,206.4L593.3,204.6L593.3,203.5L593.5,202.2ZM566.6,161.8L569.1,160.8L571.4,161.2L571.8,162.5L574.2,163.5L573.8,164.3L570.7,164.5L569.7,165.5L567.8,167.2L566.8,165.7L566.8,165L567.4,164.7L568,162.7Z"/></a>
@@ -148,7 +155,7 @@
   <script>
     (function () {
       var tooltip = document.getElementById('tooltip'), wrap = tooltip.parentNode;
-      document.querySelectorAll('#world-map .region').forEach(function (el) {
+      document.querySelectorAll('#world-map [data-name]').forEach(function (el) {
         el.addEventListener('mousemove', function (e) {
           var box = wrap.getBoundingClientRect();
           tooltip.textContent = el.getAttribute('data-name');
@@ -158,10 +165,9 @@
         });
         el.addEventListener('mouseleave', function () { tooltip.style.display = 'none'; });
       });
-      // A short demo: light up three regions in turn, then the tap hint fades after the first touch
       if (!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
         window.addEventListener('load', function () {
-          var ids = ['r-europe', 'r-north-america', 'r-east-southeast-asia'], i = 0;
+          var ids = ["r-europe","r-north-america","r-east-southeast-asia"], i = 0;
           setTimeout(function () {
             var t = setInterval(function () {
               var prev = document.getElementById(ids[i - 1]); if (prev) prev.classList.remove('demo-hover');
