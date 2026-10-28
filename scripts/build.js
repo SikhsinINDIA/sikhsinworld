@@ -135,12 +135,13 @@ write('index.html', page({
     <p class="ik">ੴ There is only one God</p>
     <h1>Sikhs in World</h1>
     <p class="lead">One Panth, every continent. Discover the history, Gurdwaras and sangat of Sikh communities around the globe, region by region and country by country.</p>
-    <p class="hero-links"><a class="btn" href="#regions">Explore the regions</a> <a class="btn ghost" href="${INDIA}">Visit Sikhs in India</a></p>
+    <p class="hero-links"><a class="btn" href="#regions">Explore the regions</a> <a class="btn" href="/04-gurudwaras/04-gurudwaras-in-world.html">Gurudwaras world map</a> <a class="btn ghost" href="${INDIA}">Visit Sikhs in India</a></p>
     </div>
   </div>
 </section>
 <section class="wrap" id="regions">
   <h2>Explore by region</h2>
+  <p>Or find Gurudwaras on the <a href="/04-gurudwaras/04-gurudwaras-in-world.html">world map of Gurudwaras</a>.</p>
   <div class="grid">
 ${REGIONS.map(r => `    <a class="card" href="/${r.slug}/">
       <h3>${esc(r.name)}</h3>
