@@ -160,6 +160,8 @@ ${REGIONS.map(r => `    <a class="card" href="/${r.slug}/">
 }));
 
 // ── Regions and countries ────────────────────────────────────
+// Every region page leads back to the world map of the eight regions
+const BACK_TO_MAP = '<p><a class="btn ghost" href="/04-gurudwaras/04-gurudwaras-in-world.html">← Back to the world map</a></p>';
 for (const r of REGIONS) {
   urls.push(`/${r.slug}/`);
   const built = r.countries.filter(c => c[1] !== 'soon').length;
@@ -169,6 +171,7 @@ for (const r of REGIONS) {
     description: `Sikh communities in ${r.name}: ${r.countries.map(c => c[0]).join(', ')}. History, Gurdwaras and sangat country by country.`,
     crumbs: [[r.name]],
     body: `<section class="wrap">
+  ${BACK_TO_MAP}
   <h1>Sikhs in ${esc(r.name)}</h1>
   <p class="lead">${esc(r.intro)}</p>
   <h2>Countries</h2>
@@ -176,6 +179,7 @@ for (const r of REGIONS) {
 ${r.countries.map(c => '    ' + countryLink(r, c)).join('\n')}
   </div>
   ${built < r.countries.length ? `<p class="note">Countries marked <b>soon</b> are being written. Would you like to help with your country? Write to <a href="mailto:sikhsinindia@gmail.com">sikhsinindia@gmail.com</a>.</p>` : ''}
+  ${BACK_TO_MAP}
 </section>`
   }));
 
