@@ -171,6 +171,7 @@ for (const r of REGIONS) {
       description: `${c.story[0].slice(0, 150).replace(/\s+\S*$/, '')}…`,
       crumbs: [[r.name, `/${r.dir}/`], [name]],
       body: `<section class="wrap">
+  <p><a class="btn ghost" href="/${r.dir}/">← Back to the ${esc(r.name)} map</a></p>
   <h1>Sikhs in ${esc(name)}</h1>
   <nav class="toc" aria-label="On this page"><a href="#story">How Sikhs arrived</a><a href="#gurdwaras">Gurdwaras</a><a href="#events">Events</a><a href="#community">Community</a><a href="#library">Sikhi library</a></nav>
 
@@ -195,6 +196,7 @@ ${c.gurdwaras.map(([g, place, note]) => `    <div class="card plain"><h3>${esc(g
   <div class="chips">
 ${LIBRARY.map(([t, h]) => `    <a class="chip" href="${h}">${t}</a>`).join('\n')}
   </div>
+  <p><a class="btn ghost" href="/${r.dir}/">← Back to the ${esc(r.name)} map</a></p>
 </section>`
     }));
   }

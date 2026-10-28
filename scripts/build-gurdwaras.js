@@ -217,7 +217,7 @@ ${dir.provinces.map(p => `      <a class="city-card" href="${base}${slug(p.name)
     </div>
     <div class="legend">Addresses come from public listings and the Gurdwaras’ own websites. Know a Gurdwara we have missed, or spotted a change? Write to <b><a href="mailto:sikhsinindia@gmail.com" style="color:inherit">sikhsinindia@gmail.com</a></b>.${usesOsm ? ' ' + OSM_CREDIT : ''}</div>
   </div>`,
-    back: `/${region.dir}/${slug(country)}/`,
+    back: `/${region.dir}/`, // the region map, where visitors chose this country
     related: { main: countryLinks.slice(1).concat([['Sikhs in World home', '/']]) },
     ld: crumbLd(crumbsTo)
   }));
