@@ -10,8 +10,8 @@ const { REGIONS, COUNTRIES, INDIA, UAE } = require('./data');
 const buildGurdwaras = require('./build-gurdwaras');
 
 // Full Gurdwara directories, by country (one page per Gurdwara)
-const DIRECTORIES = { 'Canada': require('./gurdwaras-canada'), 'Australia': require('./gurdwaras-australia'), 'New Zealand': require('./gurdwaras-new-zealand'), 'Thailand': require('./gurdwaras-thailand'), 'Singapore': require('./gurdwaras-singapore') };
-const PHOTOS = { 'Canada': require('./gurdwara-photos-canada.json'), 'Australia': require('./gurdwara-photos-australia.json'), 'New Zealand': require('./gurdwara-photos-new-zealand.json'), 'Thailand': require('./gurdwara-photos-thailand.json'), 'Singapore': require('./gurdwara-photos-singapore.json') };
+const DIRECTORIES = { 'Canada': require('./gurdwaras-canada'), 'Australia': require('./gurdwaras-australia'), 'New Zealand': require('./gurdwaras-new-zealand'), 'Thailand': require('./gurdwaras-thailand'), 'Singapore': require('./gurdwaras-singapore'), 'Hong Kong': require('./gurdwaras-hong-kong') };
+const PHOTOS = { 'Canada': require('./gurdwara-photos-canada.json'), 'Australia': require('./gurdwara-photos-australia.json'), 'New Zealand': require('./gurdwara-photos-new-zealand.json'), 'Thailand': require('./gurdwara-photos-thailand.json'), 'Singapore': require('./gurdwara-photos-singapore.json'), 'Hong Kong': require('./gurdwara-photos-hong-kong.json') };
 
 const ROOT = path.join(__dirname, '..');
 const SITE = 'https://sikhsinworld.com';
@@ -201,7 +201,7 @@ ${c.story.map(p => `  <p>${esc(p)}</p>`).join('\n')}
 ${c.gurdwaras.map(([g, place, note]) => `    <div class="card plain"><h3>${esc(g)}</h3><p class="place">${esc(place)}</p><p>${esc(note)}</p><p><a href="https://www.google.com/maps/search/?api=1&amp;query=${encodeURIComponent(g + ' ' + place)}">Open in Google Maps</a></p></div>`).join('\n')}
   </div>
   ${directory
-    ? `<p><a class="btn" href="${directory.url}">See all ${directory.total} Gurdwaras in ${esc(name)} →</a></p>`
+    ? `<p><a class="btn" href="${directory.url}">${directory.total === 1 ? 'See the Gurdwara' : `See all ${directory.total} Gurdwaras`} in ${esc(name)} →</a></p>`
     : `<p class="note">A full directory of Gurdwaras in ${esc(name)}, with addresses and diwan times, is coming soon.</p>`}
 
   <h2 id="events">Events and Gurpurabs</h2>

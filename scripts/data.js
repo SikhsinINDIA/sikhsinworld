@@ -61,8 +61,8 @@ const REGIONS = [
     slug: 'east-southeast-asia', name: 'East & Southeast Asia',
     intro: 'Sikhs arrived in Southeast Asia in the late 1800s as police, soldiers and traders, and built Gurdwaras that are now well over a century old.',
     countries: [
-      ['Malaysia', 'page'], ['Singapore', 'page'], ['Thailand', 'page'],
-      ['Hong Kong', 'soon'], ['Philippines', 'soon'], ['Indonesia', 'soon'], ['Japan', 'soon']
+      ['Malaysia', 'page'], ['Singapore', 'page'], ['Thailand', 'page'], ['Hong Kong', 'page'],
+      ['Philippines', 'soon'], ['Indonesia', 'soon'], ['Japan', 'soon']
     ]
   },
   {
@@ -163,6 +163,15 @@ const COUNTRIES = {
     ],
     gurdwaras: [
       ['Gurdwara Siri Guru Singh Sabha', 'Phahurat, Bangkok', 'Main Gurdwara of Thailand (1933)']
+    ]
+  },
+  'Hong Kong': {
+    story: [
+      'Sikhs came to Hong Kong from the 1840s as soldiers and police, and built their Gurdwara in Wan Chai in 1901.',
+      'The Khalsa Diwan rebuilt the Gurdwara on the same site, and the new building opened in 2022. It is the only Gurdwara in Hong Kong.'
+    ],
+    gurdwaras: [
+      ['Khalsa Diwan Sikh Temple', 'Queen’s Road East, Wan Chai', 'The only Gurdwara in Hong Kong (1901)']
     ]
   },
   'Australia': {

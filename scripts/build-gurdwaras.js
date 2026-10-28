@@ -27,6 +27,7 @@ module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug,
   const photosOf = g => (photos[photoKey(g)] || []).map(p => driveImage(p.drive));
   const base = `/${region.slug}/${slug(country)}/gurdwaras/`;
   const total = dir.provinces.reduce((t, p) => t + p.list.length, 0);
+  const gurdwaras = n => `${n} Gurdwara${n === 1 ? '' : 's'}`, gurudwaras = n => `${n} Gurudwara${n === 1 ? '' : 's'}`;
   // Words for the country’s divisions, e.g. Province / provinces and territories, State / states and territories
   const Div = dir.division || 'Province', div = Div.toLowerCase(), divs = dir.divisions || `${div}s`;
 
@@ -183,10 +184,10 @@ ${related.more.map(([t, h]) => `      <li><a href="${h}">${esc(t)}</a></li>`).jo
   urls.push(base);
   write(`${base.slice(1)}index.html`, poster({
     url: base,
-    title: `Gurudwaras in ${country} – ${total} Gurdwaras by ${Div} | Sikhs in World`,
-    description: `Directory of ${total} Gurudwaras in ${country}, ${div} by ${div}, with addresses, maps and a short introduction to each Gurdwara.`,
+    title: `Gurudwaras in ${country} – ${gurdwaras(total)} by ${Div} | Sikhs in World`,
+    description: `Directory of ${gurudwaras(total)} in ${country}, ${div} by ${div}, with addresses, maps and a short introduction to each Gurdwara.`,
     hero: heroTitle(`Gurudwaras in ${country}`),
-    subtitle: `${total} Gurudwaras across ${dir.provinces.length} ${divs}`,
+    subtitle: `${gurudwaras(total)} across ${dir.provinces.length} ${dir.provinces.length === 1 ? div : divs}`,
     banner: dir.banner,
     body: `  <!-- ── ${Div.toUpperCase()}S ── -->
   <div class="cities-wrapper">
