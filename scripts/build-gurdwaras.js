@@ -22,51 +22,14 @@ const photoFolder = (regionSlug, country, g) =>
 const photoKey = g => g.wg || gurdwaraSlug(g);
 const driveImage = id => `https://lh3.googleusercontent.com/d/${id}=w1200`;
 
-module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug, esc, photos = {} }) {
-  const country = dir.country;
-  const photosOf = g => (photos[photoKey(g)] || []).map(p => driveImage(p.drive));
-  // Photos from Wikimedia Commons carry a credit (author, licence, source page), shown wherever the photo is
-  const creditsOf = g => (photos[photoKey(g)] || []).map(p => p.credit);
-  const creditHtml = c => c ? `<a href="${esc(c.page)}" target="_blank" rel="noopener">${esc(c.by || 'Unknown author')}</a>, ${c.licenseUrl ? `<a href="${esc(c.licenseUrl)}" target="_blank" rel="noopener">${esc(c.license)}</a>` : esc(c.license)}, via Wikimedia Commons` : '';
-  const CREDIT_STYLE = 'font-size:12px;opacity:.75;margin-top:6px;line-height:1.5';
-  // Gurdwaras taken from OpenStreetMap (g.osm, e.g. "node/123") need its licence credit
-  const OSM_CREDIT = 'Some addresses come from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a>, available under the Open Database Licence.';
-  const usesOsm = dir.provinces.some(p => p.list.some(g => g.osm));
-  const base = `/${region.slug}/${slug(country)}/gurdwaras/`;
-  const total = dir.provinces.reduce((t, p) => t + p.list.length, 0);
-  const gurdwaras = n => `${n} Gurdwara${n === 1 ? '' : 's'}`, gurudwaras = n => `${n} Gurudwara${n === 1 ? '' : 's'}`;
-  // Words for the country’s divisions, e.g. Province / provinces and territories, State / states and territories
-  const Div = dir.division || 'Province', div = Div.toLowerCase(), divs = dir.divisions || `${div}s`;
-
-  const ICON = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 3 L16 8" stroke="#F7941D" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="16" cy="10.5" r="2.5" fill="#F7941D"/>
-            <path d="M7 27 L7 19 C7 14 11 12 16 12 C21 12 25 14 25 19 L25 27 Z" stroke="#F7941D" stroke-width="2" fill="rgba(247,148,29,0.25)" stroke-linejoin="round"/>
-            <rect x="5" y="27" width="22" height="3" rx="1" fill="#F7941D"/>
-          </svg>`;
-  const ARROW = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
-  const BACK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>`;
-
-  // "GURDWARA DUKH NIVARAN SAHIB" → white first part, saffron second part (as on sikhsinindia.com)
-  const heroTitle = text => {
-    const w = text.toUpperCase().split(' ');
-    const cut = w.length <= 2 ? 1 : 2;
-    return `${esc(w.slice(0, cut).join(' '))} <span>${esc(w.slice(cut).join(' '))}</span>`;
-  };
-  // Phone link: a number written with + keeps its own code, a local one gets the country’s (+1 by default)
-  const telOf = ph => ph.trim().startsWith('+') ? `+${ph.replace(/\D/g, '')}` : `+${dir.dial || '1'}${ph.replace(/\D/g, '').replace(/^0/, '')}`;
-  const firstSentence = p => (p.match(/^.*?[.!?](\s|$)/) || [p])[0].trim();
-  const fullAddress = (g, prov) => [g.a, g.c && g.c.replace(/\s*\(.*\)$/, '').replace(/ area$/, ''), [prov.abbr, g.pc].filter(Boolean).join(' ')].filter(Boolean).join(', ');
-  const place = (g, prov) => [g.c, prov.name].filter(Boolean).join(', ');
-  const gSlug = gurdwaraSlug;
-  const mapsUrl = (g, prov) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(g.n + ', ' + fullAddress(g, prov) + ', ' + country)}`;
-
-  function poster({ url, title, description, eyebrow = 'Sikh Heritage &amp; Holy Places', hero, subtitle, banner, body, back, related, footLeft, ld, image, gallery }) {
-    const hasPhotos = body.includes('lh3.googleusercontent.com');
-    const canonical = SITE + url;
-    const share = encodeURIComponent(canonical);
-    const ogImage = image || `${SITE}/pictures/sikhsinworld-share.jpg`;
-    return `<!DOCTYPE html>
+// The poster page shared by every Gurdwara page (and the world map page)
+const BACK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>`;
+function posterPage({ url, title, description, eyebrow = 'Sikh Heritage &amp; Holy Places', hero, subtitle, banner, body, back, related, footLeft, ld, image, gallery }, { esc, SITE }) {
+  const hasPhotos = body.includes('lh3.googleusercontent.com');
+  const canonical = SITE + url;
+  const share = encodeURIComponent(canonical);
+  const ogImage = image || `${SITE}/pictures/sikhsinworld-share.jpg`;
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -174,7 +137,47 @@ ${related.more.map(([t, h]) => `      <li><a href="${h}">${esc(t)}</a></li>`).jo
 </body>
 </html>
 `;
-  }
+}
+
+module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug, esc, photos = {} }) {
+  const country = dir.country;
+  const photosOf = g => (photos[photoKey(g)] || []).map(p => driveImage(p.drive));
+  // Photos from Wikimedia Commons carry a credit (author, licence, source page), shown wherever the photo is
+  const creditsOf = g => (photos[photoKey(g)] || []).map(p => p.credit);
+  const creditHtml = c => c ? `<a href="${esc(c.page)}" target="_blank" rel="noopener">${esc(c.by || 'Unknown author')}</a>, ${c.licenseUrl ? `<a href="${esc(c.licenseUrl)}" target="_blank" rel="noopener">${esc(c.license)}</a>` : esc(c.license)}, via Wikimedia Commons` : '';
+  const CREDIT_STYLE = 'font-size:12px;opacity:.75;margin-top:6px;line-height:1.5';
+  // Gurdwaras taken from OpenStreetMap (g.osm, e.g. "node/123") need its licence credit
+  const OSM_CREDIT = 'Some addresses come from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a>, available under the Open Database Licence.';
+  const usesOsm = dir.provinces.some(p => p.list.some(g => g.osm));
+  const base = `/${region.slug}/${slug(country)}/gurdwaras/`;
+  const total = dir.provinces.reduce((t, p) => t + p.list.length, 0);
+  const gurdwaras = n => `${n} Gurdwara${n === 1 ? '' : 's'}`, gurudwaras = n => `${n} Gurudwara${n === 1 ? '' : 's'}`;
+  // Words for the country’s divisions, e.g. Province / provinces and territories, State / states and territories
+  const Div = dir.division || 'Province', div = Div.toLowerCase(), divs = dir.divisions || `${div}s`;
+
+  const ICON = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 3 L16 8" stroke="#F7941D" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="16" cy="10.5" r="2.5" fill="#F7941D"/>
+            <path d="M7 27 L7 19 C7 14 11 12 16 12 C21 12 25 14 25 19 L25 27 Z" stroke="#F7941D" stroke-width="2" fill="rgba(247,148,29,0.25)" stroke-linejoin="round"/>
+            <rect x="5" y="27" width="22" height="3" rx="1" fill="#F7941D"/>
+          </svg>`;
+  const ARROW = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+
+  // "GURDWARA DUKH NIVARAN SAHIB" → white first part, saffron second part (as on sikhsinindia.com)
+  const heroTitle = text => {
+    const w = text.toUpperCase().split(' ');
+    const cut = w.length <= 2 ? 1 : 2;
+    return `${esc(w.slice(0, cut).join(' '))} <span>${esc(w.slice(cut).join(' '))}</span>`;
+  };
+  // Phone link: a number written with + keeps its own code, a local one gets the country’s (+1 by default)
+  const telOf = ph => ph.trim().startsWith('+') ? `+${ph.replace(/\D/g, '')}` : `+${dir.dial || '1'}${ph.replace(/\D/g, '').replace(/^0/, '')}`;
+  const firstSentence = p => (p.match(/^.*?[.!?](\s|$)/) || [p])[0].trim();
+  const fullAddress = (g, prov) => [g.a, g.c && g.c.replace(/\s*\(.*\)$/, '').replace(/ area$/, ''), [prov.abbr, g.pc].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+  const place = (g, prov) => [g.c, prov.name].filter(Boolean).join(', ');
+  const gSlug = gurdwaraSlug;
+  const mapsUrl = (g, prov) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(g.n + ', ' + fullAddress(g, prov) + ', ' + country)}`;
+
+  const poster = opts => posterPage(opts, { esc, SITE });
 
   const crumbLd = items => ({
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
@@ -344,3 +347,4 @@ ${facts.map(([l, v]) => `        <div class="fact">
 module.exports.photoFolder = photoFolder;
 module.exports.gurdwaraSlug = gurdwaraSlug;
 module.exports.photoKey = photoKey;
+module.exports.posterPage = posterPage;

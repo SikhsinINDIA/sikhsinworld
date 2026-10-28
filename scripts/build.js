@@ -220,6 +220,9 @@ ${LIBRARY.map(([t, h]) => `    <a class="chip" href="${h}">${t}</a>`).join('\n')
   }
 }
 
+// ── World map of Gurudwaras ──────────────────────────────────
+require('./build-world-map')({ REGIONS, DIRECTORIES, write, urls, SITE, slug, esc });
+
 // ── 404, sitemap ─────────────────────────────────────────────
 write('404.html', page({
   url: '/404.html',
