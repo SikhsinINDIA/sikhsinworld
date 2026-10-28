@@ -19,6 +19,7 @@
  *   - the Sikhs in India logo becomes the Sikhs in World logo;
  *   - SikhsInIndia.com in the <title> becomes SikhsInWorld.com;
  *   - the home page's Gurudwaras card shows the world icon (pictures/gurudwaras-in-world.svg);
+ *   - India's "Sikhs in World" buttons become "Sikhs in India", leading to the same page there;
  *   - links to India's Gurudwaras map open the world map instead (except inside
  *     India's own Gurdwara pages, so their back links stay in India's map);
  *   - pictures, scripts and styles load straight from sikhsinindia.com, so they
@@ -115,6 +116,14 @@ function rewrite(response, pageUrl, path) {
         if (inIndiaGurdwaras) return;
         const to = new URL(el.getAttribute('href'), pageUrl);
         if (to.origin === INDIA && INDIA_MAP.test(to.pathname)) el.setAttribute('href', WORLD_MAP);
+      }
+    })
+    .on('a[href="https://sikhsinworld.com/"]', {
+      // India's "Sikhs in World" buttons point here; on this site they lead to the same page in India
+      element(el) {
+        el.setAttribute('href', pageUrl);
+        if (el.getAttribute('title')) el.setAttribute('title', 'Sikhs in India: this page on sikhsinindia.com');
+        el.setInnerContent('Sikhs in India &#8599;', { html: true });
       }
     })
     .on('source[srcset]', fromIndia('srcset'))

@@ -64,7 +64,7 @@ function posterPage({ url, title, description, eyebrow = 'Sikh Heritage &amp; Ho
   <script type="application/ld+json">${JSON.stringify(ld)}</script>
 </head>
 <body>
-<a class="world-pill" href="/" title="Sikhs in World home">&#127757; Sikhs in World</a>
+<a class="world-pill" href="https://sikhsinindia.com/" title="Sikhs in India: the sister site">Sikhs in India &#8599;</a>
 <div class="poster">
   <!-- ── HEADER ── -->
   <div class="header">
