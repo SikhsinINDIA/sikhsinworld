@@ -73,9 +73,9 @@ module.exports = function buildWorldMap({ REGIONS, DIRECTORIES, write, urls, SIT
     <div id="tooltip" class="tooltip"></div>
     <svg viewBox="${map.viewBox}" xmlns="http://www.w3.org/2000/svg" id="world-map" role="img" aria-label="Map of the world in eight regions">
       <path class="other" d="${map.regions.other.d}"/>
-${regions.map(r => `      <a href="/${r.slug}/" aria-label="${esc(tip(r))}"><path id="r-${r.slug}" class="region" data-name="${esc(tip(r))}" fill="${FILL[r.slug]}" d="${map.regions[r.slug].d}"/></a>`).join('\n')}
+${regions.map(r => `      <a href="/${r.dir}/" aria-label="${esc(tip(r))}"><path id="r-${r.slug}" class="region" data-name="${esc(tip(r))}" fill="${FILL[r.slug]}" d="${map.regions[r.slug].d}"/></a>`).join('\n')}
       <path class="borders" d="${map.borders}"/>
-${dots.map(d => { const r = regions.find(x => x.slug === d.region); return `      <a href="/${r.slug}/${slug(d.name)}/gurdwaras/" aria-label="Gurudwaras in ${esc(d.name)}"><circle class="dot region" data-name="${esc(d.name)} · ${count(d.name)} Gurudwara${count(d.name) === 1 ? '' : 's'}" cx="${d.at[0]}" cy="${d.at[1]}" r="4" fill="${FILL[r.slug]}"/></a>`; }).join('\n')}
+${dots.map(d => { const r = regions.find(x => x.slug === d.region); return `      <a href="/${r.dir}/${slug(d.name)}/gurdwaras/" aria-label="Gurudwaras in ${esc(d.name)}"><circle class="dot region" data-name="${esc(d.name)} · ${count(d.name)} Gurudwara${count(d.name) === 1 ? '' : 's'}" cx="${d.at[0]}" cy="${d.at[1]}" r="4" fill="${FILL[r.slug]}"/></a>`; }).join('\n')}
 ${regions.map(r => { const [x, y] = map.regions[r.slug].label; return `      <text class="region-label" x="${x}" y="${y}">${esc(r.name)}</text>`; }).join('\n')}
     </svg>
     <div class="tap-hint-overlay" id="tapHintOverlay" aria-hidden="true">
@@ -102,7 +102,7 @@ ${regions.map(r => { const [x, y] = map.regions[r.slug].label; return `      <te
   <nav class="seo-links" aria-labelledby="seo-regions-h">
     <h2 id="seo-regions-h">All regions</h2>
     <ul>
-${regions.map(r => `      <li><a href="/${r.slug}/">Sikhs in ${esc(r.name)}${r.total ? ` <small>· ${gurudwaras(r.total)}</small>` : ''}</a></li>`).join('\n')}
+${regions.map(r => `      <li><a href="/${r.dir}/">Sikhs in ${esc(r.name)}${r.total ? ` <small>· ${gurudwaras(r.total)}</small>` : ''}</a></li>`).join('\n')}
     </ul>
   </nav>
   <script>

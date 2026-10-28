@@ -149,7 +149,7 @@ module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug,
   // Gurdwaras taken from OpenStreetMap (g.osm, e.g. "node/123") need its licence credit
   const OSM_CREDIT = 'Some addresses come from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a>, available under the Open Database Licence.';
   const usesOsm = dir.provinces.some(p => p.list.some(g => g.osm));
-  const base = `/${region.slug}/${slug(country)}/gurdwaras/`;
+  const base = `/${region.dir}/${slug(country)}/gurdwaras/`;
   const total = dir.provinces.reduce((t, p) => t + p.list.length, 0);
   const gurdwaras = n => `${n} Gurdwara${n === 1 ? '' : 's'}`, gurudwaras = n => `${n} Gurudwara${n === 1 ? '' : 's'}`;
   // Words for the country’s divisions, e.g. Province / provinces and territories, State / states and territories
@@ -183,11 +183,11 @@ module.exports = function buildGurdwaras({ dir, region, write, urls, SITE, slug,
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
     itemListElement: items.map(([t, h], i) => ({ '@type': 'ListItem', position: i + 1, name: t, item: SITE + h }))
   });
-  const crumbsTo = [['World', '/'], [region.name, `/${region.slug}/`], [country, `/${region.slug}/${slug(country)}/`], [`Gurudwaras in ${country}`, base]];
+  const crumbsTo = [['World', '/'], [region.name, `/${region.dir}/`], [country, `/${region.dir}/${slug(country)}/`], [`Gurudwaras in ${country}`, base]];
   const countryLinks = [
     [`Gurudwaras in ${country}`, base],
-    [`Sikhs in ${country}`, `/${region.slug}/${slug(country)}/`],
-    [`Sikhs in ${region.name}`, `/${region.slug}/`]
+    [`Sikhs in ${country}`, `/${region.dir}/${slug(country)}/`],
+    [`Sikhs in ${region.name}`, `/${region.dir}/`]
   ];
 
   // ── Country page: every province ──────────────────────────────
@@ -217,7 +217,7 @@ ${dir.provinces.map(p => `      <a class="city-card" href="${base}${slug(p.name)
     </div>
     <div class="legend">Addresses come from public listings and the Gurdwaras’ own websites. Know a Gurdwara we have missed, or spotted a change? Write to <b><a href="mailto:sikhsinindia@gmail.com" style="color:inherit">sikhsinindia@gmail.com</a></b>.${usesOsm ? ' ' + OSM_CREDIT : ''}</div>
   </div>`,
-    back: `/${region.slug}/${slug(country)}/`,
+    back: `/${region.dir}/${slug(country)}/`,
     related: { main: countryLinks.slice(1).concat([['Sikhs in World home', '/']]) },
     ld: crumbLd(crumbsTo)
   }));

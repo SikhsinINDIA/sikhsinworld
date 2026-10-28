@@ -8,6 +8,8 @@ const fs = require('fs');
 const path = require('path');
 const { REGIONS, COUNTRIES, INDIA, UAE } = require('./data');
 const buildGurdwaras = require('./build-gurdwaras');
+// Each region's pages live in 04-gurudwaras, numbered like the state folders on sikhsinindia.com
+REGIONS.forEach((r, i) => { r.dir = `04-gurudwaras/${String(i + 1).padStart(2, '0')}-${r.slug}`; });
 
 // Full Gurdwara directories, by country (one page per Gurdwara)
 const { directories, photosOf } = require('./directories');
@@ -111,7 +113,7 @@ ${crumbHtml ? `<div class="wrap">${crumbHtml}</div>\n` : ''}${body}
 
 function countryLink(region, [name, kind, href]) {
   if (kind === 'external') return `<a class="chip ext" href="${href}">${esc(name)} <span>↗ own site</span></a>`;
-  if (kind === 'page') return `<a class="chip" href="/${region.slug}/${slug(name)}/">${esc(name)}</a>`;
+  if (kind === 'page') return `<a class="chip" href="/${region.dir}/${slug(name)}/">${esc(name)}</a>`;
   return `<span class="chip soon" title="Page coming soon">${esc(name)} <span>soon</span></span>`;
 }
 
@@ -143,7 +145,7 @@ write('index.html', page({
   <h2>Explore by region</h2>
   <p>Or find Gurudwaras on the <a href="/04-gurudwaras/04-gurudwaras-in-world.html">world map of Gurudwaras</a>.</p>
   <div class="grid">
-${REGIONS.map(r => `    <a class="card" href="/${r.slug}/">
+${REGIONS.map(r => `    <a class="card" href="/${r.dir}/">
       <h3>${esc(r.name)}</h3>
       <p>${esc(r.countries.map(c => c[0]).join(' · '))}</p>
     </a>`).join('\n')}
@@ -163,10 +165,10 @@ ${REGIONS.map(r => `    <a class="card" href="/${r.slug}/">
 // Every region page leads back to the world map of the eight regions
 const BACK_TO_MAP = '<p><a class="btn ghost" href="/04-gurudwaras/04-gurudwaras-in-world.html">← Back to the world map</a></p>';
 for (const r of REGIONS) {
-  urls.push(`/${r.slug}/`);
+  urls.push(`/${r.dir}/`);
   const built = r.countries.filter(c => c[1] !== 'soon').length;
-  write(`${r.slug}/index.html`, page({
-    url: `/${r.slug}/`,
+  write(`${r.dir}/index.html`, page({
+    url: `/${r.dir}/`,
     title: `Sikhs in ${r.name} – Sikh Communities and Gurdwaras | Sikhs in World`,
     description: `Sikh communities in ${r.name}: ${r.countries.map(c => c[0]).join(', ')}. History, Gurdwaras and sangat country by country.`,
     crumbs: [[r.name]],
@@ -187,14 +189,14 @@ ${r.countries.map(c => '    ' + countryLink(r, c)).join('\n')}
     if (kind !== 'page') continue;
     const c = COUNTRIES[name];
     if (!c) throw new Error('No country data for ' + name);
-    const url = `/${r.slug}/${slug(name)}/`;
+    const url = `/${r.dir}/${slug(name)}/`;
     urls.push(url);
     const directory = DIRECTORIES[name] && buildGurdwaras({ dir: DIRECTORIES[name], region: r, write, urls, SITE, slug, esc, photos: PHOTOS[name] });
-    write(`${r.slug}/${slug(name)}/index.html`, page({
+    write(`${r.dir}/${slug(name)}/index.html`, page({
       url,
       title: `Sikhs in ${name} – History, Gurdwaras and Community | Sikhs in World`,
       description: `${c.story[0].slice(0, 150).replace(/\s+\S*$/, '')}…`,
-      crumbs: [[r.name, `/${r.slug}/`], [name]],
+      crumbs: [[r.name, `/${r.dir}/`], [name]],
       body: `<section class="wrap">
   <h1>Sikhs in ${esc(name)}</h1>
   <nav class="toc" aria-label="On this page"><a href="#story">How Sikhs arrived</a><a href="#gurdwaras">Gurdwaras</a><a href="#events">Events</a><a href="#community">Community</a><a href="#library">Sikhi library</a></nav>
@@ -228,14 +230,27 @@ ${LIBRARY.map(([t, h]) => `    <a class="chip" href="${h}">${t}</a>`).join('\n')
 // ── World map of Gurudwaras ──────────────────────────────────
 require('./build-world-map')({ REGIONS, DIRECTORIES, write, urls, SITE, slug, esc });
 
+// ── Old addresses ────────────────────────────────────────────
+// Until October 2026 the regions sat at the top level (/europe/…). Their old folders are
+// removed, and the 404 page sends anyone arriving at an old address to the new one.
+for (const r of REGIONS) fs.rmSync(path.join(ROOT, r.slug), { recursive: true, force: true });
+const OLD_ADDRESS_REDIRECT = `<script>
+(function () {
+  var dirs = ${JSON.stringify(Object.fromEntries(REGIONS.map(r => [r.slug, r.dir])))};
+  var m = location.pathname.match(/^\\/([a-z-]+)(\\/.*)?$/);
+  if (m && dirs[m[1]]) location.replace('/' + dirs[m[1]] + (m[2] || '/') + location.search + location.hash);
+})();
+</script>
+`;
+
 // ── 404, sitemap ─────────────────────────────────────────────
 write('404.html', page({
   url: '/404.html',
   title: 'Page not found | Sikhs in World',
   description: 'This page could not be found on Sikhs in World.',
   body: `<section class="wrap"><h1>Page not found</h1><p class="lead">This page may have moved. Start again from the <a href="/">Sikhs in World home page</a> or explore a region below.</p>
-  <div class="chips">${REGIONS.map(r => `<a class="chip" href="/${r.slug}/">${esc(r.name)}</a>`).join('')}</div></section>`
-}).replace('<meta name="description"', '<meta name="robots" content="noindex">\n<meta name="description"'));
+  <div class="chips">${REGIONS.map(r => `<a class="chip" href="/${r.dir}/">${esc(r.name)}</a>`).join('')}</div></section>`
+}).replace('<meta name="description"', '<meta name="robots" content="noindex">\n<meta name="description"').replace('</head>', OLD_ADDRESS_REDIRECT + '</head>'));
 
 const today = new Date().toISOString().slice(0, 10);
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>

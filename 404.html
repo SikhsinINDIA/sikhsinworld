@@ -25,6 +25,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Sikhs in World","url":"https://sikhsinworld.com/","logo":"https://sikhsinworld.com/pictures/sikhsinworld-logo.png","email":"sikhsinindia@gmail.com","sameAs":["https://sikhsinindia.com/","https://sikhsinuae.com/"]}</script>
+<script>
+(function () {
+  var dirs = {"south-asia":"04-gurudwaras/01-south-asia","middle-east":"04-gurudwaras/02-middle-east","europe":"04-gurudwaras/03-europe","north-america":"04-gurudwaras/04-north-america","south-america":"04-gurudwaras/05-south-america","africa":"04-gurudwaras/06-africa","east-southeast-asia":"04-gurudwaras/07-east-southeast-asia","australia-nz":"04-gurudwaras/08-australia-nz"};
+  var m = location.pathname.match(/^\/([a-z-]+)(\/.*)?$/);
+  if (m && dirs[m[1]]) location.replace('/' + dirs[m[1]] + (m[2] || '/') + location.search + location.hash);
+})();
+</script>
 </head>
 <body>
 <header class="top">
@@ -42,7 +49,7 @@
 </header>
 <main>
 <section class="wrap"><h1>Page not found</h1><p class="lead">This page may have moved. Start again from the <a href="/">Sikhs in World home page</a> or explore a region below.</p>
-  <div class="chips"><a class="chip" href="/south-asia/">South Asia</a><a class="chip" href="/middle-east/">Middle East</a><a class="chip" href="/europe/">Europe</a><a class="chip" href="/north-america/">North America</a><a class="chip" href="/south-america/">South America</a><a class="chip" href="/africa/">Africa</a><a class="chip" href="/east-southeast-asia/">East &amp; Southeast Asia</a><a class="chip" href="/australia-nz/">Australia &amp; New Zealand</a></div></section>
+  <div class="chips"><a class="chip" href="/04-gurudwaras/01-south-asia/">South Asia</a><a class="chip" href="/04-gurudwaras/02-middle-east/">Middle East</a><a class="chip" href="/04-gurudwaras/03-europe/">Europe</a><a class="chip" href="/04-gurudwaras/04-north-america/">North America</a><a class="chip" href="/04-gurudwaras/05-south-america/">South America</a><a class="chip" href="/04-gurudwaras/06-africa/">Africa</a><a class="chip" href="/04-gurudwaras/07-east-southeast-asia/">East &amp; Southeast Asia</a><a class="chip" href="/04-gurudwaras/08-australia-nz/">Australia &amp; New Zealand</a></div></section>
 </main>
 <footer class="foot">
   <div class="wrap foot-in">
